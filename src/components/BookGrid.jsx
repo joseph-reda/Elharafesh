@@ -10,7 +10,7 @@ export default function BookGrid({ books = [] }) {
     }
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-right font-sans">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 text-right font-sans">
             {books.map((book) => (
                 <BookCard key={book.id} book={book} />
             ))}

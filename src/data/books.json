@@ -460,51 +460,5 @@
         "price": "20 ج.م",
         "HPaper": "236",
         "description": "...................."
-    },
-    {
-        "id": 1,
-        "isNew": true,
-        "title": "الخيميائي",
-        "author": "باولو كويلو",
-        "type": "مترجم",
-        "category": "روائي",
-        "cover": "images/elHara.jpeg",
-        "price": "120 ج.م"
-
-    },
-    {
-        "id": 2,
-        "isNew": true,
-        "title": "الخيميائي",
-        "author": "باولو كويلو",
-        "type": "مترجم",
-        "category": "روائي",
-        "cover": "images/elHara.jpeg",
-        "price": "120 ج.م",
-        "HPaper": "",
-        "description": "...................."
-    },
-    {
-        "id": 1,
-        "isNew": true,
-        "title": "الخيميائي",
-        "author": "باولو كويلو",
-        "type": "مترجم",
-        "category": "روائي",
-        "cover": "images/elHara.jpeg",
-        "price": "120 ج.م"
-
-    },
-    {
-        "id": 2,
-        "isNew": true,
-        "title": "الخيميائي",
-        "author": "باولو كويلو",
-        "type": "مترجم",
-        "category": "روائي",
-        "cover": "images/elHara.jpeg",
-        "price": "120 ج.م",
-        "HPaper": "",
-        "description": "...................."
     }
 ]

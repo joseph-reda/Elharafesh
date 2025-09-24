@@ -2,205 +2,509 @@
     {
         "id": 1,
         "isNew": true,
+        "title": "طريق الحياة",
+        "author": " تولستوس",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/طريق الحياة.jpg",
+        "price": "350 ج.م",
+        "HPaper": "591",
+        "description": "...................."
+
+    },
+    {
+        "id": 2,
+        "isNew": true,
+        "title": "المسيح يصلب من جديد",
+        "author": "نيكوس كازانتزاكيس",
+        "type": "فلسفة",
+        "category": "روائي",
+        "cover": "images/المسيح يصلب من جديد.jpg",
+        "price": "200 ج.م",
+        "HPaper": "575",
+        "description": "...................."
+    },
+    {
+        "id": 3,
+        "isNew": true,
+        "title": "رسالة في اللاهوت والسياسة",
+        "author": "اسبينوزا",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/رسالة في اللاهوت والسياسة .jpg",
+        "price": "150 ج.م"
+
+    },
+    {
+        "id": 4,
+        "isNew": true,
+        "title": "احببتك اكثر مما ينبغي",
+        "author": "اثير عبدالله النشمي",
+        "type": "اجتماعي",
+        "category": "روائي",
+        "cover": "images/احببتك اكثر مما ينبغي.jpg",
+        "price": "200 ج.م",
+        "HPaper": "326",
+        "description": "...................."
+    },
+    {
+        "id": 5,
+        "isNew": true,
+        "title": "تاريخ الغطرسة",
+        "author": "آري تورنين",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/تاريخ الغطرسة.jpg",
+        "price": "100 ج.م"
+
+    },
+    {
+        "id": 6,
+        "isNew": true,
+        "title": "عزازيل",
+        "author": "يوسف زيدان",
+        "type": "فلسفة",
+        "category": "روائي",
+        "cover": "images/عزازيل.jpg",
+        "price": "40 ج.م",
+        "HPaper": "380",
+        "description": "...................."
+    },
+    {
+        "id": 7,
+        "isNew": true,
+        "title": "في سبيل التاج",
+        "author": "مصطفي لطفي المنفلوطي",
+        "type": "سياسة",
+        "category": "روائي",
+        "cover": "images/في سبيل التاج.jpg",
+        "price": "80 ج.م"
+
+    },
+    {
+        "id": 8,
+        "isNew": true,
+        "title": "الكارثة التي تهددنا",
+        "author": "صلاح عيسى",
+        "type": "تاريخ",
+        "category": "غير روائي",
+        "cover": "images/الكرثة التي تهددنا.jpg",
+        "price": "100 ج.م",
+        "HPaper": "",
+        "description": "...................."
+    },
+    {
+        "id": 9,
+        "isNew": true,
+        "title": "ثلاث اسئلة لاجابة صحيحة",
+        "author": "ليو تولستوي",
+        "type": "مترجم",
+        "category": "قصص",
+        "cover": "images/ثلاث اسئلة لاجابة صحيحة.jpg",
+        "price": "70 ج.م"
+
+    },
+    {
+        "id": 10,
+        "isNew": true,
+        "title": "في العلم والاخلاق والسياسة ",
+        "author": "ليف تولستوي",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/IMG_20250923_125804.jpg",
+        "price": "160 ج.م",
+        "HPaper": "223",
+        "description": "...................."
+    },
+    {
+        "id": 11,
+        "isNew": false,
+        "title": "شذرات الفلسفة",
+        "author": "سورن كيرككورد",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/IMG_20250923_125811.jpg",
+        "price": "150 ج.م"
+
+    },
+    {
+        "id": 12,
+        "isNew": false,
+        "title": "الي المنارة ",
+        "author": "فيرجينيا وولف",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/الي المنارة.jpg",
+        "price": "300 ج.م",
+        "HPaper": "304",
+        "description": "...................."
+    },
+    {
+        "id": 13,
+        "isNew": false,
+        "title": "علم الاخلاق",
+        "author": "اسبينوزا",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/علم الاخلاق.jpg",
+        "price": "200 ج.م"
+
+    },
+    {
+        "id": 14,
+        "isNew": false,
+        "title": "هدنة لالتقاط الانفاس ",
+        "author": "جورج اورويل",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/هدنة لالتقاط الانفاس.jpg",
+        "price": "160 ج.م",
+        "HPaper": "202",
+        "description": "...................."
+    },
+    {
+        "id": 15,
+        "isNew": false,
+        "title": "مئة عام من العزلة",
+        "author": "غابريبل غارسيا ماركيز",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/مئة عام من العزلة.jpg",
+        "price": "100 ج.م"
+
+    },
+    {
+        "id": 16,
+        "isNew": false,
+        "title": "الجنس والحريم روح السراري",
+        "author": "مالك شبل",
+        "type": "مترجم",
+        "category": "تاريخ",
+        "cover": "images/الجنس والحريم روح السراري.jpg",
+        "price": "70 ج.م",
+        "HPaper": "223",
+        "description": "...................."
+    },
+    {
+        "id": 17,
+        "isNew": false,
+        "title": "ابنة القس",
+        "author": "جورج اورويل",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/ابنة القس.jpg",
+        "price": "80 ج.م"
+
+    },
+    {
+        "id": 18,
+        "isNew": false,
+        "title": "اليكترا",
+        "author": "يوربيديس",
+        "type": "مترجم",
+        "category": "شعر",
+        "cover": "images/شعر..jpg",
+        "price": "40 ج.م",
+        "HPaper": "219",
+        "description": "...................."
+    },
+    {
+        "id": 19,
+        "isNew": false,
+        "title": "الالياذة",
+        "author": "هوميروس",
+        "type": "مترجم",
+        "category": "شعر",
+        "cover": "images/الالياذة.jpg",
+        "price": "70 ج.م"
+
+    },
+    {
+        "id": 20,
+        "isNew": false,
+        "title": "الرسائل الفلسفية",
+        "author": "فولتير",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/2الرسائل الفلسفية.jpg",
+        "price": "80 ج.م",
+        "HPaper": "164",
+        "description": "...................."
+    },
+    {
+        "id": 21,
+        "isNew": false,
+        "title": "الشياطين 1/2",
+        "author": "دوستويفسكي",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/الشياطين1.jpg",
+        "price": "250 ج.م"
+
+    },
+    {
+        "id": 22,
+        "isNew": false,
+        "title": "الامير",
+        "author": "نيقولا ميكافيللي",
+        "type": "مترجم",
+        "category": "سياسة",
+        "cover": "images/الامير.jpg",
+        "price": "50 ج.م",
+        "HPaper": "266",
+        "description": "...................."
+    },
+    {
+        "id": 23,
+        "isNew": false,
+        "title": "1/2اصل الانواع",
+        "author": "تشارلز داروين",
+        "type": "مترجم",
+        "category": "علوم",
+        "cover": "images/اصل الانواع.jpg",
+        "price": "75 ج.م"
+
+    },
+    {
+        "id": 24,
+        "isNew": false,
+        "title": "هكذا تكلم زرادشت",
+        "author": "فريدريك نيتشه",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "cover": "images/هكذا تكلم زردشت.jpg",
+        "price": "75 ج.م",
+        "HPaper": "383",
+        "description": "...................."
+    },
+    {
+        "id": 25,
+        "isNew": false,
+        "title": "[جمهورية أفلاطون]",
+        "author": "افلاطون",
+        "type": "مترجم",
+        "category": "سياسة",
+        "cover": "images/جمهورية افلاطون.jpg",
+        "price": "80 ج.م"
+
+    },
+    {
+        "id": 26,
+        "isNew": false,
+        "title": "السياسة",
+        "author": "ارسطوطاليس",
+        "type": "مترجم",
+        "category": "سياسة",
+        "cover": "images/elHara.jpeg",
+        "price": "75 ج.م",
+        "HPaper": "476",
+        "description": "...................."
+    },
+    {
+        "id": 27,
+        "isNew": false,
+        "title": "1/5السيرة الهلالية",
+        "author": "عبدالرحمن الابنودي",
+        "type": "تاريخ",
+        "category": "شعر",
+        "cover": "images/السيرة الهلالية.jpg",
+        "price": "150 ج.م"
+
+    },
+    {
+        "id": 28,
+        "isNew": false,
+        "title": "كيف يسخلر المصريون من حكامهم",
+        "author": "عادل حمودة",
+        "type": "سياسة",
+        "category": "تاريخ",
+        "cover": "images/النكتة السياسية.jpg",
+        "price": "80 ج.م",
+        "HPaper": "255",
+        "description": "...................."
+    },
+    {
+        "id": 29,
+        "isNew": false,
+        "title": "نجمة اغسطس",
+        "author": "صنع الله ابراهيم",
+        "type": "سياسة",
+        "category": "روائي",
+        "cover": "images/نجمة اغسطس.jpg",
+        "price": "100 ج.م"
+
+    },
+    {
+        "id": 30,
+        "isNew": false,
+        "title": "دراسة اقتصاديةاسلامية",
+        "author": "رفعت المحجوب",
+        "type": "عربي",
+        "category": "اقتصاد",
+        "cover": "images/دراسة اقتصادية اسلامية.jpg",
+        "price": "25 ج.م",
+        "HPaper": "198",
+        "description": "...................."
+    },
+    {
+        "id": 31,
+        "isNew": false,
+        "title": "وا اسلاماه",
+        "author": "علي احمد باكثير",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/وا اسلاماه.jpg",
+        "price": "20 ج.م"
+
+    },
+    {
+        "id": 32,
+        "isNew": false,
+        "title": "مقالات بين السياسة والدين",
+        "author": "الاب متى المسكين",
+        "type": "عربي",
+        "category": "سياسة",
+        "cover": "images/متى المسكين.jpg",
+        "price": "30 ج.م",
+        "HPaper": "128",
+        "description": "...................."
+    },
+    {
+        "id": 33,
+        "isNew": false,
+        "title": "ظل الافعى",
+        "author": "يوسف زيدان",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/ظل الافعى.jpg",
+        "price": "30 ج.م"
+
+    },
+    {
+        "id": 34,
+        "isNew": false,
+        "title": "رجال في الشمس",
+        "author": "غسان كنفاني",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/رجال في الشمس.jpg",
+        "price": "25 ج.م",
+        "HPaper": "111",
+        "description": "...................."
+    },
+    {
+        "id": 35,
+        "isNew": false,
+        "title": "الراقصة والسياسي",
+        "author": "احسان عبدالقدوس",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/الراقصة والسياسي.jpg",
+        "price": "25 ج.م"
+
+    },
+    {
+        "id": 36,
+        "isNew": false,
+        "title": "العيب",
+        "author": "يوسف ادريس",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/العيب.jpg",
+        "price": "25 ج.م",
+        "HPaper": "111",
+        "description": "...................."
+    },
+    {
+        "id": 37,
+        "isNew": false,
+        "title": "ارض النفاق",
+        "author": "يوسف السباعي",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/ارض النفاق.jpg",
+        "price": "25 ج.م"
+
+    },
+    {
+        "id": 38,
+        "isNew": false,
+        "title": "اديب",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/اديب.jpg",
+        "price": "20 ج.م",
+        "HPaper": "185",
+        "description": "...................."
+    },
+    {
+        "id": 39,
+        "isNew": false,
+        "title": "الوعد الحق",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/الوعد الحق.jpg",
+        "price": "20 ج.م"
+
+    },
+    {
+        "id": 40,
+        "isNew": false,
+        "title": "مع ابي العلاء في سجنة",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "روائي",
+        "cover": "images/مع ابي العلاء في سجنة.jpg",
+        "price": "20 ج.م",
+        "HPaper": "236",
+        "description": "...................."
+    },
+    {
+        "id": 1,
+        "isNew": true,
+        "title": "الخيميائي",
+        "author": "باولو كويلو",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/elHara.jpeg",
+        "price": "120 ج.م"
+
+    },
+    {
+        "id": 2,
+        "isNew": true,
         "title": "الخيميائي",
         "author": "باولو كويلو",
         "type": "مترجم",
         "category": "روائي",
         "cover": "images/elHara.jpeg",
         "price": "120 ج.م",
-        "description": "رحلة شاب يبحث عن كنزه الشخصي ويتعلم دروسًا في الحياة.",
-        "facebookPost": "https://www.facebook.com/post1"
+        "HPaper": "",
+        "description": "...................."
+    },
+    {
+        "id": 1,
+        "isNew": true,
+        "title": "الخيميائي",
+        "author": "باولو كويلو",
+        "type": "مترجم",
+        "category": "روائي",
+        "cover": "images/elHara.jpeg",
+        "price": "120 ج.م"
+
     },
     {
         "id": 2,
         "isNew": true,
-        "title": "مئة عام من العزلة",
-        "author": "غابرييل غارسيا ماركيز",
+        "title": "الخيميائي",
+        "author": "باولو كويلو",
         "type": "مترجم",
         "category": "روائي",
         "cover": "images/elHara.jpeg",
-        "price": "140 ج.م",
-        "description": "تاريخ عائلة بوينديا في مدينة ماكوندو الخيالية.",
-        "facebookPost": "https://www.facebook.com/post2"
-    },
-    {
-        "id": 3,
-        "isNew": true,
-        "title": "نظرية الفستق",
-        "author": "فهد عامر الأحمدي",
-        "type": "عربي",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
-        "price": "100 ج.م",
-        "description": "كتاب يحتوي على مقالات قصيرة في التفكير والتطوير الشخصي.",
-        "facebookPost": "https://www.facebook.com/post3"
-    },
-    {
-        "id": 4,
-        "isNew": true,
-        "title": "فن اللامبالاة",
-        "author": "مارك مانسون",
-        "type": "مترجم",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
-        "price": "110 ج.م",
-        "description": "كتاب يغيّر نظرتك للحياة من خلال مفاهيم عكس التيار.",
-        "facebookPost": "https://www.facebook.com/post4"
-    },
-    {
-        "id": 5,
-        "isNew": true,
-        "title": "تاريخ موجز للزمان",
-        "author": "ستيفن هوكينغ",
-        "type": "مترجم",
-        "category": "تاريخ",
-        "cover": "images/elHara.jpeg",
-        "price": "150 ج.م",
-        "description": "تبسيط لأسس الكون والنظريات الفيزيائية الكبرى.",
-        "facebookPost": "https://www.facebook.com/post5"
-    },
-    {
-        "id": 6,
-        "isNew": true,
-        "title": "أثر الفراشة",
-        "author": "محمود درويش",
-        "type": "عربي",
-        "category": "فلسفة",
-        "cover": "images/elHara.jpeg",
-        "price": "90 ج.م",
-        "description": "قصائد قصيرة ذات طابع وجداني وفلسفي.",
-        "facebookPost": "https://www.facebook.com/post6"
-    },
-    {
-        "id": 7,
-        "title": "الرجال من المريخ والنساء من الزهرة",
-        "author": "جون غراي",
-        "type": "مترجم",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
-        "price": "130 ج.م",
-        "description": "فهم الاختلافات النفسية بين الجنسين لتحسين العلاقات.",
-        "facebookPost": "https://www.facebook.com/post7"
-    },
-    {
-        "id": 8,
-        "title": "لأنك الله",
-        "author": "علي بن جابر الفيفي",
-        "type": "عربي",
-        "category": "فلسفة",
-        "cover": "images/elHara.jpeg",
-        "price": "80 ج.م",
-        "description": "رحلة إيمانية في أسماء الله الحسنى بأسلوب بسيط وعميق.",
-        "facebookPost": "https://www.facebook.com/post8"
-    },
-    {
-        "id": 9,
-        "title": "قوة الآن",
-        "author": "إيكهارت تول",
-        "type": "مترجم",
-        "category": "فلسفة",
-        "cover": "images/elHara.jpeg",
-        "price": "125 ج.م",
-        "description": "كتاب يركز على أهمية العيش في اللحظة الحالية.",
-        "facebookPost": "https://www.facebook.com/post9"
-    },
-    {
-        "id": 10,
-        "title": "الذكاء العاطفي",
-        "author": "دانييل غولمان",
-        "type": "مترجم",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
-        "price": "115 ج.م",
-        "description": "استكشاف مفهوم الذكاء العاطفي وأهميته في الحياة اليومية.",
-        "facebookPost": "https://www.facebook.com/post10"
-    },
-    {
-        "id": 11,
-        "title": "الطريق إلى النجاح",
-        "author": "ستيفن كوفي",
-        "type": "مترجم",
-        "category": "تاريخ",
-        "cover": "images/elHara.jpeg",
-        "price": "135 ج.م",
-        "description": "استراتيجيات فعالة لتحقيق النجاح الشخصي والمهني.",
-        "facebookPost": "https://www.facebook.com/post11"
-    },
-    {
-        "id": 12,
-        "title": "قوة التفكير الإيجابي",
-        "author": "نورمان فينسنت بيل",
-        "type": "مترجم",
-        "category": "تاريخ",
-        "cover": "images/elHara.jpeg",
-        "price": "95 ج.م",
-        "description": "كيف يمكن للتفكير الإيجابي أن يغير حياتك للأفضل.",
-        "facebookPost": "https://www.facebook.com/post12"
-    },
-    {
-        "id": 13,
-        "title": "الذكاء الاجتماعي",
-        "author": "دانييل غولمان",
-        "type": "مترجم",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
         "price": "120 ج.م",
-        "description": "كيف يمكن للذكاء الاجتماعي أن يؤثر على نجاحك في الحياة.",
-        "facebookPost": "https://www.facebook.com/post13"
-    },
-    {
-        "id": 14,
-        "title": "القيادة بلا حدود",
-        "author": "جون سي ماكسويل",
-        "type": "مترجم",
-        "category": "تاريخ",
-        "cover": "images/elHara.jpeg",
-        "price": "140 ج.م",
-        "description": "مبادئ القيادة الفعالة وكيفية التأثير على الآخرين.",
-        "facebookPost": "https://www.facebook.com/post14"
-    },
-    {
-        "id": 15,
-        "title": "الذكاء المالي",
-        "author": "روبرت كيوساكي",
-        "type": "مترجم",
-        "category": "تاريخ",
-        "cover": "images/elHara.jpeg",
-        "price": "150 ج.م",
-        "description": "كيف تبني ثروتك من خلال فهم الذكاء المالي.",
-        "facebookPost": "https://www.facebook.com/post15"
-    },
-    {
-        "id": 16,
-        "title": "التحكم في العواطف",
-        "author": "مارك مانسون",
-        "type": "مترجم",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
-        "price": "130 ج.م",
-        "description": "استراتيجيات للتحكم في العواطف وتحسين جودة الحياة.",
-        "facebookPost": "https://www.facebook.com/post16"
-    },
-    {
-        "id": 17,
-        "title": "النجاح ليس صدفة",
-        "author": "أنتوني روبنز",
-        "type": "مترجم",
-        "category": "تاريخ",
-        "cover": "images/elHara.jpeg",
-        "price": "160 ج.م",
-        "description": "كيف تحقق النجاح من خلال التخطيط والعمل الجاد.",
-        "facebookPost": "https://www.facebook.com/post17"
-    },
-    {
-        "id": 18,
-        "title": "قوة العادات",
-        "author": "تشارلز دويج",
-        "type": "مترجم",
-        "category": "علم نفس",
-        "cover": "images/elHara.jpeg",
-        "price": "125 ج.م",
-        "description": "كيف تشكل العادات حياتنا وكيف يمكن تغييرها.",
-        "facebookPost": "https://www.facebook.com/post18"
+        "HPaper": "",
+        "description": "...................."
     }
 ]

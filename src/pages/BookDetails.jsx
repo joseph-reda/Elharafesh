@@ -46,16 +46,27 @@ export default function BookDetails() {
                 <p className="leading-relaxed">{book.description}</p>
             </div>
 
-            {/* زر الحجز */}
+            {/* زر الحجز أو بديل للتواصل */}
             <div className="flex justify-end">
-                <a
-                    href={book.facebookPost}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow transition font-medium text-lg"
-                >
-                    🛒 احجز عبر فيسبوك
-                </a>
+                {book.facebookPost ? (
+                    <a
+                        href={book.facebookPost}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow transition font-medium text-lg"
+                    >
+                        🛒 احجز عبر فيسبوك
+                    </a>
+                ) : (
+                    <a
+                        href="https://wa.me/201234567890"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow transition font-medium text-lg"
+                    >
+                        💬 تواصل عبر واتساب
+                    </a>
+                )}
             </div>
         </div>
     );

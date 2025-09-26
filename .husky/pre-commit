@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# ضغط الصور قبل كل commit
+npm run compress-images
+
+# إضافة الملفات المضغوطة تلقائياً
+git add public/images/compressed

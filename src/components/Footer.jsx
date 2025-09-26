@@ -1,23 +1,55 @@
-export default function Footer() {
-    return (
-        <footer className="bg-gray-100 text-center p-4 mt-10 text-sm text-gray-600 border-t text-right rtl">
-            <div className="max-w-5xl mx-auto space-y-2">
-                <p>&copy; {new Date().getFullYear()} جميع الحقوق محفوظة لمكتبة الحرافيش للكتب</p>
+// src/components/Footer.jsx
+import { motion } from "framer-motion";
 
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4 text-sm">
-                    <p>📞 للتواصل عبر واتساب: <a href="https://wa.me/201287666728" className="text-green-600 hover:underline">01287666728</a></p>
-                    <p>📘 صفحتنا على فيسبوك:{" "}
-                        <a
-                            href="https://www.facebook.com/harafesh.books"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline"
-                        >
-                            harafesh.books
-                        </a>
-                    </p>
+export default function Footer() {
+    const contacts = [
+        {
+            label: "واتساب",
+            value: "01212145165",
+            link: "https://wa.me/2001212145165",
+            icon: "📞",
+            color: "text-green-600",
+        },
+        {
+            label: "فيسبوك",
+            value: "harafesh.books",
+            link: "https://www.facebook.com/share/1ACxYSibvC/",
+            icon: "📘",
+            color: "text-blue-600",
+        },
+    ];
+
+    return (
+        <motion.footer
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-gray-100 text-right p-4 mt-10 text-sm text-gray-600 border-t"
+        >
+            <div className="max-w-5xl mx-auto space-y-3">
+                {/* الحقوق */}
+                <p>
+                    &copy; {new Date().getFullYear()} جميع الحقوق محفوظة لمكتبة
+                    الحرافيش للكتب
+                </p>
+
+                {/* وسائل التواصل */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-6">
+                    {contacts.map((item, idx) => (
+                        <p key={idx} className="flex items-center gap-1">
+                            <span>{item.icon}</span>
+                            <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`${item.color} hover:underline`}
+                            >
+                                {item.value}
+                            </a>
+                        </p>
+                    ))}
                 </div>
             </div>
-        </footer>
+        </motion.footer>
     );
 }

@@ -2,19 +2,19 @@
 import { Routes, Route } from "react-router-dom";
 
 // Components
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 // Pages
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import BookDetails from "./pages/BookDetails";
-import Category from "./pages/Category";
-import Favorites from "./pages/Favorites";
-import NotFound from "./pages/NotFound";
+import Home from "./pages/Home.jsx";
+import Contact from "./pages/Contact.jsx";
+import BookDetails from "./pages/BookDetails.jsx";
+import Category from "./pages/Category.jsx";
+import Favorites from "./pages/Favorites.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 // (اختياري) صفحة عرض نتائج البحث
-import SearchResults from "./pages/SearchResults";
+import SearchResults from "./pages/SearchResults.jsx";
 
 export default function App() {
     return (

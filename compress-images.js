@@ -1,4 +1,3 @@
-// compress-images.js
 import imagemin from "imagemin";
 import imageminMozjpeg from "imagemin-mozjpeg";
 import imageminPngquant from "imagemin-pngquant";
@@ -6,52 +5,46 @@ import imageminWebp from "imagemin-webp";
 import fs from "fs";
 import path from "path";
 
-const inputRoot = path.resolve("public/images");
+const inputDir = path.resolve("public/images");
+const outputDir = path.resolve("public/images/compressed");
 
-// دالة recursive تجيب كل الصور من جميع الفولدرات
-function getAllImageFiles(dir, fileList = []) {
-    const files = fs.readdirSync(dir);
-
-    files.forEach((file) => {
-        const filePath = path.join(dir, file);
-        if (fs.lstatSync(filePath).isDirectory()) {
-            getAllImageFiles(filePath, fileList);
-        } else if (/\.(jpg|jpeg|png)$/i.test(file)) {
-            fileList.push(filePath);
-        }
-    });
-
-    return fileList;
+// إنشاء مجلد الإخراج لو مش موجود
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
 }
 
 (async () => {
-    try {
-        const allImages = getAllImageFiles(inputRoot);
+  try {
+    // قراءة كل الفولدرات داخل public/images
+    const folders = fs.readdirSync(inputDir).filter((f) =>
+      fs.statSync(path.join(inputDir, f)).isDirectory()
+    );
 
-        for (const file of allImages) {
-            const folderPath = path.dirname(file);
-            const fileName = path.basename(file);
+    for (const folder of folders) {
+      const folderPath = path.join(inputDir, folder);
+      const outputFolder = path.join(outputDir, folder);
 
-            // ضغط الصورة الأصلية واستبدالها
-            await imagemin([file], {
-                destination: folderPath,
-                plugins: [
-                    imageminMozjpeg({ quality: 75 }),
-                    imageminPngquant({ quality: [0.6, 0.8] }),
-                ],
-            });
+      // إنشاء مجلد الإخراج لكل يوم لو مش موجود
+      if (!fs.existsSync(outputFolder)) {
+        fs.mkdirSync(outputFolder, { recursive: true });
+      }
 
-            // إنشاء نسخة WebP بنفس الاسم
-            await imagemin([file], {
-                destination: folderPath,
-                plugins: [imageminWebp({ quality: 75 })],
-            });
+      console.log(`🔄 جاري ضغط صور الفولدر: ${folder} ...`);
 
-            console.log(`✅ Compressed & created WebP: ${fileName}`);
-        }
+      await imagemin([`${folderPath}/*.{jpg,jpeg,png}`], {
+        destination: outputFolder,
+        plugins: [
+          imageminMozjpeg({ quality: 75 }),
+          imageminPngquant({ quality: [0.6, 0.8] }),
+          imageminWebp({ quality: 75 }),
+        ],
+      });
 
-        console.log("🎉 All images compressed & WebP versions created successfully!");
-    } catch (err) {
-        console.error("❌ Error compressing images:", err);
+      console.log(`✅ تم ضغط الصور وإنشاء نسخة WebP في: ${outputFolder}`);
     }
+
+    console.log("🎉 تم ضغط جميع الصور في كل الفولدرات بنجاح!");
+  } catch (err) {
+    console.error("❌ خطأ أثناء ضغط الصور:", err);
+  }
 })();

@@ -6,7 +6,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "compress-images": "node src/compress-images.js",
+        "compress-images": "node compress-images.js",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "prepare": "husky install"

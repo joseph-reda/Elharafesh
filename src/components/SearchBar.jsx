@@ -8,33 +8,30 @@ export default function SearchBar() {
     const [keyword, setKeyword] = useState("");
     const navigate = useNavigate();
 
-    // دالة البحث
     const handleSubmit = (e) => {
         e.preventDefault();
-        const trimmed = keyword.trim();
+        const query = keyword.trim().toLowerCase();
 
-        // التحقق من الإدخال
-        if (!trimmed) {
+        if (!query) {
             toast.error("⚠️ من فضلك أدخل كلمة للبحث");
             return;
         }
 
-        // البحث في العنوان + المؤلف
-        const results = books.filter(
-            (book) =>
-                book.title.toLowerCase().includes(trimmed.toLowerCase()) ||
-                book.author?.toLowerCase().includes(trimmed.toLowerCase())
-        );
+        // البحث بالعنوان أو المؤلف
+        const results = books.filter((book) => {
+            const title = book.title?.toLowerCase() || "";
+            const author = book.author?.toLowerCase() || "";
+            return title.includes(query) || author.includes(query);
+        });
 
-        // إذا مفيش نتائج
+        // إذا لا توجد نتائج
         if (results.length === 0) {
             toast("❌ لا توجد نتائج لهذا البحث", { icon: "📭" });
-            return;
         }
 
-        // الذهاب لصفحة النتائج
-        navigate("/search", {
-            state: { results, keyword: trimmed },
+        // الانتقال لصفحة البحث مع تمرير النتائج والـ keyword
+        navigate(`/search?q=${encodeURIComponent(query)}`, {
+            state: { results, keyword: keyword.trim() },
         });
     };
 
@@ -46,14 +43,15 @@ export default function SearchBar() {
         >
             <input
                 type="text"
-                className="border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="🔍 ابحث عن كتاب أو مؤلف..."
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
+                placeholder="🔍 ابحث باسم الكتاب أو اسم الكاتب..."
+                aria-label="ابحث باسم الكتاب أو المؤلف"
+                className="border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2 rounded-lg shadow transition font-medium"
             >
                 بحث
             </button>

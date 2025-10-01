@@ -6,6 +6,8 @@ import BookImage from "./BookImage";
 export default function BookCard({ book }) {
     if (!book) return null;
 
+    const isSold = book.status === "sold";
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -22,11 +24,21 @@ export default function BookCard({ book }) {
                     fit="cover"
                     className="rounded-t-2xl"
                 />
+
+                {/* شارة جديد */}
                 {book.isNew && (
                     <span className="absolute top-3 right-3 text-xs bg-red-600 text-white px-2 py-1 rounded-full shadow">
                         جديد
                     </span>
                 )}
+
+                {/* شارة الحالة */}
+                <span
+                    className={`absolute top-3 left-3 text-xs px-2 py-1 rounded-full shadow ${isSold ? "bg-gray-800 text-white" : "bg-green-600 text-white"
+                        }`}
+                >
+                    {isSold ? "❌ تم البيع" : "✅ متوفر"}
+                </span>
             </div>
 
             {/* تفاصيل الكتاب */}
@@ -47,9 +59,16 @@ export default function BookCard({ book }) {
                     </p>
                 )}
 
+                {/* زر التفاصيل */}
                 <Link
                     to={`/book/${book.id}`}
-                    className="inline-block text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition"
+                    className={`inline-block text-sm px-4 py-2 rounded-lg transition ${isSold
+                            ? "bg-gray-400 text-white cursor-not-allowed"
+                            : "bg-blue-700 text-white hover:bg-blue-800"
+                        }`}
+                    onClick={(e) => {
+                        if (isSold) e.preventDefault();
+                    }}
                 >
                     عرض التفاصيل
                 </Link>

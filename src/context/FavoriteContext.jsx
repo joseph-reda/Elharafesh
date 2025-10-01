@@ -2,42 +2,39 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-// إنشاء الـ Context
 const FavoriteContext = createContext();
 
-// مزود المفضلة
 export function FavoriteProvider({ children }) {
     const [favorites, setFavorites] = useState(() => {
         try {
             const saved = localStorage.getItem("favorites");
             return saved ? JSON.parse(saved) : [];
         } catch (err) {
-            console.error("خطأ في قراءة المفضلة من localStorage:", err);
+            console.error("❌ خطأ أثناء قراءة المفضلة:", err);
             return [];
         }
     });
 
-    // تحديث localStorage عند أي تعديل
+    // تحديث localStorage مع أي تغيير
     useEffect(() => {
         localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
 
-    // إضافة كتاب إلى المفضلة
+    // إضافة كتاب
     function addFavorite(book) {
         if (!book?.id) return;
 
         setFavorites((prev) => {
-            if (!prev.some((b) => b.id === book.id)) {
-                toast.success(`❤️ تمت إضافة "${book.title}" إلى المفضلة`);
-                return [...prev, book];
-            } else {
+            if (prev.some((b) => b.id === book.id)) {
                 toast("⚠️ هذا الكتاب موجود بالفعل في المفضلة", { icon: "ℹ️" });
+                return prev;
             }
-            return prev;
+            toast.success(`❤️ تمت إضافة "${book.title}" إلى المفضلة`);
+            return [...prev, book];
         });
     }
 
-    // إزالة كتاب من المفضلة
+    // إزالة كتاب
     function removeFavorite(bookId) {
         setFavorites((prev) => {
             const updated = prev.filter((b) => b.id !== bookId);
@@ -48,10 +45,8 @@ export function FavoriteProvider({ children }) {
         });
     }
 
-    // التحقق إذا كان الكتاب موجود
-    function isFavorite(bookId) {
-        return favorites.some((b) => b.id === bookId);
-    }
+    // تحقق إذا الكتاب موجود
+    const isFavorite = (bookId) => favorites.some((b) => b.id === bookId);
 
     return (
         <FavoriteContext.Provider
@@ -62,7 +57,6 @@ export function FavoriteProvider({ children }) {
     );
 }
 
-// Hook لاستخدام المفضلة بسهولة
 export function useFavorites() {
     return useContext(FavoriteContext);
 }

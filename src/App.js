@@ -1,4 +1,3 @@
-// src/App.js
 import { Routes, Route } from "react-router-dom";
 
 // Components
@@ -12,8 +11,6 @@ import BookDetails from "./pages/BookDetails.jsx";
 import Category from "./pages/Category.jsx";
 import Favorites from "./pages/Favorites.jsx";
 import NotFound from "./pages/NotFound.jsx";
-
-// (اختياري) صفحة عرض نتائج البحث
 import SearchResults from "./pages/SearchResults.jsx";
 
 export default function App() {

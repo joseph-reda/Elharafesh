@@ -1,70 +1,28 @@
-// src/components/SearchBar.jsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import books from "../data/books.json";
+// src/pages/SearchResults.jsx
+import { useLocation } from "react-router-dom";
+import BookCard from "../components/BookCard";
 
-export default function SearchBar() {
-    const [filter, setFilter] = useState("all"); // القيمة الافتراضية = الكل
-    const navigate = useNavigate();
-
-    // تطبيق الفلتر
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        let results = [];
-
-        switch (filter) {
-            case "novel": // روائي
-                results = books.filter((book) => book.category === "روائي");
-                break;
-
-            case "non-novel": // غير روائي
-                results = books.filter((book) => book.category !== "روائي");
-                break;
-
-            case "translated": // مترجم
-                results = books.filter((book) => book.type === "مترجم");
-                break;
-
-            case "arabic": // عربي
-                results = books.filter((book) => book.type === "عربي");
-                break;
-
-            default: // الكل
-                results = books;
-                break;
-        }
-
-        // الذهاب لصفحة النتائج
-        navigate("/search", {
-            state: { results, keyword: filter },
-        });
-    };
+export default function SearchResults() {
+    const location = useLocation();
+    const { results = [], keyword = "" } = location.state || {};
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="flex gap-2 w-full max-w-xl mx-auto"
-            aria-label="شريط البحث"
-        >
-            <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                className="border border-gray-300 p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-                <option value="all">📚 الكل</option>
-                <option value="novel">📖 روائي</option>
-                <option value="non-novel">📘 غير روائي</option>
-                <option value="translated">🌍 مترجم</option>
-                <option value="arabic">🇪🇬 عربي</option>
-            </select>
+        <main className="px-4 md:px-12 py-8 text-right font-sans">
+            <h1 className="text-2xl font-bold text-blue-800 mb-6">
+                نتائج البحث عن: "<span className="text-gray-700">{keyword}</span>"
+            </h1>
 
-            <button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
-            >
-                عرض
-            </button>
-        </form>
+            {results.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {results.map((book) => (
+                        <BookCard key={book.id} book={book} />
+                    ))}
+                </div>
+            ) : (
+                <p className="text-gray-600 text-lg text-center py-10">
+                    📭 لا توجد نتائج مطابقة للبحث.
+                </p>
+            )}
+        </main>
     );
 }

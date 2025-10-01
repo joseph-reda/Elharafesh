@@ -2,6 +2,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoriteContext";
 import books from "../data/books.json";
+import SearchBar from "../components/SearchBar";
 import BookCard from "../components/BookCard";
 import CategoryCard from "../components/CategoryCard";
 import { motion } from "framer-motion";
@@ -31,6 +32,7 @@ export default function Category() {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">
+            <SearchBar />
             {/* عنوان الصفحة */}
             <motion.h1
                 initial={{ opacity: 0, x: 40 }}

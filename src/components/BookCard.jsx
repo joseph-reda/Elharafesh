@@ -13,9 +13,9 @@ export default function BookCard({ book }) {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-white rounded-2xl shadow hover:shadow-lg transition duration-300 overflow-hidden text-right border border-gray-100 relative"
+            className="bg-white rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden text-right border border-gray-100 relative"
         >
-            {/* صورة الكتاب */}
+            {/* صورة الكتاب + الشارات */}
             <div className="relative">
                 <BookImage
                     images={book.images || []}
@@ -27,15 +27,16 @@ export default function BookCard({ book }) {
 
                 {/* شارة جديد */}
                 {book.isNew && (
-                    <span className="absolute top-3 right-3 text-xs bg-red-600 text-white px-2 py-1 rounded-full shadow">
+                    <span className="absolute top-3 right-3 text-xs bg-red-600 text-white px-2 py-1 rounded-full shadow-md">
                         جديد
                     </span>
                 )}
 
                 {/* شارة الحالة */}
                 <span
-                    className={`absolute top-3 left-3 text-xs px-2 py-1 rounded-full shadow ${isSold ? "bg-gray-800 text-white" : "bg-green-600 text-white"
-                        }`}
+                    className={`absolute top-3 left-3 text-xs px-2 py-1 rounded-full shadow-md ${
+                        isSold ? "bg-gray-700 text-white" : "bg-green-600 text-white"
+                    }`}
                 >
                     {isSold ? "❌ تم البيع" : "✅ متوفر"}
                 </span>
@@ -62,15 +63,16 @@ export default function BookCard({ book }) {
                 {/* زر التفاصيل */}
                 <Link
                     to={`/book/${book.id}`}
-                    className={`inline-block text-sm px-4 py-2 rounded-lg transition ${isSold
-                            ? "bg-gray-400 text-white cursor-not-allowed"
+                    className={`inline-block text-sm px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                        isSold
+                            ? "bg-gray-400 text-white cursor-not-allowed opacity-80"
                             : "bg-blue-700 text-white hover:bg-blue-800"
-                        }`}
+                    }`}
                     onClick={(e) => {
                         if (isSold) e.preventDefault();
                     }}
                 >
-                    عرض التفاصيل
+                    {isSold ? "غير متاح" : "عرض التفاصيل"}
                 </Link>
             </div>
         </motion.div>

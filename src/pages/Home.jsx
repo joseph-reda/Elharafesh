@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Home() {
-    // استخراج الكتب الجديدة (لو عايز تخليها حسب شرط تاني مستقبلاً)
+    // استخراج الكتب الجديدة
     const newBooks = books.filter((book) => book.isNew);
 
     return (
@@ -26,14 +26,13 @@ export default function Home() {
                             لبيع الكتب المستعملة والقديمة
                         </h1>
                         <p className="text-gray-700 text-md md:text-lg leading-loose">
-                            اكتشف أحدث الكتب العربية والمترجمة، بنكهة شعبية وتراثية،
-                            تجمع بين الأدب والثقافة والتاريخ.
+                            اكتشف أحدث الكتب العربية والمترجمة، بنكهة شعبية وتراثية تجمع بين الأدب والثقافة والتاريخ.
                         </p>
                     </div>
                     <img
                         src="/images/logo.png"
                         alt="شعار مكتبة الحرافيش"
-                        className="w-48 md:w-60 rounded-full border-4 border-blue-200 shadow-md"
+                        className="w-44 md:w-56 rounded-full border-4 border-blue-200 shadow-md hover:scale-105 transition-transform duration-300"
                     />
                 </header>
             </motion.section>
@@ -50,8 +49,9 @@ export default function Home() {
                     🕙 يتم نشر مجموعة جديدة من الكتب يوميًا في الساعة{" "}
                     <strong>9 مساءً</strong> على صفحتنا على الفيسبوك.
                     <br />
-                    للحجز، يُرجى كتابة تعليق على منشور الكتاب أو التواصل معنا عبر
-                    واتساب أو ماسنجر.
+                    للحجز، يُرجى كتابة تعليق على منشور الكتاب أو التواصل معنا عبر{" "}
+                    <span className="font-semibold text-blue-700">واتساب</span> أو{" "}
+                    <span className="font-semibold text-blue-700">ماسنجر</span>.
                 </p>
             </motion.section>
 
@@ -72,14 +72,16 @@ export default function Home() {
                         <div className="mt-6 text-center">
                             <Link
                                 to="/category"
-                                className="inline-block bg-blue-600 text-white text-lg px-8 py-2 rounded-lg hover:bg-blue-700 transition-all"
+                                className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white text-lg px-8 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md"
                             >
                                 عرض المزيد
                             </Link>
                         </div>
                     </>
                 ) : (
-                    <p className="text-gray-600">لا توجد كتب جديدة حاليًا.</p>
+                    <p className="text-gray-600 text-center text-lg">
+                        📭 لا توجد كتب جديدة حاليًا.
+                    </p>
                 )}
             </motion.section>
         </main>

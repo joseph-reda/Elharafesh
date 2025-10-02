@@ -9,13 +9,13 @@ export default function CategoryCard({
     return (
         <motion.button
             onClick={onClick}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
-            className={`w-full px-4 py-2 rounded-lg text-center font-medium shadow-sm transition-colors duration-200 ${
-                selected
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-800 hover:bg-blue-100"
-            }`}
+            className={`px-5 py-2 min-w-[100px] rounded-xl text-center font-medium shadow-sm transition-all duration-300 
+                ${selected
+                    ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+                    : "bg-gray-100 text-gray-800 hover:bg-blue-50 hover:text-blue-700 border border-gray-200"
+                }`}
         >
             {title}
         </motion.button>

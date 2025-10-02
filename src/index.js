@@ -1,16 +1,17 @@
+// src/main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.js";
 import "./index.css";
-import { FavoriteProvider } from "./context/FavoriteContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx"; // ✅ استيراد الـ CartProvider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <BrowserRouter>
-            <FavoriteProvider>
+            <CartProvider>  {/* ✅ لف التطبيق كله بالـ CartProvider */}
                 <App />
-            </FavoriteProvider>
+            </CartProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

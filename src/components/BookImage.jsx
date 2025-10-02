@@ -16,9 +16,7 @@ export default function BookImage({
 
     if (!images || images.length === 0) {
         return (
-            <div
-                className={`relative overflow-hidden rounded-md bg-gray-200 ${ratio}`}
-            >
+            <div className={`relative overflow-hidden rounded-md bg-gray-200 ${ratio}`}>
                 <img
                     src="/placeholder.png"
                     alt={alt}
@@ -29,7 +27,6 @@ export default function BookImage({
         );
     }
 
-    // الصورة الحالية
     const currentImage = images[index];
     const webpSrc = currentImage.replace(/\.(jpg|jpeg|png)$/i, ".webp");
 
@@ -44,14 +41,13 @@ export default function BookImage({
     };
 
     return (
-        <div
-            className={`relative overflow-hidden rounded-md bg-gray-100 ${ratio} ${className}`}
-        >
-            {/* Skeleton */}
+        <div className={`relative overflow-hidden rounded-lg bg-gray-100 ${ratio} ${className}`}>
+            {/* Skeleton أثناء التحميل */}
             {!loaded && (
-                <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-md" />
+                <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg" />
             )}
 
+            {/* الصورة الحالية */}
             <AnimatePresence mode="wait">
                 <motion.picture
                     key={index}
@@ -67,35 +63,37 @@ export default function BookImage({
                         alt={alt}
                         effect="blur"
                         afterLoad={() => setLoaded(true)}
-                        className={`w-full h-full object-${fit} rounded-md`}
+                        className={`w-full h-full object-${fit} rounded-lg`}
                     />
                 </motion.picture>
             </AnimatePresence>
 
-            {/* أزرار التنقل لو أكتر من صورة */}
+            {/* التنقل بين الصور */}
             {images.length > 1 && (
                 <>
                     <button
                         onClick={prevImage}
-                        className="absolute top-1/2 left-2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition"
+                        className="absolute top-1/2 left-3 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition"
                         aria-label="الصورة السابقة"
                     >
                         ◀
                     </button>
                     <button
                         onClick={nextImage}
-                        className="absolute top-1/2 right-2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition"
+                        className="absolute top-1/2 right-3 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition"
                         aria-label="الصورة التالية"
                     >
                         ▶
                     </button>
 
-                    {/* مؤشرات الصور */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+                    {/* مؤشرات الصور (Dots) */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                         {images.map((_, i) => (
                             <span
                                 key={i}
-                                className={`w-2 h-2 rounded-full ${i === index ? "bg-white" : "bg-white/50"
+                                className={`w-2.5 h-2.5 rounded-full transition-all ${i === index
+                                        ? "bg-white scale-110"
+                                        : "bg-white/50"
                                     }`}
                             />
                         ))}

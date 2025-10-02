@@ -1,23 +1,33 @@
+// src/App.jsx
 import { Routes, Route } from "react-router-dom";
 
 // Components
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import SearchBar from "./components/SearchBar.jsx";
 
 // Pages
 import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 import BookDetails from "./pages/BookDetails.jsx";
 import Category from "./pages/Category.jsx";
-import Favorites from "./pages/Favorites.jsx";
+import Cart from "./pages/Cart.jsx"; // ✅ استبدل Favorites
 import NotFound from "./pages/NotFound.jsx";
 import SearchResults from "./pages/SearchResults.jsx";
 
 export default function App() {
     return (
-        <div dir="rtl" className="font-sans bg-gray-50 min-h-screen flex flex-col">
+        <div
+            dir="rtl"
+            className="font-sans bg-gray-50 min-h-screen flex flex-col"
+        >
             {/* شريط التنقل */}
             <Navbar />
+
+            {/* شريط البحث */}
+            <div className="bg-white shadow-sm border-b border-gray-200 py-4 px-6">
+                <SearchBar />
+            </div>
 
             {/* المحتوى الرئيسي */}
             <main className="flex-1 p-4">
@@ -26,13 +36,9 @@ export default function App() {
                     <Route path="/book/:id" element={<BookDetails />} />
                     <Route path="/category" element={<Category />} />
                     <Route path="/category/:name" element={<Category />} />
-                    <Route path="/favorites" element={<Favorites />} />
+                    <Route path="/cart" element={<Cart />} /> {/* ✅ صفحة التسوق */}
                     <Route path="/contact" element={<Contact />} />
-
-                    {/* صفحة البحث */}
                     <Route path="/search" element={<SearchResults />} />
-
-                    {/* أي رابط غير معروف */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>

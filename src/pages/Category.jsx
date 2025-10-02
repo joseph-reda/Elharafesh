@@ -1,18 +1,17 @@
 // src/pages/Category.jsx
 import { useParams, Link } from "react-router-dom";
-import { useFavorites } from "../context/FavoriteContext";
+import { useCart } from "../context/CartContext"; // ✅ بدل Favorites بـ Cart
 import books from "../data/books.json";
-import SearchBar from "../components/SearchBar";
 import BookCard from "../components/BookCard";
 import CategoryCard from "../components/CategoryCard";
 import { motion } from "framer-motion";
 
-// التصنيفات الرئيسية فقط
+// التصنيفات الرئيسية
 const categories = ["روائي", "غير روائي", "مترجم", "عربي"];
 
 export default function Category() {
     const { name } = useParams();
-    const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+    const { addToCart, removeFromCart, isInCart } = useCart(); // ✅ API جديد من CartContext
 
     // ترتيب الكتب (الأحدث أولاً)
     const sortedBooks = [...books].sort((a, b) => b.id - a.id);
@@ -20,19 +19,18 @@ export default function Category() {
     // فلترة الكتب
     const filteredBooks = name
         ? sortedBooks.filter((book) => {
-            if (name === "مترجم" || name === "عربي") {
-                return book.type?.toLowerCase() === name.toLowerCase();
-            }
-            if (name === "غير روائي") {
-                return book.category?.toLowerCase() !== "روائي";
-            }
-            return book.category?.toLowerCase() === name.toLowerCase();
-        })
+              if (name === "مترجم" || name === "عربي") {
+                  return book.type?.toLowerCase() === name.toLowerCase();
+              }
+              if (name === "غير روائي") {
+                  return book.category?.toLowerCase() !== "روائي";
+              }
+              return book.category?.toLowerCase() === name.toLowerCase();
+          })
         : sortedBooks;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">
-            <SearchBar />
             {/* عنوان الصفحة */}
             <motion.h1
                 initial={{ opacity: 0, x: 40 }}
@@ -40,7 +38,7 @@ export default function Category() {
                 transition={{ duration: 0.6 }}
                 className="text-3xl font-extrabold text-blue-800"
             >
-                📚 التصنيفات
+                🛍️ التصنيفات
             </motion.h1>
 
             {/* فلتر التصنيفات */}
@@ -100,21 +98,22 @@ export default function Category() {
                         >
                             <BookCard book={book} />
 
-                            {/* زر المفضلة */}
+                            {/* زر السلة */}
                             <button
                                 onClick={() =>
-                                    isFavorite(book.id)
-                                        ? removeFavorite(book.id)
-                                        : addFavorite(book)
+                                    isInCart(book.id)
+                                        ? removeFromCart(book.id)
+                                        : addToCart(book)
                                 }
-                                className={`mt-3 w-full text-sm px-4 py-2 rounded-lg transition font-medium ${isFavorite(book.id)
+                                className={`mt-3 w-full text-sm px-4 py-2 rounded-lg transition font-medium ${
+                                    isInCart(book.id)
                                         ? "bg-red-100 text-red-600 hover:bg-red-200"
-                                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                                    }`}
+                                        : "bg-green-100 text-green-700 hover:bg-green-200"
+                                }`}
                             >
-                                {isFavorite(book.id)
-                                    ? "❤️ إزالة من المفضلة"
-                                    : "🤍 أضف إلى المفضلة"}
+                                {isInCart(book.id)
+                                    ? "🗑️ إزالة من السلة"
+                                    : "➕ أضف إلى السلة"}
                             </button>
                         </motion.div>
                     ))}

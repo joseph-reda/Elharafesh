@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
-export function CartProvider({ children }) {
+function CartProvider({ children }) {
     const [cart, setCart] = useState(() => {
         try {
             const saved = localStorage.getItem("cart");
@@ -22,6 +22,11 @@ export function CartProvider({ children }) {
     // إضافة كتاب للسلة
     function addToCart(book) {
         if (!book?.id) return;
+
+        if (book.status === "sold") {
+            toast.error("⚠️ هذا الكتاب غير متاح للإضافة للسلة");
+            return;
+        }
 
         setCart((prev) => {
             if (!prev.some((b) => b.id === book.id)) {
@@ -44,7 +49,9 @@ export function CartProvider({ children }) {
     function updateQuantity(bookId, qty) {
         if (qty < 1) return;
         setCart((prev) =>
-            prev.map((b) => (b.id === bookId ? { ...b, quantity: qty } : b))
+            prev.map((b) =>
+                b.id === bookId ? { ...b, quantity: qty } : b
+            )
         );
     }
 
@@ -67,7 +74,7 @@ export function CartProvider({ children }) {
                 removeFromCart,
                 updateQuantity,
                 clearCart,
-                isInCart, // ✅ مضافة هنا
+                isInCart,
             }}
         >
             {children}
@@ -75,6 +82,9 @@ export function CartProvider({ children }) {
     );
 }
 
-export function useCart() {
+// Hook جاهز للاستخدام
+function useCart() {
     return useContext(CartContext);
 }
+
+export { CartProvider, useCart };

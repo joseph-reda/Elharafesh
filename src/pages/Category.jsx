@@ -1,33 +1,38 @@
-// src/pages/Category.jsx
 import { useParams, Link } from "react-router-dom";
-import { useCart } from "../context/CartContext"; // ✅ بدل Favorites بـ Cart
+import { useCart } from "../context/CartContext";
 import books from "../data/books.json";
 import BookCard from "../components/BookCard";
 import CategoryCard from "../components/CategoryCard";
 import { motion } from "framer-motion";
+import ScrollToTopButton from "../components/ScrollTopButton"; // ✅ زر الصعود لأعلى
 
 // التصنيفات الرئيسية
 const categories = ["روائي", "غير روائي", "مترجم", "عربي"];
 
 export default function Category() {
     const { name } = useParams();
-    const { addToCart, removeFromCart, isInCart } = useCart(); // ✅ API جديد من CartContext
+    const { addToCart, removeFromCart, isInCart } = useCart();
 
     // ترتيب الكتب (الأحدث أولاً)
     const sortedBooks = [...books].sort((a, b) => b.id - a.id);
 
-    // فلترة الكتب
-    const filteredBooks = name
+    // فلترة + ترتيب الكتب
+    const filteredBooks = (name
         ? sortedBooks.filter((book) => {
-              if (name === "مترجم" || name === "عربي") {
-                  return book.type?.toLowerCase() === name.toLowerCase();
-              }
-              if (name === "غير روائي") {
-                  return book.category?.toLowerCase() !== "روائي";
-              }
-              return book.category?.toLowerCase() === name.toLowerCase();
-          })
-        : sortedBooks;
+            if (name === "مترجم" || name === "عربي") {
+                return book.type?.toLowerCase() === name.toLowerCase();
+            }
+            if (name === "غير روائي") {
+                return book.category?.toLowerCase() !== "روائي";
+            }
+            return book.category?.toLowerCase() === name.toLowerCase();
+        })
+        : sortedBooks
+    ).sort((a, b) => {
+        if (a.status === "available" && b.status !== "available") return -1;
+        if (a.status !== "available" && b.status === "available") return 1;
+        return 0;
+    });
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">
@@ -97,28 +102,13 @@ export default function Category() {
                             className="relative"
                         >
                             <BookCard book={book} />
-
-                            {/* زر السلة */}
-                            <button
-                                onClick={() =>
-                                    isInCart(book.id)
-                                        ? removeFromCart(book.id)
-                                        : addToCart(book)
-                                }
-                                className={`mt-3 w-full text-sm px-4 py-2 rounded-lg transition font-medium ${
-                                    isInCart(book.id)
-                                        ? "bg-red-100 text-red-600 hover:bg-red-200"
-                                        : "bg-green-100 text-green-700 hover:bg-green-200"
-                                }`}
-                            >
-                                {isInCart(book.id)
-                                    ? "🗑️ إزالة من السلة"
-                                    : "➕ أضف إلى السلة"}
-                            </button>
                         </motion.div>
                     ))}
                 </motion.div>
             )}
+
+            {/* ✅ زر الصعود لأعلى */}
+            <ScrollToTopButton />
         </div>
     );
 }

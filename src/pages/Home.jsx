@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Home() {
-    // استخراج الكتب الجديدة
+    // ✅ استخراج الكتب الجديدة فقط
     const newBooks = books.filter((book) => book.isNew);
 
     return (
@@ -68,6 +68,7 @@ export default function Home() {
 
                 {newBooks.length > 0 ? (
                     <>
+                        {/* ✅ BookGrid بيستخدم BookCard اللي فيه منطق السلة والحالة */}
                         <BookGrid books={newBooks} />
                         <div className="mt-6 text-center">
                             <Link

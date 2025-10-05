@@ -1,12 +1,32 @@
 // src/pages/Home.jsx
-import books from "../data/books.json";
+import { useQuery } from "@tanstack/react-query";
 import BookGrid from "../components/BookGrid";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Home() {
-    // ✅ استخراج الكتب الجديدة فقط
+    // ✅ جلب الكتب من API أو JSON
+    const { data: books = [], isLoading, error } = useQuery({
+        queryKey: ["books"],
+        queryFn: () => fetch("/books.json").then((res) => res.json()),
+    });
+
+    // ✅ تصفية الكتب الجديدة فقط
     const newBooks = books.filter((book) => book.isNew);
+
+    if (isLoading)
+        return (
+            <main className="text-center py-20 text-gray-600 text-lg">
+                ⏳ جاري تحميل الكتب...
+            </main>
+        );
+
+    if (error)
+        return (
+            <main className="text-center py-20 text-red-600 text-lg">
+                ❌ حدث خطأ أثناء تحميل الكتب
+            </main>
+        );
 
     return (
         <main className="text-right px-4 md:px-12 py-8 space-y-12 font-sans bg-gray-50">
@@ -26,7 +46,8 @@ export default function Home() {
                             لبيع الكتب المستعملة والقديمة
                         </h1>
                         <p className="text-gray-700 text-md md:text-lg leading-loose">
-                            اكتشف أحدث الكتب العربية والمترجمة، بنكهة شعبية وتراثية تجمع بين الأدب والثقافة والتاريخ.
+                            اكتشف أحدث الكتب العربية والمترجمة، بنكهة شعبية وتراثية تجمع بين
+                            الأدب والثقافة والتاريخ.
                         </p>
                     </div>
                     <img
@@ -68,7 +89,6 @@ export default function Home() {
 
                 {newBooks.length > 0 ? (
                     <>
-                        {/* ✅ BookGrid بيستخدم BookCard اللي فيه منطق السلة والحالة */}
                         <BookGrid books={newBooks} />
                         <div className="mt-6 text-center">
                             <Link

@@ -1,15 +1,21 @@
-// src/components/SearchBar.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import books from "../data/books.json";
 import toast from "react-hot-toast";
 
 export default function SearchBar() {
     const [keyword, setKeyword] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [books, setBooks] = useState([]);
     const navigate = useNavigate();
 
-    // تحديث الاقتراحات أثناء الكتابة
+    // تحميل الكتب مرة واحدة
+    useEffect(() => {
+        fetch("/books.json")
+            .then((res) => res.json())
+            .then((data) => setBooks(data))
+            .catch((err) => console.error("خطأ في تحميل الكتب:", err));
+    }, []);
+
     const handleChange = (e) => {
         const value = e.target.value;
         setKeyword(value);
@@ -26,7 +32,7 @@ export default function SearchBar() {
                 book.author?.toLowerCase().includes(query)
         );
 
-        setSuggestions(filtered.slice(0, 5)); // نعرض 5 اقتراحات بس
+        setSuggestions(filtered.slice(0, 5));
     };
 
     const handleSubmit = (e) => {
@@ -86,7 +92,6 @@ export default function SearchBar() {
                 </button>
             </form>
 
-            {/* قائمة الاقتراحات */}
             {suggestions.length > 0 && (
                 <ul className="absolute z-50 bg-white border border-gray-200 rounded-lg shadow-md mt-2 w-full max-h-60 overflow-y-auto">
                     {suggestions.map((book) => (

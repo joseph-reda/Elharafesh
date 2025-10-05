@@ -4,14 +4,20 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.js";
 import "./index.css";
-import { CartProvider } from "./context/CartContext.jsx"; // ✅ استيراد الـ CartProvider
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CartProvider } from "./context/CartContext.jsx"; // ✅ استيراد الـ Provider
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <BrowserRouter>
-            <CartProvider>  {/* ✅ لف التطبيق كله بالـ CartProvider */}
-                <App />
-            </CartProvider>
+            <QueryClientProvider client={queryClient}>
+                <CartProvider> {/* ✅ لف App بالـ CartProvider */}
+                    <App />
+                </CartProvider>
+            </QueryClientProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

@@ -15,7 +15,7 @@ export default function Cart() {
         .map((book) => `📚 ${book.title} - ${book.price} × ${book.quantity}`)
         .join("\n");
 
-    const whatsappUrl = `https://wa.me/2001212145165?text=مرحبًا، أود حجز هذه الكتب:\n${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/2001034345458?text=مرحبًا، أود حجز هذه الكتب:\n${encodeURIComponent(
         whatsappMessage
     )}\n\nالإجمالي: ${totalPrice.toFixed(2)} ج.م`;
 
@@ -39,7 +39,7 @@ export default function Cart() {
                     {/* شبكة الكتب */}
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {cart.map((book) => {
-                            const singleBookUrl = `https://wa.me/2001212145165?text=مرحبًا، أود حجز الكتاب:\n📖 ${book.title}\n💵 ${book.price}`;
+                            const singleBookUrl = `https://wa.me/2001034345458?text=مرحبًا، أود حجز الكتاب:\n📖 ${book.title}\n💵 ${book.price}`;
                             return (
                                 <motion.div
                                     key={book.id}

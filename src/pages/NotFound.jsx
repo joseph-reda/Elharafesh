@@ -8,7 +8,7 @@ export default function NotFound() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center justify-center text-center py-20 text-right"
+            className="flex flex-col items-center justify-center py-20 text-right"
         >
             <h1 className="text-4xl font-extrabold text-red-600 mb-4">
                 404 — الصفحة غير موجودة

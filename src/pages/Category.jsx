@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 
 // التصنيفات الرئيسية
-const categories = ["روائي", "غير روائي", "مترجم", "عربي"];
+const categories = ["رواية", "غير روائي", "مترجم", "عربي"];
 
 export default function Category() {
     const { name } = useParams();
@@ -32,18 +32,26 @@ export default function Category() {
         return b.id - a.id;
     });
 
-    // ✅ فلترة حسب التصنيف
-    const filteredBooks = name
-        ? sortedBooks.filter((book) => {
-            if (name === "مترجم" || name === "عربي") {
-                return book.type?.toLowerCase() === name.toLowerCase();
-            }
-            if (name === "غير روائي") {
-                return book.category?.toLowerCase() !== "روائي";
-            }
-            return book.category?.toLowerCase() === name.toLowerCase();
-        })
-        : sortedBooks;
+  // ✅ فلترة حسب التصنيف
+const filteredBooks = name
+    ? sortedBooks.filter((book) => {
+        const cat = book.category?.toLowerCase() || "";
+        const type = book.type?.toLowerCase() || "";
+        const n = name.toLowerCase();
+
+        if (n === "مترجم") {
+            return ["أجنبي", "عالمي", "مترجم"].includes(type);
+        }
+        if (n === "عربي") {
+            return type.includes("عربي");
+        }
+        if (n === "غير روائي") {
+            return !cat.includes("رواية");
+        }
+        return cat.includes(n);
+    })
+    : sortedBooks;
+
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">

@@ -7,8 +7,8 @@ export default function Contact() {
         {
             icon: <FaWhatsapp className="text-green-600 text-2xl" />,
             label: "واتساب",
-            value: "01212145165",
-            link: "https://wa.me/201212145165",
+            value: "01034345458",
+            link: "https://wa.me/201034345458",
             color: "from-green-500 to-green-600",
         },
         {
@@ -27,8 +27,8 @@ export default function Contact() {
         {
             icon: <FaEnvelope className="text-gray-600 text-2xl" />,
             label: "البريد الإلكتروني",
-            value: "nehrugamal@gmail.com",
-            link: "mailto:nehrugamal@gmail.com",
+            value: "alhrafyshllktb@gmail.com",
+            link: "mailto:alhrafyshllktb@gmail.com",
             color: "from-gray-500 to-gray-600",
         },
     ];

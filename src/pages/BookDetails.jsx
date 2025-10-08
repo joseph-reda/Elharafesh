@@ -42,7 +42,7 @@ export default function BookDetails() {
     const notAvailable = isSold;
 
     // ✅ رابط واتساب للحجز
-    const whatsappUrl = `https://wa.me/201234567890?text=مرحبًا، أود حجز الكتاب:\n📖 ${book.title}\n💵 ${book.price}`;
+    const whatsappUrl = `https://wa.me/201034345458?text=مرحبًا، أود حجز الكتاب:\n📖 ${book.title}\n💵 ${book.price}`;
 
     return (
         <motion.div

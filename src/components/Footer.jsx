@@ -5,8 +5,8 @@ export default function Footer() {
     const contacts = [
         {
             label: "واتساب",
-            value: "01212145165",
-            link: "https://wa.me/2001212145165",
+            value: "01034345458",
+            link: "https://wa.me/2001034345458",
             icon: "📞",
             color: "text-green-600",
         },

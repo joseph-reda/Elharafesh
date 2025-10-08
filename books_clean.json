@@ -16,7 +16,7 @@
         "price": 150,
         "HPaper": null,
         "description": "قصص شعرية مستوحاة من السيرة الهلالية، تحكي بطولات ومغامرات الفلاحين والفرسان.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 41,
@@ -154,7 +154,7 @@
         "price": 35,
         "HPaper": "377",
         "description": "رواية تصور التحولات الاجتماعية والنفسية لشخصياتها في إطار تاريخي.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 50,
@@ -169,7 +169,7 @@
         "price": 35,
         "HPaper": "367",
         "description": "رواية تتناول الأحلام والخداع في حياة الشخصيات بأسلوب محفوظ المميز.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 51,
@@ -232,7 +232,7 @@
         "price": 50,
         "HPaper": "851",
         "description": "رواية تصف صراع جوليان سورال بين الطموح الاجتماعي والدين والحب والغيرة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 55,
@@ -247,7 +247,7 @@
         "price": 25,
         "HPaper": "181",
         "description": "رحلة بطل يبحث عن أبيه الضائع ليكتشف أنه يبحث عن ذاته ومعنى وجوده. رواية فلسفية عميقة تكشف صراع الإنسان مع القدر والحرية.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 56,
@@ -323,7 +323,7 @@
         "price": 20,
         "HPaper": "118",
         "description": "مسرحية رمزية تستعيد أسطورة إيزيس وأوزوريس. حكاية عن الخيانة والفداء وقوة الحب التي تعيد للحياة معناها.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 61,
@@ -335,10 +335,10 @@
         "images": [
             "/images/9-27/9_27_ (6).jpg"
         ],
-        "price": 10,
+        "price": 2,
         "HPaper": "86",
         "description": "كتاب قصير يشرح بأسلوب مبسط معنى الديمقراطية ورؤية طه حسين للمستقبل القائم على الحرية والعدالة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 62,
@@ -383,7 +383,7 @@
         "price": 35,
         "HPaper": "363",
         "description": "رواية جريئة تكشف فساد السياسة والمجتمع في مصر من خلال شخصيات متعددة داخل عمارة واحدة تجسد تناقضات الواقع.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 65,
@@ -429,7 +429,7 @@
         "price": 75,
         "HPaper": "382",
         "description": "دراسة موسوعية في تطور الفلسفة الإسلامية تعرض أعلام الفكر وتأثيرهم في الحضارة العالمية.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 68,
@@ -445,7 +445,7 @@
         "price": 40,
         "HPaper": "298",
         "description": "رواية واقعية خالدة عن إيما بوفاري الباحثة عن الحب والحرية، نقد لقيود المجتمع ومأساة البحث عن السعادة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 69,
@@ -507,7 +507,7 @@
         "price": 20,
         "HPaper": "231",
         "description": "قصص قصيرة تكشف عمق التجربة الإنسانية. يكتب إدريس عن البشر في لحظات ضعفهم وقوتهم بواقعية آسرة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 73,
@@ -553,7 +553,7 @@
         "price": 10,
         "HPaper": "150",
         "description": "عمل جريء يناقش قضايا المرأة والمجتمع. يسلط الضوء على صور القهر الاجتماعي والبحث عن الحرية.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 76,
@@ -598,7 +598,7 @@
         "price": 10,
         "HPaper": "182",
         "description": "مذكرات أدبية تكشف رحلة الحكيم في باريس. تجربة فكرية وإنسانية غنية بالتأملات.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 79,
@@ -645,7 +645,7 @@
         "price": 70,
         "HPaper": "229",
         "description": "دراسة اجتماعية نفسية تشرح آليات السياسة وتأثير الجماهير. رؤية تحليلية عميقة من رائد علم النفس الاجتماعي.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 82,
@@ -741,7 +741,7 @@
         "price": 20,
         "HPaper": "145",
         "description": "رواية رمزية عن صياد يعثر على لؤلؤة نادرة. حكاية عن الطمع، الأمل، ومأساة الإنسان أمام القدر.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 88,
@@ -756,7 +756,7 @@
         "price": 20,
         "HPaper": "255",
         "description": "مذكرات شخصية توثق أحداث وتحولات سياسية وفنية. شهادة صريحة على عصر مليء بالتغيرات.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 89,
@@ -772,7 +772,7 @@
         "price": 20,
         "HPaper": "263",
         "description": "رحلة أدبية وإنسانية للكاتب الطيار. تأملات في معنى الحياة، الطيران، وتجربة الإنسان أمام الطبيعة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 90,
@@ -803,7 +803,7 @@
         "price": 20,
         "HPaper": "163",
         "description": "يوميات وأفكار سجّلها الكاتب في رحلته إلى نيويورك. رؤية ناقدة للغرب بعيون كاتب مصري ساخر.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 92,
@@ -818,7 +818,7 @@
         "price": 30,
         "HPaper": "163",
         "description": "كتاب يجمع بين الخيال والتأمل. يقدم رؤية أدبية عن عالم الحيوان في أسلوب طه حسين الفريد.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 93,
@@ -864,7 +864,7 @@
         "price": 20,
         "HPaper": "124",
         "description": "رواية قصيرة رمزية وفلسفية تتناول علاقة الإنسان بالتراث والدين والواقع. نص يفتح أسئلة أكثر مما يقدم أجوبة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 96,
@@ -897,6 +897,21 @@
         "status": "sold"
     },
     {
+        "id": 98,
+        "isNew": false,
+        "title": "يوسف إدريس",
+        "author": "يوسف إدريس",
+        "type": "عربي",
+        "category": "قصص",
+        "images": [
+            "/images/9-30/9_30 (4).jpg"
+        ],
+        "price": 20,
+        "HPaper": "111",
+        "description": "مختارات قصصية تكشف أسلوب يوسف إدريس المميز. نصوص قصيرة تعكس هموم الإنسان المصري وتفاصيل حياته اليومية.",
+        "status": "available"
+    },
+    {
         "id": 99,
         "isNew": false,
         "title": "عزازيل",
@@ -924,7 +939,7 @@
         "price": 150,
         "HPaper": "455",
         "description": "دراسة تاريخية توثق بناء جيش محمد علي باشا. تكشف أثر التجنيد والحداثة على المجتمع المصري.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 101,
@@ -970,7 +985,7 @@
         "price": 25,
         "HPaper": "200",
         "description": "كتاب يعرض تحليلات معمقة للاقتصاد المصري والعالمي. يقدم رؤية علمية لفهم التحديات والسياسات الاقتصادية. مرجع مهم للباحثين والمهتمين بالشأن الاقتصادي.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 104,
@@ -1015,7 +1030,7 @@
         "price": 40,
         "HPaper": "280",
         "description": "رواية فلسفية عن تقلبات المصير والحياة. يستعرض ويلز صراع الإنسان مع القدر وتناقضاته. نص عميق يمزج بين الخيال والتأمل الوجودي.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 108,
@@ -1045,7 +1060,7 @@
         "price": 40,
         "HPaper": "288",
         "description": "مجموعة مقالات ساخرة ترصد الواقع المصري بروح ناقدة ومرحة. أسلوب لاذع يخلط بين الضحك والمرارة في تناول قضايا المجتمع والسياسة.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 110,
@@ -1168,725 +1183,18 @@
         "status": "sold"
     },
     {
-        "id":119 ,
-        "isNew":false,
-        "title": "ثلاثة أسئلة لإجابة وحيدة",
-        "author": "ليو تولستوي",
-        "type": "عالمي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (1).jpg"
-        ],
-        "price": 75,
-        "HPaper": "135",
-        "description": "قصة قصيرة تتناول أسئلة الوجود والمعنى من منظور فلسفي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 120,
-        "isNew": false,
-        "title": "الشيخ العيل",
-        "author": "بلال فضل",
-        "type": "عربي",
-        "category": "قصص",
-        "images": [
-            "/images/OLD/old_1 (2).jpg"
-        ],
-        "price": 40,
-        "HPaper": "120",
-        "description": "مجموعة قصصية تعكس الحياة المصرية بواقعية وسخرية.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 121,
-        "isNew": false,
-        "title": "الخميني والجماعة",
-        "author": " محمد الزمزمي",
-        "type": "عربي",
-        "category": "تاريخ",
-        "images": [
-            "/images/OLD/old_1 (3).jpg"
-        ],
-        "price": 40,
-        "HPaper": "215",
-        "description": "دراسة تحليلية حول تأثير الخميني والجماعات الإسلامية في السياسة الإيرانية.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 122,
-        "isNew": false,
-        "title": " في العلم والاخلاق والسياسة",
-        "author": " ليف تولستوي",
+        "id": 118,
+        "isNew": true,
+        "title": "مشروع للسلام الدائم",
+        "author": "كانط – ترجمة عثمان أمين",
         "type": "عالمي",
         "category": "فلسفة",
         "images": [
-            "/images/OLD/old_1 (4).jpg"
+            "/images/02-10/02-10 (12).jpg"
         ],
-        "price": 150,
-        "HPaper": "220",
-        "description": "استكشاف العلاقة بين العلم والأخلاق والسياسة من منظور فلسفي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 123,
-        "isNew": false,
-        "title": "أحببتك  أكثر مما ينبغي",
-        "author": " أثير عبدالله النشمي",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (6).jpg"
-        ],
-        "price": 150,
-        "HPaper": "325",
-        "description": "رواية عاطفية تتناول قضايا الحب والخيانة في المجتمع العربي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 124,
-        "isNew": false,
-        "title": "علم الاخلاق",
-        "author": "سبينوزا",
-        "type": "عالمي",
-        "category": "فلسفة",
-        "images": [
-            "/images/OLD/old_1 (7).jpg"
-        ],
-        "price": 200,
-        "HPaper": "310",
-        "description": "استكشاف شامل لمفاهيم الأخلاق من منظور فلسفي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 125,
-        "isNew": false,
-        "title": "تجدد",
-        "author": "بات باركر",
-        "type": "عالمي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (9).jpg"
-        ],
-        "price": 240,
-        "HPaper": "600",
-        "description": "رواية تتناول قضايا الهوية والتغيير في المجتمع المعاصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 126,
-        "isNew":false ,
-        "title": "مذكرات هدى الشعراوي",
-        "author": "هدى الشعراوي",
-        "type": "عربي",
-        "category": "سير ذاتية",
-        "images": [
-            "/images/OLD/old_1 (10).jpg"
-        ],
-        "price": 75,
-        "HPaper": "400",
-        "description": "مذكرات شخصية تسلط الضوء على نضال المرأة المصرية من أجل حقوقها.",
-        "status": "available"
-    },
-    {
-        "id": 127,
-        "isNew": false,
-        "title": "السياسة",
-        "author": "ارسطو",
-        "type": "عالمي",
-        "category": "فلسفة",
-        "images": [
-            "/images/OLD/old_1 (11).jpg"
-        ],
-        "price": 100,
-        "HPaper": "475",
-        "description": "استكشاف شامل لمفاهيم السياسة من منظور فلسفي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 128,
-        "isNew": false,
-        "title": "عجلة الحظ",
-        "author": "هربرت جورج ويلز – ترجمة شرقاوي حافظ",
-        "type": "عالمي",
-        "category": "خيال علمي",
-        "images": [
-            "/images/OLD/old_1 (12).jpg"
-        ],
-        "price": 50,
-        "HPaper": "280",
-        "description": "رواية فلسفية عن تقلبات المصير والحياة.",
-        "status": "available"
-    },
-    {
-        "id":129 ,
-        "isNew": false,
-        "title": "حلم على النهر",
-        "author": "جارالنبي الحلو",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (13).jpg"
-        ],
-        "price": 30,
-        "HPaper": "225",
-        "description": "رواية تعكس الحياة الاجتماعية والسياسية في مصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 130,
-        "isNew":false ,
-        "title": "بصراحة غير مطلقة",
-        "author": "يوسف إدريس",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (14).jpg"
-        ],
-        "price":15 ,
-        "HPaper": "180",
-        "description": "مجموعة قصصية تعكس الواقع الاجتماعي والسياسي في مصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 131,
-        "isNew":false ,
-        "title": "نيويورك 80",
-        "author": "يوسف إدريس",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (15).jpg"
-        ],
-        "price":15 ,
-        "HPaper": "160",
-        "description": "مجموعة قصصية تعكس الواقع الاجتماعي والسياسي في مصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 132,
-        "isNew": false,
-        "title": "ام رتيبة",
-        "author": "يوسف السباعي",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (16).jpg"
-        ],
-        "price": 15,
-        "HPaper": "265",
-        "description": "رواية تتناول قضايا الهوية والتغيير في المجتمع المعاصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 133,
-        "isNew": false,
-        "title": "ليلة خمر",
-        "author": "يوسف السباعي",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (17).jpg"
-        ],
-        "price": 15,
-        "HPaper": "265",
-        "description": "رواية تتناول قضايا الهوية والتغيير في المجتمع المعاصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 134,
-        "isNew": false,
-        "title": "كنت رئيساً لمصر",
-        "author": "الرئيس محمد نجيب",
-        "type": "عربي",
-        "category": "سير ذاتية",
-        "images": [
-            "/images/OLD/old_1 (18).jpg"
-        ],
-        "price": 75,
-        "HPaper": "420",
-        "description": "مذكرات شخصية تسلط الضوء على فترة حكم الرئيس محمد نجيب في مصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 135,
-        "isNew": false,
-        "title": "الارض الطيبة",
-        "author": "بيرل بك",
-        "type": "عالمي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (19).jpg"
-        ],
-        "price": 20,
-        "HPaper": "325",
-        "description": "رواية تحكي قصة اسرة صينية ايام المجاعة",
-        "status": "available"
-    },
-    {
-        "id": 136,
-        "isNew": false,
-        "title": "سيرانو دي برجراك",
-        "author": "إدموند روستان",
-        "type": "عالمي",
-        "category": "مسرحية",
-        "images": [
-            "/images/OLD/old_1 (20).jpg"
-        ],
-        "price": 15,
-        "HPaper": "290",
-        "description": "مسرحية كلاسيكية فرنسية عن الحب والشجاعة.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 137,
-        "isNew": false,
-        "title": "ثلاث مسرحيات",
-        "author": "جون بوشنر",
-        "type": "عالمي",
-        "category": "مسرحية",
-        "images": [
-            "/images/OLD/old_1 (21).jpg"
-        ],
-        "price": 15,
-        "HPaper": "310",
-        "description": "مجموعة من المسرحيات الكلاسيكية التي تتناول قضايا إنسانية.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 138,
-        "isNew": false,
-        "title": "من الاشكال القصيرة للمسرح الالماني",
-        "author": "محمود محمدة قاسم",
-        "type": "عالمي",
-        "category": "مسرحية",
-        "images": [
-            "/images/OLD/old_1 (22).jpg"
-        ],
-        "price": 15,
-        "HPaper": "350",
-        "description": "مجموعة من المسرحيات القصيرة التي تتناول قضايا إنسانية.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 139,
-        "isNew": false,
-        "title": "بيت برناردا ألبا",
-        "author": "فريدريكو غارسيا لوركا",
-        "type": "عالمي",
-        "category": "مسرحية",
-        "images": [
-            "/images/OLD/old_1 (23).jpg"
-        ],
-        "price": 15,
-        "HPaper": "150",
-        "description": "مسرحية تتناول قضايا المرأة والسلطة.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 140,
-        "isNew": false,
-        "title": "بيكيت",
-        "author": "جون انوي",
-        "type": "عالمي",
-        "category": "مسرحية",
-        "images": [
-            "/images/OLD/old_1 (24).jpg"
-        ],
-        "price": 15,
-        "HPaper": "220",
-        "description": "مسرحية فلسفية تتناول موضوعات الوجود والعبث.",
-        "status": "available"
-    },
-    {
-        "id": 141,
-        "isNew": false,
-        "title": "الجوع والعطش",
-        "author": "جون يونيسكو",
-        "type": "عالمي",
-        "category": "مسرحية",
-        "images": [
-            "/images/OLD/old_1 (25).jpg"
-        ],
-        "price": 15,
-        "HPaper": "220",
-        "description": "مسرحية تتناول قضايا الجوع والعطش في المجتمع.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 142,
-        "isNew":false ,
-        "title": "اللص والكلاب",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (26).jpg"
-        ],
-        "price": 50,
-        "HPaper": "140",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 143,
-        "isNew": false,
-        "title": " عصر الحب",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (27).jpg"
-        ],
-        "price":50 ,
-        "HPaper": "175",
-        "description": "رواية تعكس الحياة الاجتماعية والسياسية في مصر.",
-        "status": "available"
-    }
-    ,
-    {
-        "id":144 ,
-        "isNew": false,
-        "title": "ثرثرة فوق النيل",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (28).jpg"
-        ],
-        "price": 50,
+        "price": 60,
         "HPaper": "130",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id":145 ,
-        "isNew": false,
-        "title": "السمان والخريف",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (29).jpg"
-        ],
-        "price": 50,
-        "HPaper": "220",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 146,
-        "isNew": false,
-        "title": " بداية ونهاية",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (30).jpg"
-        ],
-        "price": 50,
-        "HPaper": "290",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id": 147,
-        "isNew":false ,
-        "title": "ثرثرة فوق النيل",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (31).jpg"
-        ],
-        "price": 50,
-        "HPaper": "130",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 148,
-        "isNew": false,
-        "title": "القاهرة الجديدة",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (32).jpg"
-        ],
-        "price": 50,
-        "HPaper": "220",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 149,
-        "isNew": false,
-        "title": " القاهرة الجديدة",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (33).jpg"
-        ],
-        "price": 50,
-        "HPaper": "220",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 150,
-        "isNew": false,
-        "title": " تحت المظلة",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (34).jpg"
-        ],
-        "price": 50,
-        "HPaper": "250",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id":151 ,
-        "isNew": false,
-        "title": " الحب فوق هضبة الهرم",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (35).jpg"
-        ],
-        "price":50 ,
-        "HPaper": "275",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id": 152,
-        "isNew": false,
-        "title": "زقاق المدق",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (36).jpg"
-        ],
-        "price":50 ,
-        "HPaper": "285",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id": 153,
-        "isNew": false,
-        "title": "زقاق المدق",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (37).jpg"
-        ],
-        "price": 50,
-        "HPaper": "305",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id": 154,
-        "isNew": false,
-        "title": "القاهرة الجديدة",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (38).jpg"
-        ],
-        "price": 50,
-        "HPaper": "205",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id": 155,
-        "isNew": false,
-        "title": " الحب تحت المطر",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (39).jpg"
-        ],
-        "price": 50,
-        "HPaper": "210",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    },
-    {
-        "id":156 ,
-        "isNew": false,
-        "title": "الباقي من الزمن ساعة",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (41).jpg"
-        ],
-        "price": 50,
-        "HPaper": "200",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 157,
-        "isNew": false,
-        "title": "الشحاذ",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (42).jpg"
-        ],
-        "price": 50,
-        "HPaper": "270",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id":158 ,
-        "isNew": false,
-        "title": "الحب تحت المطر",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (47).jpg"
-        ],
-        "price": 50,
-        "HPaper": "210",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id":159 ,
-        "isNew": false,
-        "title": "الطريق",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (48).jpg"
-        ],
-        "price": 50,
-        "HPaper": "210",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id":160 ,
-        "isNew": false,
-        "title": "قلب الليل",
-        "author": "نجيب محفوظ",
-        "type": "عربي",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (49).jpg"
-        ],
-        "price": 50,
-        "HPaper": "155",
-        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
-    }
-    ,
-    {
-        "id": 161,
-        "isNew": false,
-        "title": "انجيل الابن",
-        "author": "نورمان ميلر – ترجمة ثاىر ديب",
-        "type": "مترجم",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (43).jpg"
-        ],
-        "price": 30,
-        "HPaper": "280",
-        "description": "رواية تتناول قصة حياة يسوع المسيح من منظور إنساني.",
-        "status": "available"
-    },
-    {
-        "id": 162,
-        "isNew": false,
-        "title": "التجمع",
-        "author": "أن أنرايت ترجمة أماني توما",
-        "type": "مترجم",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (44).jpg"
-        ],
-        "price": 15,
-        "HPaper": "415",
-        "description": "",
-        "status": "available"
-    }
-,
-    {
-        "id": 163,
-        "isNew": false,
-        "title": "ملك كاهل",
-        "author": "تيرنو",
-        "type": "مترجم",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (45).jpg"
-        ],
-        "price": 15,
-        "HPaper": "445",
-        "description": ".",
-        "status": "available"
-    },
-    {
-        "id": 164,
-        "isNew": false,
-        "title": "الموتمر الاخير",
-        "author": "مارك بروسن",
-        "type": "مترجم",
-        "category": "رواية",
-        "images": [
-            "/images/OLD/old_1 (46).jpg"
-        ],
-        "price": 15,
-        "HPaper": "380",
-        "description": ".",
-        "status": "available"
+        "description": "رسالة فلسفية كلاسيكية لكانط حول السلام الدائم بين الدول. عرض لمبادئ العدالة الدولية وأهمية القانون والأخلاق في العلاقات الإنسانية.",
+        "status": "sold"
     }
 ]

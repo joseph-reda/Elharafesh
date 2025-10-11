@@ -1540,7 +1540,7 @@
         "price": 50,
         "HPaper": "175",
         "description": "رواية تعكس الحياة الاجتماعية والسياسية في مصر.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 144,
@@ -1555,7 +1555,7 @@
         "price": 50,
         "HPaper": "130",
         "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 145,
@@ -1570,7 +1570,7 @@
         "price": 50,
         "HPaper": "220",
         "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 146,
@@ -1737,592 +1737,831 @@
         "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
         "status": "available"
     },
-    [
-        {
-            "id": 157,
-            "isNew": false,
-            "title": "الشحاذ",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (42).jpg"
-            ],
-            "price": 50,
-            "HPaper": "270",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 158,
-            "isNew": false,
-            "title": "الحب تحت المطر",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (47).jpg"
-            ],
-            "price": 50,
-            "HPaper": "210",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 159,
-            "isNew": false,
-            "title": "الطريق",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (48).jpg"
-            ],
-            "price": 50,
-            "HPaper": "210",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 160,
-            "isNew": false,
-            "title": "قلب الليل",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (49).jpg"
-            ],
-            "price": 50,
-            "HPaper": "155",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 161,
-            "isNew": false,
-            "title": "انجيل الابن",
-            "author": "نورمان ميلر – ترجمة ثائر ديب",
-            "type": "مترجم",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (43).jpg"
-            ],
-            "price": 30,
-            "HPaper": "280",
-            "description": "رواية تتناول قصة حياة يسوع المسيح من منظور إنساني.",
-            "status": "available"
-        },
-        {
-            "id": 162,
-            "isNew": false,
-            "title": "التجمع",
-            "author": "آن إنرايت – ترجمة أماني توما",
-            "type": "مترجم",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (44).jpg"
-            ],
-            "price": 15,
-            "HPaper": "415",
-            "description": "",
-            "status": "available"
-        },
-        {
-            "id": 163,
-            "isNew": false,
-            "title": "ملك كاهل",
-            "author": "تيرنو",
-            "type": "مترجم",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (45).jpg"
-            ],
-            "price": 15,
-            "HPaper": "445",
-            "description": "",
-            "status": "available"
-        },
-        {
-            "id": 164,
-            "isNew": false,
-            "title": "المؤتمر الأخير",
-            "author": "مارك بروسن",
-            "type": "مترجم",
-            "category": "رواية",
-            "images": [
-                "/images/OLD/old_1 (46).jpg"
-            ],
-            "price": 15,
-            "HPaper": "380",
-            "description": "",
-            "status": "available"
-        },
-        {
-            "id": 165,
-            "isNew": false,
-            "title": "أضلاع الصحراء",
-            "author": "إدوارد الخراط",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (21).jpg"
-            ],
-            "price": 40,
-            "HPaper": "280",
-            "description": "رواية فلسفية تمزج بين الواقع والأسطورة، حيث تتحول الصحراء إلى رمز للبحث عن الذات والحرية. بأسلوب شعري ولغة عميقة، يصور الخراط صراع الإنسان مع العزلة والمعنى، متأملاً الغربة الداخلية وامتداد الصحراء في النفس الإنسانية.",
-            "status": "available"
-        },
-        {
-            "id": 166,
-            "isNew": false,
-            "title": "صح النوم",
-            "author": "يحيى حقي",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (20).jpg"
-            ],
-            "price": 30,
-            "HPaper": "150",
-            "description": "رواية اجتماعية ساخرة تتناول ببساطة وعمق حياة الإنسان البسيط وصراعه اليومي مع الواقع. بأسلوب يحيى حقي المميز، تمزج بين خفة الظل والتأمل في التغيرات الاجتماعية والإنسانية في مصر.",
-            "status": "available"
-        },
-        {
-            "id": 167,
-            "isNew": false,
-            "title": "يوم قتل الزعيم",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (2).jpg"
-            ],
-            "price": 50,
-            "HPaper": "85",
-            "description": "رواية قصيرة تتناول اغتيال الزعيم السياسي وتأثيره على المجتمع. بأسلوب نجيب محفوظ السلس، تقدم الرواية تأملاً في السلطة، العنف، والتغيرات السياسية في مصر.",
-            "status": "sold"
-        },
-        {
-            "id": 168,
-            "isNew": false,
-            "title": " السهم",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (3).jpg"
-            ],
-            "price": 50,
-            "HPaper": "285",
-            "description": ".رواية تتناول قضايا الفقر والظلم الاجتماعي بأسلوب نجيب محفوظ المميز.",
-            "status": "available"
-        },
-        {
-            "id": 169,
-            "isNew": false,
-            "title": "حكايات حارتنا",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (4).jpg"
-            ],
-            "price": 50,
-            "HPaper": "180",
-            "description": "رواية  من أعمال نجيب محفوظ الشهيرة.",
-            "status": "available"
-        },
-        {
-            "id": 170,
-            "isNew": false,
-            "title": " السكرية",
-            "author": "نجيب محفوظ",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (5).jpg"
-            ],
-            "price": 50,
-            "HPaper": "180",
-            "description": "رواية  من أعمال نجيب محفوظ الشهيرة.",
-            "status": "available"
-        },
-        {
-            "id": 171,
-            "isNew": false,
-            "title": "الفتنى الكبرى",
-            "author": "طه حسين",
-            "type": "عربي",
-            "category": "تاريخ",
-            "images": [
-                "/images/10-10/10-10 (6).jpg"
-            ],
-            "price": 30,
-            "HPaper": "330",
-            "description": "كتاب تاريخي يتناول الفتنة الكبرى في التاريخ الإسلامي.",
-            "status": "available"
-        },
-        {
-            "id": 172,
-            "isNew": false,
-            "title": "دعاء الكروان",
-            "author": "طه حسين",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (7).jpg"
-            ],
-            "price": 20,
-            "HPaper": "160",
-            "description": "رواية تتناول قضايا الحب والتضحية في المجتمع المصري.",
-            "status": "available"
-        },
-        {
-            "id": 173,
-            "isNew": false,
-            "title": "دعاء الكروان",
-            "author": "طه حسين",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (8).jpg"
-            ],
-            "price": 30,
-            "HPaper": "160",
-            "description": "رواية تتناول قضايا الحب والتضحية في المجتمع المصري.",
-            "status": "available"
-        },
-        {
-            "id": 174,
-            "isNew": false,
-            "title": " مراة الاسلام",
-            "author": "طه حسين",
-            "type": "عربي",
-            "category": "تاريخ",
-            "images": [
-                "/images/10-10/10-10 (9).jpg"
-            ],
-            "price": 30,
-            "HPaper": "265",
-            "description": "يقدم هذا الكتاب نظرة شاملة لحال الجزيرة العربية في العصور الوسطى.",
-            "status": "available"
-        },
-        {
-            "id": 175,
-            "isNew": false,
-            "title": "  جنة الحيوان",
-            "author": "طه حسين",
-            "type": "عربي",
-            "category": "فكر",
-            "images": [
-                "/images/10-10/10-10 (10).jpg"
-            ],
-            "price": 40,
-            "HPaper": "160",
-            "description": "كتاب فكري يتناول موضوعات متنوعة في الفلسفة والأدب.",
-            "status": "available"
-        },
-        {
-            "id": 176,
-            "isNew": false,
-            "title": "الايام",
-            "author": "طه حسين",
-            "type": "عربي",
-            "category": "سيرة ذاتية",
-            "images": [
-                "/images/10-10/10-10 (11).jpg",
-                "/images/10-10/10-10 (12).jpg",
-                "/images/10-10/10-10 (13).jpg"
-            ],
-            "price": 60,
-            "HPaper": "500",
-            "description": "سيرة ذاتية تتناول حياة طه حسين وتجربته الشخصية.",
-            "status": "available"
-        },
-        {
-            "id": 177,
-            "isNew": false,
-            "title": "عودة الروح",
-            "author": "توفيق الحكيم",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (14).jpg"
-            ],
-            "price": 50,
-            "HPaper": "550",
-            "description": "رواية فلسفية تتناول موضوعات الوجود والهوية.",
-            "status": "available"
-        },
-        {
-            "id": 178,
-            "isNew": false,
-            "title": "اهل الكهف",
-            "author": "توفيق الحكيم",
-            "type": "عربي",
-            "category": "مسرحية",
-            "images": [
-                "/images/10-10/10-10 (15).jpg"
-            ],
-            "price": 35,
-            "HPaper": "140",
-            "description": "مسرحية فلسفية تتناول موضوعات الوجود والهوية.",
-            "status": "available"
-        },
-        {
-            "id": 179,
-            "isNew": false,
-            "title": "زهرة العمر",
-            "author": "توفيق الحكيم",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (16).jpg"
-            ],
-            "price": 35,
-            "HPaper": "235",
-            "description": "رواية فلسفية تتناول موضوعات الوجود والهوية.",
-            "status": "available"
-        },
-        {
-            "id": 180,
-            "isNew": false,
-            "title": "السقا مات",
-            "author": "يوسف السباعي",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (17).jpg"
-            ],
-            "price": 35,
-            "HPaper": "330",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 181,
-            "isNew": false,
-            "title": "السقا مات",
-            "author": "يوسف السباعي",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (18).jpg"
-            ],
-            "price": 35,
-            "HPaper": "330",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 182,
-            "isNew": false,
-            "title": " الارض",
-            "author": "عبد الرحمن الشرقاوي",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (19).jpg"
-            ],
-            "price": 50,
-            "HPaper": "600",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 183,
-            "isNew": false,
-            "title": "عزازيل",
-            "author": "يوسف زيدان",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (22).jpg"
-            ],
-            "price": 45,
-            "HPaper": "500",
-            "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-            "status": "available"
-        },
-        {
-            "id": 184,
-            "isNew": false,
-            "title": " روميو وجوليت",
-            "author": "وليم شكسبير",
-            "type": "عالمي",
-            "category": "مسرحية",
-            "images": [
-                "/images/10-10/10-10 (23).jpg"
-            ],
-            "price": 25,
-            "HPaper": "220",
-            "description": "مسرحية كلاسيكية عن الحب والمأساة.",
-            "status": "available"
-        },
-        {
-            "id": 185,
-            "isNew": false,
-            "title": " روميو وجوليت",
-            "author": "وليم شكسبير",
-            "type": "عالمي",
-            "category": "مسرحية",
-            "images": [
-                "/images/10-10/10-10 (24).jpg"
-            ],
-            "price": 25,
-            "HPaper": "220",
-            "description": "مسرحية كلاسيكية عن الحب والمأساة.",
-            "status": "available"
-        },
-        {
-            "id": 186,
-            "isNew": false,
-            "title": " هضبة تورتيلا",
-            "author": "جون شتاينبك",
-            "type": "عالمي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (25).jpg"
-            ],
-            "price": 35,
-            "HPaper": "200",
-            "description": " رواية عن الغرب الامريكي والاعراق المختلطة ",
-            "status": "available"
-        },
-        {
-            "id": 187,
-            "isNew": false,
-            "title": "الموت في البندقية",
-            "author": "توماس مان",
-            "type": "عالمي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (26).jpg"
-            ],
-            "price": 35,
-            "HPaper": "145",
-            "description": " رواية عن الحب والفقدان.",
-            "status": "available"
-        },
-        {
-            "id": 188,
-            "isNew": false,
-            "title": "مصر القديمة",
-            "author": "جان فيركوتير",
-            "type": "عالمي",
-            "category": "تاريخ",
-            "images": [
-                "/images/10-10/10-10 (27).jpg"
-            ],
-            "price": 30,
-            "HPaper": "180",
-            "description": "كتاب تاريخي عن مصر القديمة.",
-            "status": "available"
-        },
-        {
-            "id": 189,
-            "isNew": false,
-            "title": " عن القمر والطين",
-            "author": "صلاح جاهين",
-            "type": "عربي",
-            "category": "شعر",
-            "images": [
-                "/images/10-10/10-10 (28).jpg"
-            ],
-            "price": 35,
-            "HPaper": "220",
-            "description": "مجموعة شعرية تعكس روح العصر.",
-            "status": "available"
-        },
-        {
-            "id": 190,
-            "isNew": false,
-            "title": " بيتنا في شارع المانجو",
-            "author": "ساندرا سيسنيروز",
-            "type": "عالمي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (29).jpg"
-            ],
-            "price": 35,
-            "HPaper": "150",
-            "description": "رواية عن الحياة في حي لاتيني في الولايات المتحدة.",
-            "status": "available"
-        },
-        {
-            "id": 191,
-            "isNew": false,
-            "title": " هوامش على دفتر التنوير",
-            "author": "جابر عصفور",
-            "type": "عربي",
-            "category": "نقد",
-            "images": [
-                "/images/10-10/10-10 (30).jpg"
-            ],
-            "price": 50,
-            "HPaper": "450",
-            "description": "كتاب نقدي يتناول موضوعات متنوعة في الأدب والفكر.",
-            "status": "available"
-        },
-        {
-            "id": 192,
-            "isNew": false,
-            "title": "اشكالية الهوية في اسرائيل",
-            "author": "رشاد عبدالله الشامي",
-            "type": "عربي",
-            "category": "نقد",
-            "images": [
-                "/images/10-10/10-10 (31).jpg"
-            ],
-            "price": 30,
-            "HPaper": "310",
-            "description": "كتاب يتناول قضايا الهوية في السياق الإسرائيلي.",
-            "status": "available"
-        },
-        {
-            "id": 193,
-            "isNew": false,
-            "title": "  انهيار الراسمالية ",
-            "author": "اورليش شيفر",
-            "type": "عالمي",
-            "category": "اقتصاد",
-            "images": [
-                "/images/10-10/10-10 (32).jpg"
-            ],
-            "price": 50,
-            "HPaper": "460",
-            "description": "كتاب اقتصادي يتناول أسباب وتداعيات انهيار النظام الرأسمالي.",
-            "status": "available"
-        },
-        {
-            "id": 194,
-            "isNew": false,
-            "title": "من الحداثة الى العولمة",
-            "author": "تيمونز روبيرتز",
-            "type": "عالمي",
-            "category": "اقتصاد",
-            "images": [
-                "/images/10-10/10-10 (33).jpg"
-            ],
-            "price": 50,
-            "HPaper": "270",
-            "description": "كتاب يتناول التحولات الاقتصادية والاجتماعية من منظور تاريخي.",
-            "status": "available"
-        },
-        {
-            "id": 195,
-            "isNew": false,
-            "title": " تراب الماس ",
-            "author": "احمد مراد",
-            "type": "عربي",
-            "category": "رواية",
-            "images": [
-                "/images/10-10/10-10 (34).jpg"
-            ],
-            "price": 70,
-            "HPaper": "430",
-            "description": "رواية بوليسية مشوقة تدور أحداثها في مصر المعاصرة.",
-            "status": "available"
-        }
-    ]]
+    {
+        "id": 157,
+        "isNew": false,
+        "title": "الشحاذ",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (42).jpg"
+        ],
+        "price": 50,
+        "HPaper": "270",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 158,
+        "isNew": false,
+        "title": "الحب تحت المطر",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (47).jpg"
+        ],
+        "price": 50,
+        "HPaper": "210",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 159,
+        "isNew": false,
+        "title": "الطريق",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (48).jpg"
+        ],
+        "price": 50,
+        "HPaper": "210",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "sold"
+    },
+    {
+        "id": 160,
+        "isNew": false,
+        "title": "قلب الليل",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (49).jpg"
+        ],
+        "price": 50,
+        "HPaper": "155",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 161,
+        "isNew": false,
+        "title": "انجيل الابن",
+        "author": "نورمان ميلر – ترجمة ثائر ديب",
+        "type": "مترجم",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (43).jpg"
+        ],
+        "price": 30,
+        "HPaper": "280",
+        "description": "رواية تتناول قصة حياة يسوع المسيح من منظور إنساني.",
+        "status": "available"
+    },
+    {
+        "id": 162,
+        "isNew": false,
+        "title": "التجمع",
+        "author": "آن إنرايت – ترجمة أماني توما",
+        "type": "مترجم",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (44).jpg"
+        ],
+        "price": 15,
+        "HPaper": "415",
+        "description": "",
+        "status": "available"
+    },
+    {
+        "id": 163,
+        "isNew": false,
+        "title": "ملك كاهل",
+        "author": "تيرنو",
+        "type": "مترجم",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (45).jpg"
+        ],
+        "price": 15,
+        "HPaper": "445",
+        "description": "",
+        "status": "available"
+    },
+    {
+        "id": 164,
+        "isNew": false,
+        "title": "المؤتمر الأخير",
+        "author": "مارك بروسن",
+        "type": "مترجم",
+        "category": "رواية",
+        "images": [
+            "/images/OLD/old_1 (46).jpg"
+        ],
+        "price": 15,
+        "HPaper": "380",
+        "description": "",
+        "status": "available"
+    },
+    {
+        "id": 165,
+        "isNew": false,
+        "title": "أضلاع الصحراء",
+        "author": "إدوارد الخراط",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (21).jpg"
+        ],
+        "price": 40,
+        "HPaper": "280",
+        "description": "رواية فلسفية تمزج بين الواقع والأسطورة، حيث تتحول الصحراء إلى رمز للبحث عن الذات والحرية. بأسلوب شعري ولغة عميقة، يصور الخراط صراع الإنسان مع العزلة والمعنى، متأملاً الغربة الداخلية وامتداد الصحراء في النفس الإنسانية.",
+        "status": "available"
+    },
+    {
+        "id": 166,
+        "isNew": false,
+        "title": "صح النوم",
+        "author": "يحيى حقي",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (20).jpg"
+        ],
+        "price": 30,
+        "HPaper": "150",
+        "description": "رواية اجتماعية ساخرة تتناول ببساطة وعمق حياة الإنسان البسيط وصراعه اليومي مع الواقع. بأسلوب يحيى حقي المميز، تمزج بين خفة الظل والتأمل في التغيرات الاجتماعية والإنسانية في مصر.",
+        "status": "available"
+    },
+    {
+        "id": 167,
+        "isNew": false,
+        "title": "يوم قتل الزعيم",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (2).jpg"
+        ],
+        "price": 50,
+        "HPaper": "85",
+        "description": "رواية قصيرة تتناول اغتيال الزعيم السياسي وتأثيره على المجتمع. بأسلوب نجيب محفوظ السلس، تقدم الرواية تأملاً في السلطة، العنف، والتغيرات السياسية في مصر.",
+        "status": "sold"
+    },
+    {
+        "id": 168,
+        "isNew": false,
+        "title": " السهم",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (3).jpg"
+        ],
+        "price": 50,
+        "HPaper": "285",
+        "description": ".رواية تتناول قضايا الفقر والظلم الاجتماعي بأسلوب نجيب محفوظ المميز.",
+        "status": "available"
+    },
+    {
+        "id": 169,
+        "isNew": false,
+        "title": "حكايات حارتنا",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (4).jpg"
+        ],
+        "price": 50,
+        "HPaper": "180",
+        "description": "رواية  من أعمال نجيب محفوظ الشهيرة.",
+        "status": "available"
+    },
+    {
+        "id": 170,
+        "isNew": false,
+        "title": " السكرية",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (5).jpg"
+        ],
+        "price": 50,
+        "HPaper": "180",
+        "description": "رواية  من أعمال نجيب محفوظ الشهيرة.",
+        "status": "available"
+    },
+    {
+        "id": 171,
+        "isNew": false,
+        "title": "الفتنى الكبرى",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-10/10-10 (6).jpg"
+        ],
+        "price": 30,
+        "HPaper": "330",
+        "description": "كتاب تاريخي يتناول الفتنة الكبرى في التاريخ الإسلامي.",
+        "status": "available"
+    },
+    {
+        "id": 172,
+        "isNew": false,
+        "title": "دعاء الكروان",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (7).jpg"
+        ],
+        "price": 20,
+        "HPaper": "160",
+        "description": "رواية تتناول قضايا الحب والتضحية في المجتمع المصري.",
+        "status": "available"
+    },
+    {
+        "id": 173,
+        "isNew": false,
+        "title": "دعاء الكروان",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (8).jpg"
+        ],
+        "price": 30,
+        "HPaper": "160",
+        "description": "رواية تتناول قضايا الحب والتضحية في المجتمع المصري.",
+        "status": "available"
+    },
+    {
+        "id": 174,
+        "isNew": false,
+        "title": " مراة الاسلام",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-10/10-10 (9).jpg"
+        ],
+        "price": 30,
+        "HPaper": "265",
+        "description": "يقدم هذا الكتاب نظرة شاملة لحال الجزيرة العربية في العصور الوسطى.",
+        "status": "available"
+    },
+    {
+        "id": 175,
+        "isNew": false,
+        "title": "  جنة الحيوان",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "فكر",
+        "images": [
+            "/images/10-10/10-10 (10).jpg"
+        ],
+        "price": 40,
+        "HPaper": "160",
+        "description": "كتاب فكري يتناول موضوعات متنوعة في الفلسفة والأدب.",
+        "status": "available"
+    },
+    {
+        "id": 176,
+        "isNew": false,
+        "title": "الايام",
+        "author": "طه حسين",
+        "type": "عربي",
+        "category": "سيرة ذاتية",
+        "images": [
+            "/images/10-10/10-10 (11).jpg",
+            "/images/10-10/10-10 (12).jpg",
+            "/images/10-10/10-10 (13).jpg"
+        ],
+        "price": 60,
+        "HPaper": "500",
+        "description": "سيرة ذاتية تتناول حياة طه حسين وتجربته الشخصية.",
+        "status": "available"
+    },
+    {
+        "id": 177,
+        "isNew": false,
+        "title": "عودة الروح",
+        "author": "توفيق الحكيم",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (14).jpg"
+        ],
+        "price": 50,
+        "HPaper": "550",
+        "description": "رواية فلسفية تتناول موضوعات الوجود والهوية.",
+        "status": "available"
+    },
+    {
+        "id": 178,
+        "isNew": false,
+        "title": "اهل الكهف",
+        "author": "توفيق الحكيم",
+        "type": "عربي",
+        "category": "مسرحية",
+        "images": [
+            "/images/10-10/10-10 (15).jpg"
+        ],
+        "price": 35,
+        "HPaper": "140",
+        "description": "مسرحية فلسفية تتناول موضوعات الوجود والهوية.",
+        "status": "available"
+    },
+    {
+        "id": 179,
+        "isNew": false,
+        "title": "زهرة العمر",
+        "author": "توفيق الحكيم",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (16).jpg"
+        ],
+        "price": 35,
+        "HPaper": "235",
+        "description": "رواية فلسفية تتناول موضوعات الوجود والهوية.",
+        "status": "available"
+    },
+    {
+        "id": 180,
+        "isNew": false,
+        "title": "السقا مات",
+        "author": "يوسف السباعي",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (17).jpg"
+        ],
+        "price": 35,
+        "HPaper": "330",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 181,
+        "isNew": false,
+        "title": "السقا مات",
+        "author": "يوسف السباعي",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (18).jpg"
+        ],
+        "price": 35,
+        "HPaper": "330",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 182,
+        "isNew": false,
+        "title": " الارض",
+        "author": "عبد الرحمن الشرقاوي",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (19).jpg"
+        ],
+        "price": 50,
+        "HPaper": "600",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 183,
+        "isNew": false,
+        "title": "عزازيل",
+        "author": "يوسف زيدان",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (22).jpg"
+        ],
+        "price": 45,
+        "HPaper": "500",
+        "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
+        "status": "available"
+    },
+    {
+        "id": 184,
+        "isNew": false,
+        "title": " روميو وجوليت",
+        "author": "وليم شكسبير",
+        "type": "عالمي",
+        "category": "مسرحية",
+        "images": [
+            "/images/10-10/10-10 (23).jpg"
+        ],
+        "price": 25,
+        "HPaper": "220",
+        "description": "مسرحية كلاسيكية عن الحب والمأساة.",
+        "status": "available"
+    },
+    {
+        "id": 185,
+        "isNew": false,
+        "title": " روميو وجوليت",
+        "author": "وليم شكسبير",
+        "type": "عالمي",
+        "category": "مسرحية",
+        "images": [
+            "/images/10-10/10-10 (24).jpg"
+        ],
+        "price": 25,
+        "HPaper": "220",
+        "description": "مسرحية كلاسيكية عن الحب والمأساة.",
+        "status": "available"
+    },
+    {
+        "id": 186,
+        "isNew": false,
+        "title": " هضبة تورتيلا",
+        "author": "جون شتاينبك",
+        "type": "عالمي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (25).jpg"
+        ],
+        "price": 35,
+        "HPaper": "200",
+        "description": " رواية عن الغرب الامريكي والاعراق المختلطة ",
+        "status": "available"
+    },
+    {
+        "id": 187,
+        "isNew": false,
+        "title": "الموت في البندقية",
+        "author": "توماس مان",
+        "type": "عالمي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (26).jpg"
+        ],
+        "price": 35,
+        "HPaper": "145",
+        "description": " رواية عن الحب والفقدان.",
+        "status": "available"
+    },
+    {
+        "id": 188,
+        "isNew": false,
+        "title": "مصر القديمة",
+        "author": "جان فيركوتير",
+        "type": "عالمي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-10/10-10 (27).jpg"
+        ],
+        "price": 30,
+        "HPaper": "180",
+        "description": "كتاب تاريخي عن مصر القديمة.",
+        "status": "available"
+    },
+    {
+        "id": 189,
+        "isNew": false,
+        "title": " عن القمر والطين",
+        "author": "صلاح جاهين",
+        "type": "عربي",
+        "category": "شعر",
+        "images": [
+            "/images/10-10/10-10 (28).jpg"
+        ],
+        "price": 35,
+        "HPaper": "220",
+        "description": "مجموعة شعرية تعكس روح العصر.",
+        "status": "available"
+    },
+    {
+        "id": 190,
+        "isNew": false,
+        "title": " بيتنا في شارع المانجو",
+        "author": "ساندرا سيسنيروز",
+        "type": "عالمي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (29).jpg"
+        ],
+        "price": 35,
+        "HPaper": "150",
+        "description": "رواية عن الحياة في حي لاتيني في الولايات المتحدة.",
+        "status": "available"
+    },
+    {
+        "id": 191,
+        "isNew": false,
+        "title": " هوامش على دفتر التنوير",
+        "author": "جابر عصفور",
+        "type": "عربي",
+        "category": "نقد",
+        "images": [
+            "/images/10-10/10-10 (30).jpg"
+        ],
+        "price": 50,
+        "HPaper": "450",
+        "description": "كتاب نقدي يتناول موضوعات متنوعة في الأدب والفكر.",
+        "status": "available"
+    },
+    {
+        "id": 192,
+        "isNew": false,
+        "title": "اشكالية الهوية في اسرائيل",
+        "author": "رشاد عبدالله الشامي",
+        "type": "عربي",
+        "category": "نقد",
+        "images": [
+            "/images/10-10/10-10 (31).jpg"
+        ],
+        "price": 30,
+        "HPaper": "310",
+        "description": "كتاب يتناول قضايا الهوية في السياق الإسرائيلي.",
+        "status": "available"
+    },
+    {
+        "id": 193,
+        "isNew": false,
+        "title": "  انهيار الراسمالية ",
+        "author": "اورليش شيفر",
+        "type": "عالمي",
+        "category": "اقتصاد",
+        "images": [
+            "/images/10-10/10-10 (32).jpg"
+        ],
+        "price": 50,
+        "HPaper": "460",
+        "description": "كتاب اقتصادي يتناول أسباب وتداعيات انهيار النظام الرأسمالي.",
+        "status": "available"
+    },
+    {
+        "id": 194,
+        "isNew": false,
+        "title": "من الحداثة الى العولمة",
+        "author": "تيمونز روبيرتز",
+        "type": "عالمي",
+        "category": "اقتصاد",
+        "images": [
+            "/images/10-10/10-10 (33).jpg"
+        ],
+        "price": 50,
+        "HPaper": "270",
+        "description": "كتاب يتناول التحولات الاقتصادية والاجتماعية من منظور تاريخي.",
+        "status": "available"
+    },
+    {
+        "id": 195,
+        "isNew": false,
+        "title": " تراب الماس ",
+        "author": "احمد مراد",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-10/10-10 (34).jpg"
+        ],
+        "price": 70,
+        "HPaper": "430",
+        "description": "رواية بوليسية مشوقة تدور أحداثها في مصر المعاصرة.",
+        "status": "available"
+    },
+    {
+        "id": 196,
+        "isNew": true,
+        "title": "تاريخ اداب العرب",
+        "author": "مصطفى صادق الرافعي",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-11/10-11 (5).jpg"
+        ],
+        "price": 250,
+        "HPaper": "1000",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 197,
+        "isNew": true,
+        "title": "هكذا تكلم زرادشت",
+        "author": "فريدريك نيتشه",
+        "type": "عالمي",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-11/10-11 (6).jpg"
+        ],
+        "price": 90,
+        "HPaper": "380",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 198,
+        "isNew": true,
+        "title": "هكذا تكلم زرادشت",
+        "author": "فريدريك نيتشه",
+        "type": "عالمي",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-11/10-11 (6).jpg"
+        ],
+        "price": 90,
+        "HPaper": "380",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 199,
+        "isNew": true,
+        "title": " حكايات من دفتر الوطن",
+        "author": " صلاح عيسى",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-11/10-11 (7).jpg"
+        ],
+        "price": 150,
+        "HPaper": "545",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 200,
+        "isNew": true,
+        "title": "النقد الادبي",
+        "author": "احمد امين",
+        "type": "عربي",
+        "category": "أدب",
+        "images": [
+            "/images/10-11/10-11 (9).jpg"
+        ],
+        "price": 90,
+        "HPaper": "394",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 201,
+        "isNew": true,
+        "title": "فوما جوردييف",
+        "author": "مكسيم جوركي",
+        "type": "عالمي",
+        "category": "أدب",
+        "images": [
+            "/images/10-11/10-11 (10).jpg"
+        ],
+        "price": 100,
+        "HPaper": "485",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 202,
+        "isNew": true,
+        "title": "تاريخ الفلسفة الروسية",
+        "author": "نيقولاي لوسكي",
+        "type": "عالمي",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-11/10-11 (11).jpg"
+        ],
+        "price": 120,
+        "HPaper": "465",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 203,
+        "isNew": true,
+        "title": "رحلة ابن بطوطة",
+        "author": "ابن بطوطة",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-11/10-11 (12).jpg"
+        ],
+        "price": 120,
+        "HPaper": "500",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 204,
+        "isNew": true,
+        "title": "هز القحوف",
+        "author": "عبدالعزيز جمال الدين",
+        "type": "عربي",
+        "category": "أدب",
+        "images": [
+            "/images/10-11/10-11 (13).jpg"
+        ],
+        "price": 90,
+        "HPaper": "460",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 205,
+        "isNew": true,
+        "title": "نوكاس بوربا",
+        "author": "ماشادو دو اسيس",
+        "type": "عالمي",
+        "category": "أدب",
+        "images": [
+            "/images/10-11/10-11 (14).jpg"
+        ],
+        "price": 80,
+        "HPaper": "360",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 206,
+        "isNew": true,
+        "title": " الاحمر والاسود",
+        "author": " ستندال",
+        "type": "عالمي",
+        "category": "أدب",
+        "images": [
+            "/images/10-11/10-11 (15).jpg"
+        ],
+        "price": 75,
+        "HPaper": "850",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 207,
+        "isNew": true,
+        "title": "مدام بوفاري",
+        "author": "غوستاف فلوبير",
+        "type": "عالمي",
+        "category": "أدب",
+        "images": [
+            "/images/10-11/10-11 (16).jpg"
+        ],
+        "price": 50,
+        "HPaper": "300",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id":208 ,
+        "isNew": true,
+        "title": "الي المنارة",
+        "author": "فيرجينيا وولف",
+        "type": "عالمي",
+        "category": "رواية",
+        "images": [
+            "/images/10-11/10-11 (1).jpg"
+        ],
+        "price":300 ,
+        "HPaper": "305",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id":209 ,
+        "isNew": true,
+        "title": "طريق الحياة",
+        "author": " ليف تولستوي",
+        "type": "عالمي",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-11/10-11 (2).jpg"
+        ],
+        "price": 350,
+        "HPaper": "585",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 210,
+        "isNew":true ,
+        "title": "الانفس الميتة",
+        "author": "نيقولاي غوغول",
+        "type": "عالمي",
+        "category": "رواية",
+        "images": [
+            "/images/10-11/10-11 (3).jpg"
+        ],
+        "price": 300,
+        "HPaper": "340",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id":211 ,
+        "isNew": true,
+        "title": "تاريخ الغطرسة",
+        "author": "اري تورنين",
+        "type": "عالمي",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-11/10-11 (4).jpg"
+        ],
+        "price": 150,
+        "HPaper": "250",
+        "description": ".",
+        "status": "available"
+    }
+]

@@ -955,7 +955,7 @@
         "price": 50,
         "HPaper": "287",
         "description": "رواية تتناول مشروع السد العالي وما رافقه من تحولات اجتماعية وسياسية. نص يجمع بين الوثيقة والسرد الأدبي، ليعكس صورة مصر في حقبة التحولات الكبرى.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 103,
@@ -1105,7 +1105,7 @@
         "price": 50,
         "HPaper": "280",
         "description": "رواية كلاسيكية مشوقة تحكي قصة الغموض والانتقام. تجمع بين الإثارة والحبكة التاريخية بأسلوب دوماس المميز.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 114,
@@ -1525,7 +1525,7 @@
         "price": 50,
         "HPaper": "140",
         "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 143,
@@ -1615,7 +1615,7 @@
         "price": 50,
         "HPaper": "220",
         "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 149,
@@ -1690,7 +1690,7 @@
         "price": 50,
         "HPaper": "305",
         "description": "رواية تتناول قضايا الفقر والظلم الاجتماعي.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 154,
@@ -1975,7 +1975,7 @@
         "price": 20,
         "HPaper": "160",
         "description": "رواية تتناول قضايا الحب والتضحية في المجتمع المصري.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 173,
@@ -2052,7 +2052,7 @@
         "price": 50,
         "HPaper": "550",
         "description": "رواية فلسفية تتناول موضوعات الوجود والهوية.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 178,
@@ -2067,7 +2067,7 @@
         "price": 35,
         "HPaper": "140",
         "description": "مسرحية فلسفية تتناول موضوعات الوجود والهوية.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 179,
@@ -2157,7 +2157,7 @@
         "price": 25,
         "HPaper": "220",
         "description": "مسرحية كلاسيكية عن الحب والمأساة.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 185,
@@ -2352,7 +2352,7 @@
         "price": 90,
         "HPaper": "380",
         "description": ".",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 198,

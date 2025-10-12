@@ -1139,7 +1139,7 @@
     },
     {
         "id": 116,
-        "isNew": true,
+        "isNew": false,
         "title": "شذرات الفلسفة",
         "author": "سورن كيركجورد – ترجمة قحطان جاسم",
         "type": "عالمي",
@@ -1210,7 +1210,7 @@
         "price": 40,
         "HPaper": "215",
         "description": "دراسة تحليلية حول تأثير الخميني والجماعات الإسلامية في السياسة الإيرانية.",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 122,
@@ -1375,7 +1375,7 @@
         "price": 15,
         "HPaper": "265",
         "description": "رواية تتناول قضايا الهوية والتغيير في المجتمع المعاصر.",
-        "status": "sold"
+        "status": "available"
     },
     {
         "id": 133,
@@ -2326,7 +2326,7 @@
     },
     {
         "id": 196,
-        "isNew": true,
+        "isNew": false,
         "title": "تاريخ اداب العرب",
         "author": "مصطفى صادق الرافعي",
         "type": "عربي",
@@ -2341,7 +2341,7 @@
     },
     {
         "id": 197,
-        "isNew": true,
+        "isNew": false,
         "title": "هكذا تكلم زرادشت",
         "author": "فريدريك نيتشه",
         "type": "عالمي",
@@ -2356,7 +2356,7 @@
     },
     {
         "id": 198,
-        "isNew": true,
+        "isNew": false,
         "title": "هكذا تكلم زرادشت",
         "author": "فريدريك نيتشه",
         "type": "عالمي",
@@ -2367,11 +2367,11 @@
         "price": 90,
         "HPaper": "380",
         "description": ".",
-        "status": "available"
+        "status": "sold"
     },
     {
         "id": 199,
-        "isNew": true,
+        "isNew": false,
         "title": " حكايات من دفتر الوطن",
         "author": " صلاح عيسى",
         "type": "عربي",
@@ -2386,7 +2386,7 @@
     },
     {
         "id": 200,
-        "isNew": true,
+        "isNew": false,
         "title": "النقد الادبي",
         "author": "احمد امين",
         "type": "عربي",
@@ -2401,7 +2401,7 @@
     },
     {
         "id": 201,
-        "isNew": true,
+        "isNew": false,
         "title": "فوما جوردييف",
         "author": "مكسيم جوركي",
         "type": "عالمي",
@@ -2416,7 +2416,7 @@
     },
     {
         "id": 202,
-        "isNew": true,
+        "isNew": false,
         "title": "تاريخ الفلسفة الروسية",
         "author": "نيقولاي لوسكي",
         "type": "عالمي",
@@ -2431,7 +2431,7 @@
     },
     {
         "id": 203,
-        "isNew": true,
+        "isNew": false,
         "title": "رحلة ابن بطوطة",
         "author": "ابن بطوطة",
         "type": "عربي",
@@ -2446,7 +2446,7 @@
     },
     {
         "id": 204,
-        "isNew": true,
+        "isNew": false,
         "title": "هز القحوف",
         "author": "عبدالعزيز جمال الدين",
         "type": "عربي",
@@ -2461,7 +2461,7 @@
     },
     {
         "id": 205,
-        "isNew": true,
+        "isNew": false,
         "title": "نوكاس بوربا",
         "author": "ماشادو دو اسيس",
         "type": "عالمي",
@@ -2476,7 +2476,7 @@
     },
     {
         "id": 206,
-        "isNew": true,
+        "isNew": false,
         "title": " الاحمر والاسود",
         "author": " ستندال",
         "type": "عالمي",
@@ -2491,7 +2491,7 @@
     },
     {
         "id": 207,
-        "isNew": true,
+        "isNew": false,
         "title": "مدام بوفاري",
         "author": "غوستاف فلوبير",
         "type": "عالمي",
@@ -2505,8 +2505,8 @@
         "status": "available"
     },
     {
-        "id":208 ,
-        "isNew": true,
+        "id": 208,
+        "isNew": false,
         "title": "الي المنارة",
         "author": "فيرجينيا وولف",
         "type": "عالمي",
@@ -2514,14 +2514,14 @@
         "images": [
             "/images/10-11/10-11 (1).jpg"
         ],
-        "price":300 ,
+        "price": 300,
         "HPaper": "305",
         "description": ".",
         "status": "available"
     },
     {
-        "id":209 ,
-        "isNew": true,
+        "id": 209,
+        "isNew": false,
         "title": "طريق الحياة",
         "author": " ليف تولستوي",
         "type": "عالمي",
@@ -2536,7 +2536,7 @@
     },
     {
         "id": 210,
-        "isNew":true ,
+        "isNew": false,
         "title": "الانفس الميتة",
         "author": "نيقولاي غوغول",
         "type": "عالمي",
@@ -2550,8 +2550,8 @@
         "status": "available"
     },
     {
-        "id":211 ,
-        "isNew": true,
+        "id": 211,
+        "isNew": false,
         "title": "تاريخ الغطرسة",
         "author": "اري تورنين",
         "type": "عالمي",
@@ -2561,6 +2561,158 @@
         ],
         "price": 150,
         "HPaper": "250",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 212,
+        "isNew": true,
+        "title": "البحث عن الذات",
+        "author": "السادات",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-12/10-12 (9).jpg",
+            "/images/10-12/10-12 (1).jpg"
+        ],
+        "price": 150,
+        "HPaper": "430",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 213,
+        "isNew": true,
+        "title": "رسائل في التسامح",
+        "author": "جون لوك",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-12/10-12 (2).jpg"
+        ],
+        "price": 40,
+        "HPaper": "87",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 214,
+        "isNew": true,
+        "title": "يوهان سباستيان باخ",
+        "author": "مارتن جك",
+        "type": "مترجم",
+        "category": "فلسفة",
+        "images": [
+            "/images/10-12/10-12 (3).jpg"
+        ],
+        "price": 40,
+        "HPaper": "215",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 215,
+        "isNew": true,
+        "title": "خريف الغضب",
+        "author": "محمد حسنين هيكل",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-12/10-12 (4).jpg"
+        ],
+        "price": 150,
+        "HPaper": "550",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 216,
+        "isNew": true,
+        "title": "حديث الصباح والمساء",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-12/10-12 (5).jpg"
+        ],
+        "price": 50,
+        "HPaper": "215",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 217,
+        "isNew": true,
+        "title": "السهم",
+        "author": "نجيب محفوظ",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-12/10-12 (8).jpg"
+        ],
+        "price": 50,
+        "HPaper": "300",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 218,
+        "isNew": true,
+        "title": "عصر اسماعيل",
+        "author": "عبدالرحمن الرافعي",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-12/10-12 (6).jpg",
+            "/images/10-12/10-12 (10).jpg"
+        ],
+        "price": 50,
+        "HPaper": "300",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 219,
+        "isNew": true,
+        "title": "هل نستحق الديمقراطية",
+        "author": "علاء الاسواني",
+        "type": "عربي",
+        "category": "تاريخ",
+        "images": [
+            "/images/10-12/10-12 (7).jpg"
+        ],
+        "price": 60,
+        "HPaper": "210",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 221,
+        "isNew": true,
+        "title": "السقا مات",
+        "author": "يوسف السباعي",
+        "type": "عربي",
+        "category": "رواية",
+        "images": [
+            "/images/10-12/10-12 (12).jpg"
+        ],
+        "price": 30,
+        "HPaper": "330",
+        "description": ".",
+        "status": "available"
+    },
+    {
+        "id": 222,
+        "isNew": true,
+        "title": "حقيقة الخديعة",
+        "author": "دان براون",
+        "type": "مترجم",
+        "category": "رواية",
+        "images": [
+            "/images/10-12/10-12 (13).jpg"
+        ],
+        "price": 90,
+        "HPaper": "420",
         "description": ".",
         "status": "available"
     }

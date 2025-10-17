@@ -37,11 +37,13 @@ export default function Navbar() {
             variants={container}
             className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-md border-b border-blue-100"
         >
-            
-            <div className="flex justify-between items-center px-6 py-4 md:flex-row-reverse">
-                
-                {/* الشعار */}
-                <motion.div variants={item} className="order-1 md:order-1 w-14">
+            <div className="flex justify-between items-center px-6 py-4 md:px-10 md:py-5">
+
+                {/* 🪶 الشعار - يظهر في أقصى اليمين في الشاشات الكبيرة */}
+                <motion.div
+                    variants={item}
+                    className="w-14 flex-shrink-0 order-1"
+                >
                     <NavLink to="/">
                         <img
                             src="/images/logo.png"
@@ -50,8 +52,10 @@ export default function Navbar() {
                         />
                     </NavLink>
                 </motion.div>
+
+                {/* 🧭 روابط التنقل - تظهر يسار الشعار في الشاشات الكبيرة */}
                 <motion.div
-                    className="hidden md:flex items-center gap-6 text-sm sm:text-base md:text-lg font-medium"
+                    className="hidden md:flex items-center gap-8 text-base font-medium ml-auto"
                     variants={container}
                 >
                     {navLinks.map((link) => (
@@ -69,11 +73,11 @@ export default function Navbar() {
                             </NavLink>
                         </motion.div>
                     ))}
+
                 </motion.div>
 
-                {/* أيقونة السلة + زر القائمة (الموبايل) */}
-                <div className="flex items-center gap-8 md:hidden order-2">
-
+                {/* 📱 قائمة الموبايل (لا تغيير عليها) */}
+                <div className="flex items-center gap-6 md:hidden">
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="text-3xl text-gray-700 hover:text-blue-700 transition"
@@ -81,6 +85,7 @@ export default function Navbar() {
                     >
                         {menuOpen ? <FiX /> : <FiMenu />}
                     </button>
+
                     <NavLink to="/cart" className="relative">
                         <FiShoppingCart className="text-3xl text-blue-700 hover:text-blue-600 transition" />
                         {cart.length > 0 && (
@@ -90,10 +95,9 @@ export default function Navbar() {
                         )}
                     </NavLink>
                 </div>
-
             </div>
 
-            {/* قائمة الموبايل المنسدلة */}
+            {/* 📱 القائمة المنسدلة للموبايل */}
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div

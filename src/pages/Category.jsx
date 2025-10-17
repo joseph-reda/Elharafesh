@@ -1,7 +1,7 @@
-// src/pages/Category.jsx
+// ✅ src/pages/Category.jsx
 import { useParams, Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
 import BookCard from "../components/BookCard";
+import ScrollTopButton from "../components/ScrollTopButton";
 import CategoryCard from "../components/CategoryCard";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -11,51 +11,44 @@ const categories = ["رواية", "غير روائي", "مترجم", "عربي"]
 
 export default function Category() {
     const { name } = useParams();
-    const { addToCart, removeFromCart, isInCart } = useCart();
 
-    // ✅ جلب الكتب من API أو JSON في public
+    // ✅ جلب الكتب من JSON عبر React Query
     const { data: books = [], isLoading, error } = useQuery({
         queryKey: ["books"],
         queryFn: () => fetch("/books.json").then((res) => res.json()),
     });
 
-    if (isLoading)
-        return <p className="text-center text-gray-600 py-10">⏳ جاري تحميل الكتب...</p>;
-
     if (error)
-        return <p className="text-center text-red-600 py-10">❌ حدث خطأ أثناء تحميل البيانات</p>;
+        return (
+            <p className="text-center text-red-600 py-10">
+                ❌ حدث خطأ أثناء تحميل البيانات
+            </p>
+        );
 
-    // ✅ ترتيب الكتب (الأحدث أولاً + المتاحة قبل المحجوزة)
+    // ✅ ترتيب الكتب: المتاحة أولًا، ثم المباعة، ثم الأحدث
     const sortedBooks = [...books].sort((a, b) => {
         if (a.status === "available" && b.status === "sold") return -1;
         if (a.status === "sold" && b.status === "available") return 1;
         return b.id - a.id;
     });
 
-  // ✅ فلترة حسب التصنيف
-const filteredBooks = name
-    ? sortedBooks.filter((book) => {
-        const cat = book.category?.toLowerCase() || "";
-        const type = book.type?.toLowerCase() || "";
-        const n = name.toLowerCase();
+    // ✅ فلترة حسب التصنيف
+    const filteredBooks = name
+        ? sortedBooks.filter((book) => {
+            const cat = book.category?.toLowerCase() || "";
+            const type = book.type?.toLowerCase() || "";
+            const n = name.toLowerCase();
 
-        if (n === "مترجم") {
-            return ["أجنبي", "عالمي", "مترجم"].includes(type);
-        }
-        if (n === "عربي") {
-            return type.includes("عربي");
-        }
-        if (n === "غير روائي") {
-            return !cat.includes("رواية");
-        }
-        return cat.includes(n);
-    })
-    : sortedBooks;
-
+            if (n === "مترجم") return ["أجنبي", "عالمي", "مترجم"].includes(type);
+            if (n === "عربي") return type.includes("عربي");
+            if (n === "غير روائي") return !cat.includes("رواية");
+            return cat.includes(n);
+        })
+        : sortedBooks;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">
-            {/* عنوان الصفحة */}
+            {/* 🏷️ عنوان الصفحة */}
             <motion.h1
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -65,7 +58,7 @@ const filteredBooks = name
                 🛍️ التصنيفات
             </motion.h1>
 
-            {/* فلتر التصنيفات */}
+            {/* 🧭 شريط التصنيفات */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -75,7 +68,6 @@ const filteredBooks = name
                 <Link to="/category">
                     <CategoryCard title="الكل" />
                 </Link>
-
                 {categories.map((category) => (
                     <Link key={category} to={`/category/${category}`}>
                         <CategoryCard title={category} />
@@ -83,7 +75,7 @@ const filteredBooks = name
                 ))}
             </motion.div>
 
-            {/* العنوان الفرعي */}
+            {/* 📚 العنوان الفرعي */}
             <motion.h2
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -93,9 +85,20 @@ const filteredBooks = name
                 📖 {name ? `تصنيف: ${name}` : "جميع الكتب"}
             </motion.h2>
 
-            {/* قائمة الكتب */}
-            {filteredBooks.length === 0 ? (
-                <p className="text-gray-600 text-lg">لا توجد كتب ضمن هذا التصنيف حالياً.</p>
+            {/* 🧩 حالة التحميل */}
+            {isLoading ? (
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {[...Array(9)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="h-80 bg-gray-200 animate-pulse rounded-lg shadow-sm"
+                        ></div>
+                    ))}
+                </div>
+            ) : filteredBooks.length === 0 ? (
+                <p className="text-gray-600 text-lg text-center py-10">
+                    📭 لا توجد كتب ضمن هذا التصنيف حالياً.
+                </p>
             ) : (
                 <motion.div
                     initial="hidden"
@@ -116,30 +119,15 @@ const filteredBooks = name
                                 hidden: { opacity: 0, y: 30 },
                                 visible: { opacity: 1, y: 0 },
                             }}
-                            className="relative"
                         >
                             <BookCard book={book} />
-
-                            {/* زر السلة يظهر فقط للكتب المتاحة */}
-                            {book.status !== "sold" && (
-                                <button
-                                    onClick={() =>
-                                        isInCart(book.id)
-                                            ? removeFromCart(book.id)
-                                            : addToCart(book)
-                                    }
-                                    className={`mt-3 w-full text-sm px-4 py-2 rounded-lg transition font-medium ${isInCart(book.id)
-                                            ? "bg-red-100 text-red-600 hover:bg-red-200"
-                                            : "bg-green-100 text-green-700 hover:bg-green-200"
-                                        }`}
-                                >
-                                    {isInCart(book.id) ? "🗑️ إزالة من السلة" : "➕ أضف إلى السلة"}
-                                </button>
-                            )}
                         </motion.div>
                     ))}
                 </motion.div>
             )}
+
+            {/* 🔝 زر الرجوع لأعلى الصفحة */}
+            <ScrollTopButton />
         </div>
     );
 }

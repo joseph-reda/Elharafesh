@@ -3640,18 +3640,18 @@
     "status": "available"
 },
 {
-    "id": 287,
+    "id": 286,
     "isNew": true,
     "title": "السيرة الهلالية",
     "author": "عبدالرحمن الابنودي",
     "type": "عربي",
     "category": "شعر",
     "images": [
-    "/images/10-23/10-23 (1).jpg",
-    "/images/10-23/10-23 (2).jpg",
-    "/images/10-23/10-23 (3).jpg",
-    "/images/10-23/10-23 (4).jpg",
-    "/images/10-23/10-23 (5).jpg"
+        "/images/10-23/10-23 (1).jpg",
+        "/images/10-23/10-23 (2).jpg",
+        "/images/10-23/10-23 (3).jpg",
+        "/images/10-23/10-23 (4).jpg",
+        "/images/10-23/10-23 (5).jpg"
     ],
     "price": 150,
     "HPaper": "700",
@@ -3659,16 +3659,16 @@
     "status": "sold"
 },
 {
-    "id": 288,
+    "id": 287,
     "isNew": true,
     "title": "الكوميديا الالهية",
     "author": "دانتي اليغييري",
     "type": "عالمي",
     "category": "شعر",
     "images": [
-    "/images/10-23/10-23 (6).jpg",
-    "/images/10-23/10-23 (7).jpg",
-    "/images/10-23/10-23 (8).jpg"
+        "/images/10-23/10-23 (6).jpg",
+        "/images/10-23/10-23 (7).jpg",
+        "/images/10-23/10-23 (8).jpg"
     ],
     "price": 400,
     "HPaper": "1700",
@@ -3676,14 +3676,14 @@
     "status": "available"
 },
 {
-    "id": 289,
+    "id": 288,
     "isNew": true,
     "title": "منزل الاموات",
     "author": "فيودور دوستويفسكي",
     "type": "عالمي",
     "category": "رواية",
     "images": [
-    "/images/10-23/10-23 (9).jpg"
+        "/images/10-23/10-23 (9).jpg"
     ],
     "price": 120,
     "HPaper": "390",
@@ -3691,14 +3691,14 @@
     "status": "available"
 },
 {
-    "id": 290,
+    "id": 289,
     "isNew": true,
     "title": "الوديعة",
     "author": "محمود الريماوي",
     "type": "عربي",
     "category": "قصص",
     "images": [
-    "/images/10-23/10-23 (10).jpg"
+        "/images/10-23/10-23 (10).jpg"
     ],
     "price": 30,
     "HPaper": "190",
@@ -3706,14 +3706,14 @@
     "status": "available"
 },
 {
-    "id": 291,
+    "id": 290,
     "isNew": true,
     "title": "الذات والغرائز",
     "author": "سيجموند فرويد",
     "type": "عالمي",
     "category": "علم",
     "images": [
-    "/images/10-23/10-23 (11).jpg"
+        "/images/10-23/10-23 (11).jpg"
     ],
     "price": 35,
     "HPaper": "140",
@@ -3721,14 +3721,14 @@
     "status": "available"
 },
 {
-    "id": 292,
+    "id": 291,
     "isNew": true,
     "title": "البرجوازيون",
     "author": "مكسيم غوركي",
     "type": "عالمي",
     "category": "مسرحية",
     "images": [
-    "/images/10-23/10-23 (13).jpg"
+        "/images/10-23/10-23 (13).jpg"
     ],
     "price": 40,
     "HPaper": "190",
@@ -3736,14 +3736,14 @@
     "status": "available"
 },
 {
-    "id": 293,
+    "id": 292,
     "isNew": true,
     "title": "صور ادبية",
     "author": "مكسيم غوركي",
     "type": "عالمي",
     "category": "مقالات",
     "images": [
-    "/images/10-23/10-23 (12).jpg"
+        "/images/10-23/10-23 (12).jpg"
     ],
     "price": 40,
     "HPaper": "220",

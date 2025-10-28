@@ -1,8 +1,14 @@
-// src/components/BookGrid.jsx
+// 📘 src/components/BookGrid.jsx
 import BookCard from "./BookCard";
 import { motion } from "framer-motion";
 
+/**
+ * مكوّن BookGrid:
+ * يعرض شبكة من البطاقات الخاصة بالكتب.
+ * يتعامل تلقائيًا مع حالة عدم وجود كتب.
+ */
 export default function BookGrid({ books = [] }) {
+    // 🧩 في حال عدم وجود كتب
     if (!Array.isArray(books) || books.length === 0) {
         return (
             <div className="text-center text-gray-500 py-10 text-lg font-medium">
@@ -11,8 +17,8 @@ export default function BookGrid({ books = [] }) {
         );
     }
 
-    // إعدادات الأنيميشن
-    const container = {
+    // 🎬 إعدادات الحركة (Framer Motion)
+    const containerVariants = {
         hidden: { opacity: 0 },
         show: {
             opacity: 1,
@@ -22,7 +28,7 @@ export default function BookGrid({ books = [] }) {
 
     return (
         <motion.div
-            variants={container}
+            variants={containerVariants}
             initial="hidden"
             animate="show"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-right font-sans"

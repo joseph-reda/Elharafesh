@@ -11,15 +11,15 @@ import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 import BookDetails from "./pages/BookDetails.jsx";
 import Category from "./pages/Category.jsx";
-import Cart from "./pages/Cart.jsx"; // ✅ استبدل Favorites
+import Cart from "./pages/Cart.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import SearchResults from "./pages/SearchResults.jsx";
 
 export default function App() {
     return (
         <div
-            dir="rtl"
             className="font-sans bg-gray-50 min-h-screen flex flex-col"
+            dir="rtl"
         >
             {/* شريط التنقل */}
             <Navbar />
@@ -36,7 +36,7 @@ export default function App() {
                     <Route path="/book/:id" element={<BookDetails />} />
                     <Route path="/category" element={<Category />} />
                     <Route path="/category/:name" element={<Category />} />
-                    <Route path="/cart" element={<Cart />} /> {/* ✅ صفحة التسوق */}
+                    <Route path="/cart" element={<Cart />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/search" element={<SearchResults />} />
                     <Route path="*" element={<NotFound />} />

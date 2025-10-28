@@ -1,4 +1,4 @@
-// src/components/Footer.jsx
+// 📘 src/components/Footer.jsx
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -7,7 +7,7 @@ export default function Footer() {
             label: "واتساب",
             value: "01034345458",
             link: "https://wa.me/2001034345458",
-            icon: "📞",
+            icon: "💬",
             color: "text-green-600",
         },
         {
@@ -24,29 +24,31 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-100 text-right p-4 mt-10 text-sm text-gray-600 border-t"
+            className="bg-gradient-to-t from-gray-100 to-white border-t border-gray-200 mt-16 py-6 text-sm text-gray-600"
         >
-            <div className="max-w-5xl mx-auto space-y-3">
+            <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 text-right">
                 {/* الحقوق */}
-                <p>
-                    &copy; {new Date().getFullYear()} جميع الحقوق محفوظة لمكتبة
-                    الحرافيش للكتب
+                <p className="text-gray-500">
+                    &copy; {new Date().getFullYear()} جميع الحقوق محفوظة لمكتبة{" "}
+                    <span className="font-semibold text-gray-800">
+                        الحرافيش للكتب المستعملة
+                    </span>
+                    .
                 </p>
 
                 {/* وسائل التواصل */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
                     {contacts.map((item, idx) => (
-                        <p key={idx} className="flex items-center gap-1">
-                            <span>{item.icon}</span>
-                            <a
-                                href={item.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`${item.color} hover:underline`}
-                            >
-                                {item.value}
-                            </a>
-                        </p>
+                        <a
+                            key={idx}
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center gap-2 hover:underline ${item.color} transition-colors duration-300`}
+                        >
+                            <span className="text-lg">{item.icon}</span>
+                            <span>{item.value}</span>
+                        </a>
                     ))}
                 </div>
             </div>

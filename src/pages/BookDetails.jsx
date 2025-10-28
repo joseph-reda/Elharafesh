@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext";
 import BookImage from "../components/BookImage";
 import { useQuery } from "@tanstack/react-query";
 import { FiShoppingCart, FiTrash2, FiMessageSquare } from "react-icons/fi";
+import { fetchBooks } from "../services/booksService"; // ✅ تم التعديل هنا
 
 export default function BookDetails() {
     const { id } = useParams();
@@ -11,7 +12,7 @@ export default function BookDetails() {
 
     const { data: books = [], isLoading, error } = useQuery({
         queryKey: ["books"],
-        queryFn: () => fetch("/books.json").then((res) => res.json()),
+        queryFn: fetchBooks, // ✅ بدلاً من fetch("/books.json")
     });
 
     if (isLoading)
@@ -111,8 +112,8 @@ export default function BookDetails() {
                     <div>
                         <span
                             className={`inline-block px-4 py-1 rounded-full text-sm font-medium shadow ${isSold
-                                    ? "bg-gray-600 text-white"
-                                    : "bg-green-600 text-white"
+                                ? "bg-gray-600 text-white"
+                                : "bg-green-600 text-white"
                                 }`}
                         >
                             {isSold ? "❌ تم الحجز" : "✅ متوفر"}
@@ -127,8 +128,8 @@ export default function BookDetails() {
                                     inCart ? removeFromCart(book.id) : addToCart(book)
                                 }
                                 className={`flex items-center justify-center gap-2 flex-1 text-base font-medium rounded-lg py-3 transition-all duration-300 ${inCart
-                                        ? "bg-red-100 text-red-600 hover:bg-red-200"
-                                        : "bg-blue-700 text-white hover:bg-blue-800"
+                                    ? "bg-red-100 text-red-600 hover:bg-red-200"
+                                    : "bg-blue-700 text-white hover:bg-blue-800"
                                     }`}
                             >
                                 {inCart ? (

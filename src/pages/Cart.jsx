@@ -1,7 +1,7 @@
-import { useCart } from "../context/CartContext";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { useCart } from "../context/CartContext";
 
 export default function Cart() {
     const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -12,7 +12,7 @@ export default function Cart() {
         return sum + price * book.quantity;
     }, 0);
 
-    // ✅ تنسيق رسالة واتساب
+    // 🟢 رسالة واتساب للمجموعة كلها
     const whatsappMessage = [
         "📚 *تفاصيل الكتب المطلوبة:*",
         "──────────────────────────────",
@@ -33,32 +33,39 @@ export default function Cart() {
     }, [cart]);
 
     return (
-        <main className="max-w-7xl mx-auto px-4 py-10 text-right font-sans relative">
+        <main className="max-w-7xl mx-auto px-4 py-12 font-sans text-right relative">
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-3xl font-bold text-blue-800 mb-8 text-center"
+                className="text-3xl font-bold text-blue-800 mb-10 text-center"
             >
                 🛒 سلة التسوق
             </motion.h1>
 
             {cart.length === 0 ? (
-                <p className="text-gray-600 text-lg text-center py-10">
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-gray-600 text-lg text-center py-16"
+                >
                     📭 السلة فارغة حالياً.
-                </p>
+                </motion.p>
             ) : (
-                <div className="space-y-10">
+                <div className="space-y-12">
                     {/* 🧾 بطاقات الكتب */}
                     <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
                         {cart.map((book) => {
-                            let singleBookMessage = `📖 *الكتاب المطلوب:*\n──────────────────────────────\n#${book.id} - ${book.title}\n💵 ${book.price}`;
-                            if (book.quantity > 1)
-                                singleBookMessage += ` × ${book.quantity}`;
-                            singleBookMessage += "\n──────────────────────────────";
+                            const singleMessage = [
+                                "📖 *الكتاب المطلوب:*",
+                                "──────────────────────────────",
+                                `#${book.id} - ${book.title}`,
+                                `💵 ${book.price}${book.quantity > 1 ? ` × ${book.quantity}` : ""}`,
+                                "──────────────────────────────",
+                            ].join("\n");
 
                             const singleBookUrl = `https://wa.me/2001034345458?text=${encodeURIComponent(
-                                singleBookMessage
+                                singleMessage
                             )}`;
 
                             return (
@@ -66,11 +73,11 @@ export default function Cart() {
                                     key={book.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="bg-white/90 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl overflow-hidden flex flex-col border border-gray-200 hover:border-blue-300 transition-all duration-300"
+                                    transition={{ duration: 0.4 }}
+                                    className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-300 flex flex-col"
                                 >
-                                    {/* ✅ صورة طويلة ومميزة */}
-                                    <div className="relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
+                                    {/* صورة الكتاب */}
+                                    <div className="relative bg-gradient-to-br from-gray-100 to-gray-50">
                                         <img
                                             src={book.images?.[0] || "/placeholder.png"}
                                             alt={book.title}
@@ -83,13 +90,13 @@ export default function Cart() {
                                         )}
                                     </div>
 
-                                    {/* ✅ تفاصيل الكتاب */}
-                                    <div className="flex-1 p-5 flex flex-col justify-between space-y-3">
-                                        <div>
-                                            <h2 className="text-xl font-semibold text-blue-900 mb-2 line-clamp-2">
+                                    {/* تفاصيل الكتاب */}
+                                    <div className="flex-1 p-5 flex flex-col justify-between">
+                                        <div className="space-y-2">
+                                            <h2 className="text-xl font-semibold text-blue-900 line-clamp-2">
                                                 {book.title}
                                             </h2>
-                                            <p className="text-green-700 font-semibold text-lg mb-1">
+                                            <p className="text-green-700 font-semibold text-lg">
                                                 💵 {book.price}
                                             </p>
                                             <p className="text-xs text-gray-500">
@@ -97,8 +104,8 @@ export default function Cart() {
                                             </p>
                                         </div>
 
-                                        {/* ✅ التحكم بالكمية */}
-                                        <div className="flex items-center gap-2 mt-2">
+                                        {/* التحكم بالكمية */}
+                                        <div className="flex items-center gap-2 mt-3">
                                             <label className="text-gray-700 text-sm">
                                                 الكمية:
                                             </label>
@@ -116,13 +123,13 @@ export default function Cart() {
                                             />
                                         </div>
 
-                                        {/* ✅ الأزرار */}
-                                        <div className="flex justify-between items-center gap-2 pt-3">
+                                        {/* الأزرار */}
+                                        <div className="flex justify-between items-center gap-3 pt-4">
                                             <a
                                                 href={singleBookUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex-1 text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow transition text-center"
+                                                className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg shadow transition text-center"
                                             >
                                                 📲 حجز الكتاب
                                             </a>
@@ -141,15 +148,20 @@ export default function Cart() {
                         })}
                     </div>
 
-                    {/* ✅ ملخص السلة */}
-                    <div className="bg-gradient-to-l from-blue-50 to-white border-t-4 border-blue-600 rounded-2xl shadow-md p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                    {/* 💰 ملخص السلة */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="bg-gradient-to-l from-blue-50 to-white border-t-4 border-blue-600 rounded-2xl shadow-md p-6 flex flex-col md:flex-row justify-between items-center gap-4"
+                    >
                         <p className="text-2xl font-bold text-blue-800">
                             💰 الإجمالي: {totalPrice.toFixed(2)} ج.م
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex flex-wrap gap-4">
                             <button
                                 onClick={clearCart}
-                                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow"
+                                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow transition"
                             >
                                 🧹 إفراغ السلة
                             </button>
@@ -157,26 +169,28 @@ export default function Cart() {
                                 href={whatsappUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow"
+                                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow transition"
                             >
                                 📦 حجز المجموعة كاملة
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             )}
 
-            {/* ✅ زر واتساب عائم */}
+            {/* 🔘 زر واتساب عائم */}
             {showButton && (
-                <a
+                <motion.a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl flex items-center justify-center text-3xl transition-transform hover:scale-110"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center text-3xl transition-all"
                     title="حجز عبر واتساب"
                 >
                     <FaWhatsapp />
-                </a>
+                </motion.a>
             )}
         </main>
     );

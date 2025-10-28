@@ -3,12 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import BookGrid from "../components/BookGrid";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { fetchBooks } from "../services/booksService.js"; // ✅ استخدام Firebase مباشرة
 
 export default function Home() {
-    // ✅ جلب الكتب من API أو JSON
+    // ✅ جلب الكتب من Firebase
     const { data: books = [], isLoading, error } = useQuery({
         queryKey: ["books"],
-        queryFn: () => fetch("/books.json").then((res) => res.json()),
+        queryFn: fetchBooks,
     });
 
     // ✅ تصفية الكتب الجديدة فقط

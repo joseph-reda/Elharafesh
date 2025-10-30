@@ -11,7 +11,6 @@ export default function Navbar() {
     const navLinks = [
         { path: "/", label: "الرئيسية" },
         { path: "/category", label: "الكتب" },
-        { path: "/cart", label: "سلة التسوق" },
         { path: "/contact", label: "تواصل معنا" },
     ];
 
@@ -19,7 +18,16 @@ export default function Navbar() {
         <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-5 py-3 flex justify-between items-center">
 
-                {/* 🧭 روابط التنقل للحواسيب */}
+                {/* الشعار دائماً على اليسار */}
+                <NavLink to="/" className="flex items-center">
+                    <img
+                        src="/images/logo.png"
+                        alt="شعار الموقع"
+                        className="w-12 h-12 rounded-full border border-gray-200 shadow-sm"
+                    />
+                </NavLink>
+
+                {/* روابط التنقل للحواسيب */}
                 <div className="hidden md:flex items-center gap-6">
                     {navLinks.map((link) => (
                         <NavLink
@@ -36,7 +44,6 @@ export default function Navbar() {
                         </NavLink>
                     ))}
 
-                    {/* 🛒 أيقونة السلة */}
                     <NavLink to="/cart" className="relative">
                         <FiShoppingCart className="text-2xl text-blue-700" />
                         {cart.length > 0 && (
@@ -47,28 +54,18 @@ export default function Navbar() {
                     </NavLink>
                 </div>
 
-                {/* 📱 تصميم الموبايل */}
-                <div className="md:hidden flex items-center justify-between w-full">
-                    {/* الجهة اليمنى: زر القائمة + الكتب + السلة */}
+                {/* تصميم الموبايل */}
+                <div className="md:hidden flex items-center justify-end gap-4">
+                    {/* رابط الكتب + السلة */}
                     <div className="flex items-center gap-4">
-                        {/* زر القائمة */}
-                        <button
-                            onClick={() => setMenuOpen(!menuOpen)}
-                            className="text-2xl text-gray-700"
-                        >
-                            {menuOpen ? <FiX /> : <FiMenu />}
-                        </button>
-
-                        {/* رابط الكتب */}
                         <NavLink
                             to="/category"
-                            onClick={() => setMenuOpen(false)}
                             className="text-gray-800 text-base font-medium hover:text-blue-700"
+                            onClick={() => setMenuOpen(false)}
                         >
-                         جميع الكتب
+                            جميع الكتب
                         </NavLink>
 
-                        {/* أيقونة السلة */}
                         <NavLink to="/cart" className="relative">
                             <FiShoppingCart className="text-2xl text-blue-700" />
                             {cart.length > 0 && (
@@ -79,18 +76,17 @@ export default function Navbar() {
                         </NavLink>
                     </div>
 
-                    {/* الشعار في أقصى اليسار */}
-                    <NavLink to="/" className="flex justify-end">
-                        <img
-                            src="/images/logo.png"
-                            alt="شعار الموقع"
-                            className="w-12 h-12 rounded-full border border-gray-200 shadow-sm"
-                        />
-                    </NavLink>
+                    {/* زر القائمة */}
+                    <button
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        className="text-2xl text-gray-700"
+                    >
+                        {menuOpen ? <FiX /> : <FiMenu />}
+                    </button>
                 </div>
             </div>
 
-            {/* 📱 القائمة المنسدلة للموبايل */}
+            {/* القائمة المنسدلة للموبايل */}
             {menuOpen && (
                 <div className="md:hidden bg-white shadow-inner border-t border-gray-200 px-5 py-3 space-y-2 text-center">
                     {navLinks.map((link) => (

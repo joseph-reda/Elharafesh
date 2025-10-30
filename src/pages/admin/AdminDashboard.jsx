@@ -1,3 +1,4 @@
+// src/pages/AdminDashboard.jsx
 import { useState } from "react";
 import { ref, push } from "firebase/database";
 import { db } from "../../firebase";
@@ -12,32 +13,28 @@ export default function AdminDashboard() {
     const [price, setPrice] = useState("");
     const [HPaper, setHPaper] = useState("");
     const [description, setDescription] = useState("");
-    const [images, setImages] = useState([]);
-    const [preview, setPreview] = useState([]);
+    const [folder, setFolder] = useState(""); // اسم مجلد اليوم داخل public/images
+    const [images, setImages] = useState([]); // روابط الصور النهائية
     const [loading, setLoading] = useState(false);
 
-    // ✅ الصور محلية فقط (من مجلد public/images/books)
-    const handleLocalImages = (files) => {
-        const selectedImages = [];
-        const previews = [];
-
-        for (const file of files) {
-            const localPath = `/images/${file.name}`;
-            selectedImages.push(localPath);
-            previews.push(URL.createObjectURL(file));
+    // عند اختيار الصور من الجهاز
+    const handleImageSelect = (files) => {
+        if (!folder.trim()) {
+            toast.error("⚠️ يرجى كتابة اسم المجلد داخل public/images أولاً (مثل 10-30)");
+            return;
         }
 
-        setImages(selectedImages);
-        setPreview(previews);
-        toast.success("✅ تم تحديد الصور بنجاح!");
+        const urls = Array.from(files).map((file) => `/images/${folder}/${file.name}`);
+        setImages(urls);
+        toast.success(`✅ تم اختيار ${urls.length} صورة`);
     };
 
-    // ✅ الحفظ في Firebase Realtime Database
+    // عند الإرسال
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!title || !author || !category || images.length === 0) {
-            toast.error("⚠️ يرجى ملء جميع الحقول وتحميل الصور!");
+            toast.error("⚠️ يرجى ملء جميع الحقول الأساسية وتحميل الصور!");
             return;
         }
 
@@ -51,17 +48,18 @@ export default function AdminDashboard() {
             transl,
             type,
             category,
-            images, // 🔹 روابط الصور المحلية
+            images, // /images/10-30/name.jpg
             price: price || "غير محدد",
             HPaper: HPaper || "",
             description: description || "",
             status: "available",
+            createdAt: Date.now(),
         };
 
         try {
             await push(ref(db, "books"), newBook);
-            toast.success("📚 تم إضافة الكتاب بنجاح إلى Firebase!");
-            // 🔹 تفريغ الحقول بعد الإضافة
+            toast.success("📚 تم إضافة الكتاب بنجاح إلى قاعدة البيانات!");
+            // إعادة التهيئة
             setTitle("");
             setAuthor("");
             setTransl("");
@@ -71,7 +69,7 @@ export default function AdminDashboard() {
             setHPaper("");
             setDescription("");
             setImages([]);
-            setPreview([]);
+            setFolder("");
         } catch (err) {
             toast.error("❌ حدث خطأ أثناء الإضافة: " + err.message);
         } finally {
@@ -82,11 +80,25 @@ export default function AdminDashboard() {
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
             <Toaster />
-            <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
-                📘 لوحة إدارة الكتب
-            </h2>
+            <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">📘 لوحة إدارة الكتب</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+                {/* اسم مجلد الصور */}
+                <div>
+                    <label className="block text-sm font-medium mb-1">📁 اسم مجلد الصور (داخل public/images)</label>
+                    <input
+                        type="text"
+                        placeholder="مثال: 10-30"
+                        value={folder}
+                        onChange={(e) => setFolder(e.target.value)}
+                        className="w-full p-3 border rounded-md"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                        أدخل اسم المجلد الذي يحتوي على الصور مثل <code>10-30</code>
+                    </p>
+                </div>
+
+                {/* بيانات الكتاب */}
                 <input
                     type="text"
                     placeholder="عنوان الكتاب"
@@ -94,7 +106,6 @@ export default function AdminDashboard() {
                     onChange={(e) => setTitle(e.target.value)}
                     className="w-full p-3 border rounded-md"
                 />
-
                 <input
                     type="text"
                     placeholder="اسم المؤلف"
@@ -102,7 +113,6 @@ export default function AdminDashboard() {
                     onChange={(e) => setAuthor(e.target.value)}
                     className="w-full p-3 border rounded-md"
                 />
-
                 <input
                     type="text"
                     placeholder="المترجم (اختياري)"
@@ -128,12 +138,9 @@ export default function AdminDashboard() {
                     <option value="">اختر الفئة</option>
                     <option value="رواية">رواية</option>
                     <option value="تاريخ">تاريخ</option>
-                    <option value="مسرحية">مسرحية</option>
-                    <option value="سير ذاتية">سير ذاتية</option>
                     <option value="شعر">شعر</option>
-                    <option value="فلسفة">فلسفة</option>
-                    <option value="علم نفس">علم نفس</option>
-                    <option value="سياسة">سياسة</option>
+                    <option value="مسرحية">مسرحية</option>
+                    <option value="سيرة ذاتية">سيرة ذاتية</option>
                 </select>
 
                 <input
@@ -143,7 +150,6 @@ export default function AdminDashboard() {
                     onChange={(e) => setPrice(e.target.value)}
                     className="w-full p-3 border rounded-md"
                 />
-
                 <input
                     type="text"
                     placeholder="عدد الصفحات (اختياري)"
@@ -151,7 +157,6 @@ export default function AdminDashboard() {
                     onChange={(e) => setHPaper(e.target.value)}
                     className="w-full p-3 border rounded-md"
                 />
-
                 <textarea
                     placeholder="الوصف (اختياري)"
                     value={description}
@@ -160,24 +165,24 @@ export default function AdminDashboard() {
                     rows="4"
                 ></textarea>
 
+                {/* اختيار الصور */}
                 <input
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={(e) => handleLocalImages(e.target.files)}
+                    onChange={(e) => handleImageSelect(e.target.files)}
                     className="w-full p-3 border rounded-md bg-gray-50"
                 />
 
-                {preview.length > 0 && (
-                    <div className="flex gap-2 flex-wrap mt-2">
-                        {preview.map((src, i) => (
-                            <img
-                                key={i}
-                                src={src}
-                                alt={`Preview ${i}`}
-                                className="w-24 h-24 object-cover rounded-md border"
-                            />
-                        ))}
+                {/* عرض الصور المختارة */}
+                {images.length > 0 && (
+                    <div className="p-3 bg-gray-50 border rounded-md">
+                        <p className="font-semibold text-sm mb-2">الصور التي سيتم حفظها:</p>
+                        <ul className="text-sm text-gray-700 list-disc list-inside">
+                            {images.map((url, idx) => (
+                                <li key={idx}>{url}</li>
+                            ))}
+                        </ul>
                     </div>
                 )}
 

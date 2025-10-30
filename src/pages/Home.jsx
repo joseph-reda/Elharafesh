@@ -1,19 +1,18 @@
 // src/pages/Home.jsx
 import { useQuery } from "@tanstack/react-query";
 import BookGrid from "../components/BookGrid";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { fetchBooks } from "../services/booksService.js"; // ✅ استخدام Firebase مباشرة
+import { fetchBooks } from "../services/booksService.js";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-    // ✅ جلب الكتب من Firebase
     const { data: books = [], isLoading, error } = useQuery({
         queryKey: ["books"],
         queryFn: fetchBooks,
     });
 
-    // ✅ تصفية الكتب الجديدة فقط
-    const newBooks = books.filter((book) => book.isNew);
+    // ✅ آخر 10 كتب فقط
+    const latestBooks = [...books].reverse().slice(0, 10);
 
     if (isLoading)
         return (
@@ -31,78 +30,119 @@ export default function Home() {
 
     return (
         <main className="text-right px-4 md:px-12 py-8 space-y-12 font-sans bg-gray-50">
-            {/* قسم الترحيب */}
+            {/* 🏷️ شريط الترحيب */}
+            <motion.div
+                className="bg-gradient-to-r from-blue-700 to-blue-500 text-white text-center py-4 px-4 rounded-xl shadow-md"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+                <p className="text-lg md:text-xl font-semibold mb-2">
+                    📚 مرحبًا بكم في مكتبة الحرافيش للكتب المستعملة والقديمة
+                </p>
+                <Link
+                    to="/category"
+                    className="inline-block bg-white text-blue-700 font-bold px-6 py-2 rounded-lg shadow hover:bg-gray-100 transition"
+                >
+                    تصفّح الكتب الآن
+                </Link>
+            </motion.div>
+
+            {/* 🌟 قسم الترحيب والمعلومات */}
             <motion.section
-                aria-label="الترحيب بالمستخدم"
+                aria-label="قسم الترحيب"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-blue-50 p-6 md:p-10 rounded-xl shadow-md"
+                className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-md border-r-4 border-blue-400"
             >
-                <header className="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex-1">
-                        <h1 className="text-3xl md:text-4xl font-extrabold text-blue-800 leading-relaxed mb-4">
-                            مرحبًا بك في مكتبة الحرافيش
-                            <br />
-                            لبيع الكتب المستعملة والقديمة
-                        </h1>
-                        <p className="text-gray-700 text-md md:text-lg leading-loose">
-                            اكتشف أحدث الكتب العربية والمترجمة، بنكهة شعبية وتراثية تجمع بين
-                            الأدب والثقافة والتاريخ.
-                        </p>
-                    </div>
-                    <img
-                        src="/images/logo.png"
-                        alt="شعار مكتبة الحرافيش"
-                        className="w-44 md:w-56 rounded-full border-4 border-blue-200 shadow-md hover:scale-105 transition-transform duration-300"
-                    />
+                <header className="text-center md:text-right">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-blue-800 mb-4">
+                        👋 أهلًا وسهلًا بكم في مكتبة الحرافيش
+                    </h1>
+                    <p className="text-lg md:text-xl text-gray-800 leading-relaxed">
+                        يسعدنا تواصلكم معنا ❤
+                        <br />
+                        نقدم لكم مجموعة مميزة من الكتب الأدبية، الفكرية، الدينية، والروايات
+                        النادرة — جميعها بحالة ممتازة وأسعار مناسبة جدًا 👌
+                    </p>
                 </header>
+
+                <div className="mt-6 text-gray-700 space-y-3 leading-relaxed text-md md:text-lg">
+                    <p>
+                        ⚙️ <strong>للحجز أو الاستفسار:</strong> يرجى إرسال اسم الكتاب أو صورته
+                        عبر{" "}
+                        <span className="text-blue-700 font-semibold">واتساب أو فيسبوك</span>،
+                        وسنقوم بالرد في أقرب وقت ممكن.
+                    </p>
+
+                    <p>
+                        💳 <strong>طرق الدفع:</strong>
+                        <br />• فودافون كاش:{" "}
+                        <span className="text-blue-700 font-semibold">01034345458</span>
+                        <br />• إنستاباي:{" "}
+                        <span className="text-blue-700 font-semibold">
+                            nehru_gamal@instapay
+                        </span>
+                    </p>
+
+                    <p>
+                        🚚 <strong>التوصيل:</strong> يتم التسليم كل{" "}
+                        <span className="font-semibold text-blue-700">يوم سبت في سوق ديانا</span>،
+                        كما يتوفر التوصيل إلى المنازل عن طريق البريد المصري.
+                        <br />
+                        💰 <em>سعر الشحن يبدأ من 40 جنيهًا مصريًا</em> ويختلف حسب وزن الكتب وعددها.
+                    </p>
+
+                    <p>
+                        ⏰ <strong>مواعيد نشر الكتب:</strong> نقوم بإضافة الكتب الجديدة من{" "}
+                        <span className="text-blue-700 font-semibold">
+                            الأحد إلى الخميس في تمام الساعة 9 مساءً
+                        </span>
+                        .
+                    </p>
+
+                    <p>
+                        🌐 <strong>يمكنكم متابعتنا علي الفيس بوك :</strong>{" "}
+                        <a
+                            href="https://www.facebook.com/share/1A7iNw3nGi/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-blue-700 underline hover:text-blue-800"
+                        >
+                            الحرافيش
+                        </a>
+                    </p>
+                </div>
             </motion.section>
 
-            {/* نظام الحجز */}
+            {/* 📢 إعلان الحجز اليومي */}
+            {/* 🆕 آخر 10 كتب */}
             <motion.section
-                aria-label="نظام الحجز"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="bg-white border-r-4 border-blue-700 p-5 rounded-lg shadow-sm text-gray-800 text-lg leading-relaxed"
-            >
-                <p>
-                    🕙 يتم نشر مجموعة جديدة من الكتب يوميًا في الساعة{" "}
-                    <strong>9 مساءً</strong> على صفحتنا على الفيسبوك.
-                    <br />
-                    للحجز، يُرجى كتابة تعليق على منشور الكتاب أو التواصل معنا عبر{" "}
-                    <span className="font-semibold text-blue-700">واتساب</span> أو{" "}
-                    <span className="font-semibold text-blue-700">ماسنجر</span>.
-                </p>
-            </motion.section>
-
-            {/* الكتب الجديدة */}
-            <motion.section
-                aria-label="الكتب الجديدة اليوم"
+                aria-label="آخر الكتب المضافة"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
             >
                 <h2 className="text-2xl font-bold text-gray-800 mb-4 border-r-4 border-blue-600 pr-3">
-                    📚 الكتب الجديدة اليوم
+                    🆕 أحدث 10 كتب تمت إضافتها
                 </h2>
 
-                {newBooks.length > 0 ? (
+                {latestBooks.length > 0 ? (
                     <>
-                        <BookGrid books={newBooks} />
+                        <BookGrid books={latestBooks} />
                         <div className="mt-6 text-center">
                             <Link
                                 to="/category"
                                 className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white text-lg px-8 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-md"
                             >
-                                عرض المزيد
+                                تصفّح جميع الكتب
                             </Link>
                         </div>
                     </>
                 ) : (
                     <p className="text-gray-600 text-center text-lg">
-                        📭 لا توجد كتب جديدة حاليًا.
+                        📭 لا توجد كتب متاحة حاليًا.
                     </p>
                 )}
             </motion.section>

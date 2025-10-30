@@ -17,15 +17,7 @@ export default function Navbar() {
 
     return (
         <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto flex justify-between items-center px-5 py-3">
-                {/* 🪶 الشعار */}
-                <NavLink to="/">
-                    <img
-                        src="/images/logo.png"
-                        alt="شعار الموقع"
-                        className="w-12 h-12 rounded-full border border-gray-200 shadow-sm"
-                    />
-                </NavLink>
+            <div className="max-w-7xl mx-auto px-5 py-3 flex justify-between items-center">
 
                 {/* 🧭 روابط التنقل للحواسيب */}
                 <div className="hidden md:flex items-center gap-6">
@@ -55,28 +47,52 @@ export default function Navbar() {
                     </NavLink>
                 </div>
 
-                {/* 📱 زر القائمة للموبايل */}
-                <div className="md:hidden flex items-center gap-4">
-                    <button
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        className="text-2xl text-gray-700"
-                    >
-                        {menuOpen ? <FiX /> : <FiMenu />}
-                    </button>
-                    <NavLink to="/cart" className="relative">
-                        <FiShoppingCart className="text-2xl text-blue-700" />
-                        {cart.length > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
-                                {cart.length}
-                            </span>
-                        )}
+                {/* 📱 تصميم الموبايل */}
+                <div className="md:hidden flex items-center justify-between w-full">
+                    {/* الجهة اليمنى: زر القائمة + الكتب + السلة */}
+                    <div className="flex items-center gap-4">
+                        {/* زر القائمة */}
+                        <button
+                            onClick={() => setMenuOpen(!menuOpen)}
+                            className="text-2xl text-gray-700"
+                        >
+                            {menuOpen ? <FiX /> : <FiMenu />}
+                        </button>
+
+                        {/* رابط الكتب */}
+                        <NavLink
+                            to="/category"
+                            onClick={() => setMenuOpen(false)}
+                            className="text-gray-800 text-base font-medium hover:text-blue-700"
+                        >
+                         جميع الكتب
+                        </NavLink>
+
+                        {/* أيقونة السلة */}
+                        <NavLink to="/cart" className="relative">
+                            <FiShoppingCart className="text-2xl text-blue-700" />
+                            {cart.length > 0 && (
+                                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+                                    {cart.length}
+                                </span>
+                            )}
+                        </NavLink>
+                    </div>
+
+                    {/* الشعار في أقصى اليسار */}
+                    <NavLink to="/" className="flex justify-end">
+                        <img
+                            src="/images/logo.png"
+                            alt="شعار الموقع"
+                            className="w-12 h-12 rounded-full border border-gray-200 shadow-sm"
+                        />
                     </NavLink>
                 </div>
             </div>
 
             {/* 📱 القائمة المنسدلة للموبايل */}
             {menuOpen && (
-                <div className="md:hidden bg-white shadow-inner border-t border-gray-200 px-5 py-3 space-y-2">
+                <div className="md:hidden bg-white shadow-inner border-t border-gray-200 px-5 py-3 space-y-2 text-center">
                     {navLinks.map((link) => (
                         <NavLink
                             key={link.path}

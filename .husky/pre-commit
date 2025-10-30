@@ -1,5 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# ضغط الصور ورفعها إلى Firebase قبل كل commit
-npm run upload-images
+# ضغط الصور ورفعها لو ممكن، بدون كسر commit
+npm run compress-and-upload || echo "⚠️ لم يتم رفع الصور، لكن يمكنك متابعة commit"
+
+# إضافة الملفات المضغوطة تلقائيًا
+git add public/images/compressed

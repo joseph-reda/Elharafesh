@@ -1,64 +1,47 @@
+// upload-images.js
 import fs from "fs";
 import path from "path";
-import imagemin from "imagemin";
-import imageminMozjpeg from "imagemin-mozjpeg";
-import imageminPngquant from "imagemin-pngquant";
-import imageminWebp from "imagemin-webp";
-import admin from "firebase-admin";
+import { initializeApp, cert } from "firebase-admin/app";
+import { getStorage } from "firebase-admin/storage";
 
-// 🔑 ملف مفتاح الخدمة من Firebase
-import serviceAccount from "./firebase-service-key.json" assert { type: "json" };
+// مسار ملف خدمة Firebase
+const serviceKeyPath = "./firebase-service-key.json";
+
+// التحقق من وجود الملف
+if (!fs.existsSync(serviceKeyPath)) {
+    console.warn(
+        "⚠️ ملف firebase-service-key.json غير موجود، سيتم تخطي رفع الصور."
+    );
+    process.exit(0); // إنهاء السكربت بأمان
+}
 
 // تهيئة Firebase
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    storageBucket: "YOUR_PROJECT_ID.appspot.com", // ضع هنا مشروعك
+const serviceAccount = JSON.parse(fs.readFileSync(serviceKeyPath, "utf8"));
+
+initializeApp({
+    credential: cert(serviceAccount),
+    storageBucket: "<YOUR_BUCKET_NAME>.appspot.com", // ضع اسم الـ bucket الخاص بك
 });
 
-const bucket = admin.storage().bucket();
+const bucket = getStorage().bucket();
 
-const inputDir = path.resolve("public/images");
-const tempDir = path.resolve("public/images/temp");
+// مسار الصور المضغوطة
+const imagesDir = path.resolve("./public/images/compressed");
 
-// إنشاء مجلد مؤقت للصور المضغوطة
-if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
+// رفع كل الصور داخل كل فولدر
+fs.readdirSync(imagesDir).forEach((folder) => {
+    const folderPath = path.join(imagesDir, folder);
+    if (fs.statSync(folderPath).isDirectory()) {
+        fs.readdirSync(folderPath).forEach(async (file) => {
+            const filePath = path.join(folderPath, file);
+            const destPath = `images/${folder}/${file}`;
 
-(async () => {
-    try {
-        const files = fs
-            .readdirSync(inputDir)
-            .filter((f) => /\.(jpe?g|png)$/i.test(f));
-
-        for (const file of files) {
-            const filePath = path.join(inputDir, file);
-            const tempPath = path.join(tempDir, file);
-
-            console.log(`🔄 ضغط الصورة: ${file} ...`);
-
-            // ضغط الصورة
-            await imagemin([filePath], {
-                destination: tempDir,
-                plugins: [
-                    imageminMozjpeg({ quality: 75 }),
-                    imageminPngquant({ quality: [0.6, 0.8] }),
-                    imageminWebp({ quality: 75 }),
-                ],
-            });
-
-            console.log(`🚀 رفع الصورة إلى Firebase: ${file} ...`);
-
-            // رفع الصورة إلى Firebase
-            await bucket.upload(tempPath, {
-                destination: `images/${file}`, // المسار داخل Firebase
-                metadata: { cacheControl: "public,max-age=31536000" },
-            });
-
-            console.log(`✅ تم رفع الصورة: ${file}`);
-        }
-
-        console.log("🎉 تم ضغط ورفع جميع الصور بنجاح!");
-    } catch (err) {
-        console.error("❌ خطأ أثناء الضغط أو الرفع:", err);
-        process.exit(1);
+            try {
+                await bucket.upload(filePath, { destination: destPath });
+                console.log(`✅ تم رفع: ${destPath}`);
+            } catch (err) {
+                console.error(`❌ خطأ أثناء رفع ${destPath}:`, err);
+            }
+        });
     }
-})();
+});

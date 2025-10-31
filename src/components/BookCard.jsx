@@ -30,13 +30,6 @@ export default function BookCard({ book }) {
                     className="w-full h-[420px] object-contain transition-transform duration-500 group-hover:scale-105"
                 />
 
-                {/* 🏷️ شارة "جديد" */}
-                {book.isNew && (
-                    <span className="absolute top-3 right-3 text-xs bg-red-600 text-white px-3 py-1 rounded-full shadow-md">
-                        جديد
-                    </span>
-                )}
-
                 {/* 🔘 حالة الكتاب */}
                 <span
                     className={`absolute top-3 left-3 text-xs font-medium px-3 py-1 rounded-full shadow-md ${isSold ? "bg-gray-600" : "bg-green-600"

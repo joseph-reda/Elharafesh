@@ -2,14 +2,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import {
-    ref,
-    query,
-    orderByChild,
-    endBefore,
-    limitToLast,
-    get,
-} from "firebase/database";
+import { ref, get } from "firebase/database";
 import { db } from "../firebase";
 import BookCard from "../components/BookCard";
 import CategoryCard from "../components/CategoryCard";
@@ -20,74 +13,69 @@ const categories = ["تاريخ", "رواية", "غير روائي", "مترجم
 export default function Category() {
     const { name } = useParams();
     const [books, setBooks] = useState([]);
-    const [lastBookId, setLastBookId] = useState(null);
+    const [visibleBooks, setVisibleBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
     const [error, setError] = useState("");
-    const [hasMore, setHasMore] = useState(true);
+    const [showSold, setShowSold] = useState(false); // هل بدأنا بعرض الكتب المباعة
     const PAGE_SIZE = 20;
 
-    // 📦 تحميل أول دفعة
+    // 📦 تحميل كل الكتب مرة واحدة (ثم تقسيمها محليًا)
     useEffect(() => {
-        fetchBooks();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        const fetchAllBooks = async () => {
+            try {
+                setLoading(true);
+                const snapshot = await get(ref(db, "books"));
+                if (snapshot.exists()) {
+                    const data = Object.values(snapshot.val());
+
+                    // ✅ ترتيب الكتب بالأحدث
+                    const sorted = data.sort((a, b) => b.id - a.id);
+
+                    // ✅ فصل الكتب المتاحة والمباعة
+                    const available = sorted.filter((b) => b.status === "available");
+                    const sold = sorted.filter((b) => b.status === "sold");
+
+                    // ✅ جمعهم بحيث المتاحة أولًا
+                    const ordered = [...available, ...sold];
+                    setBooks(ordered);
+
+                    // ✅ عرض أول دفعة من الكتب المتاحة فقط
+                    setVisibleBooks(ordered.slice(0, PAGE_SIZE));
+                } else {
+                    setBooks([]);
+                }
+            } catch (err) {
+                console.error("❌ خطأ أثناء جلب الكتب:", err);
+                setError("حدث خطأ أثناء تحميل البيانات.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAllBooks();
     }, []);
 
-    // 🔹 دالة تحميل الكتب من Firebase
-    const fetchBooks = async (loadMore = false) => {
-        try {
-            if (loadMore) setLoadingMore(true);
-            else setLoading(true);
+    // 🔽 تحميل المزيد من الكتب (حسب المرحلة)
+    const handleLoadMore = () => {
+        if (loadingMore) return;
+        setLoadingMore(true);
 
-            let booksRef;
-            if (loadMore && lastBookId) {
-                booksRef = query(
-                    ref(db, "books"),
-                    orderByChild("id"),
-                    endBefore(lastBookId),
-                    limitToLast(PAGE_SIZE)
-                );
-            } else {
-                booksRef = query(ref(db, "books"), orderByChild("id"), limitToLast(PAGE_SIZE));
+        setTimeout(() => {
+            const currentCount = visibleBooks.length;
+            const nextBatch = books.slice(currentCount, currentCount + PAGE_SIZE);
+            setVisibleBooks((prev) => [...prev, ...nextBatch]);
+
+            // ✅ إذا انتهت الكتب المتاحة نبدأ بعرض المباعة
+            if (nextBatch.some((b) => b.status === "sold")) {
+                setShowSold(true);
             }
 
-            const snapshot = await get(booksRef);
-            if (snapshot.exists()) {
-                const data = Object.values(snapshot.val());
-
-                // ✅ ترتيب الكتب: المتاحة أولاً، ثم المباعة، ثم الأحدث
-                const sorted = data.sort((a, b) => {
-                    if (a.status === "available" && b.status === "sold") return -1;
-                    if (a.status === "sold" && b.status === "available") return 1;
-                    return b.id - a.id; // الأحدث أولاً
-                });
-
-                if (loadMore) {
-                    setBooks((prev) => [...prev, ...sorted]);
-                } else {
-                    setBooks(sorted);
-                }
-
-                // تحديث مؤشر آخر كتاب
-                const last = sorted[sorted.length - 1];
-                setLastBookId(last ? last.id : null);
-
-                // تحديد إذا ما زال هناك كتب إضافية
-                setHasMore(sorted.length === PAGE_SIZE);
-            } else {
-                if (!loadMore) setBooks([]);
-                setHasMore(false);
-            }
-        } catch (err) {
-            console.error("❌ خطأ أثناء جلب الكتب:", err);
-            setError("حدث خطأ أثناء تحميل البيانات.");
-        } finally {
-            setLoading(false);
             setLoadingMore(false);
-        }
+        }, 500);
     };
 
-    // 🔍 فلترة الكتب حسب التصنيف
+    // 🔍 فلترة حسب التصنيف
     const filteredBooks = name
         ? books.filter((book) => {
             const cat = book.category?.toLowerCase() || "";
@@ -101,12 +89,10 @@ export default function Category() {
         })
         : books;
 
-    // ✅ إعادة ترتيب النتائج بعد الفلترة أيضًا
-    const displayedBooks = [...filteredBooks].sort((a, b) => {
-        if (a.status === "available" && b.status === "sold") return -1;
-        if (a.status === "sold" && b.status === "available") return 1;
-        return b.id - a.id;
-    });
+    // ✅ عرض فقط الدفعات الحالية بعد الفلترة
+    const displayedBooks = name
+        ? filteredBooks.slice(0, visibleBooks.length)
+        : visibleBooks;
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">
@@ -188,17 +174,21 @@ export default function Category() {
                     </motion.div>
 
                     {/* 🔽 زر تحميل المزيد */}
-                    {hasMore && (
+                    {visibleBooks.length < books.length && (
                         <div className="text-center mt-8">
                             <button
-                                onClick={() => fetchBooks(true)}
+                                onClick={handleLoadMore}
                                 disabled={loadingMore}
                                 className={`px-6 py-2 rounded-lg text-white transition ${loadingMore
                                         ? "bg-gray-400 cursor-not-allowed"
                                         : "bg-blue-600 hover:bg-blue-700"
                                     }`}
                             >
-                                {loadingMore ? "جار التحميل..." : "تحميل المزيد ⬇️"}
+                                {loadingMore
+                                    ? "جار التحميل..."
+                                    : showSold
+                                        ? "تحميل المزيد من الكتب المباعة ⬇️"
+                                        : "تحميل المزيد من الكتب المتاحة ⬇️"}
                             </button>
                         </div>
                     )}

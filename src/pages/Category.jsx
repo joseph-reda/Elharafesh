@@ -1,59 +1,112 @@
 // ✅ src/pages/Category.jsx
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import {
+    ref,
+    query,
+    orderByChild,
+    endBefore,
+    limitToLast,
+    get,
+} from "firebase/database";
+import { db } from "../firebase";
 import BookCard from "../components/BookCard";
 import CategoryCard from "../components/CategoryCard";
 import ScrollTopButton from "../components/ScrollTopButton";
-import { fetchBooks } from "../services/booksService"; // ✅ جلب البيانات من Firebase
 
-const categories = ["رواية", "غير روائي", "مترجم", "عربي"];
+const categories = ["تاريخ", "رواية", "غير روائي", "مترجم", "عربي"];
 
 export default function Category() {
     const { name } = useParams();
+    const [books, setBooks] = useState([]);
+    const [lastBookId, setLastBookId] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [loadingMore, setLoadingMore] = useState(false);
+    const [error, setError] = useState("");
+    const [hasMore, setHasMore] = useState(true);
+    const PAGE_SIZE = 20;
 
-    // ✅ جلب الكتب من Firebase
-    const { data: books = [], isLoading, error } = useQuery({
-        queryKey: ["books"],
-        queryFn: fetchBooks,
-    });
+    // 📦 تحميل أول دفعة
+    useEffect(() => {
+        fetchBooks();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    // ❌ التعامل مع الخطأ
-    if (error) {
-        return (
-            <p className="text-center text-red-600 py-10">
-                ❌ حدث خطأ أثناء تحميل البيانات
-            </p>
-        );
-    }
+    // 🔹 دالة تحميل الكتب من Firebase
+    const fetchBooks = async (loadMore = false) => {
+        try {
+            if (loadMore) setLoadingMore(true);
+            else setLoading(true);
 
-    // 🔹 ترتيب الكتب: المتاحة أولًا، ثم المباعة، ثم الأحدث
-    const sortBooks = (books) => {
-        return [...books].sort((a, b) => {
-            if (a.status === "available" && b.status === "sold") return -1;
-            if (a.status === "sold" && b.status === "available") return 1;
-            return b.id - a.id;
-        });
+            let booksRef;
+            if (loadMore && lastBookId) {
+                booksRef = query(
+                    ref(db, "books"),
+                    orderByChild("id"),
+                    endBefore(lastBookId),
+                    limitToLast(PAGE_SIZE)
+                );
+            } else {
+                booksRef = query(ref(db, "books"), orderByChild("id"), limitToLast(PAGE_SIZE));
+            }
+
+            const snapshot = await get(booksRef);
+            if (snapshot.exists()) {
+                const data = Object.values(snapshot.val());
+
+                // ✅ ترتيب الكتب: المتاحة أولاً، ثم المباعة، ثم الأحدث
+                const sorted = data.sort((a, b) => {
+                    if (a.status === "available" && b.status === "sold") return -1;
+                    if (a.status === "sold" && b.status === "available") return 1;
+                    return b.id - a.id; // الأحدث أولاً
+                });
+
+                if (loadMore) {
+                    setBooks((prev) => [...prev, ...sorted]);
+                } else {
+                    setBooks(sorted);
+                }
+
+                // تحديث مؤشر آخر كتاب
+                const last = sorted[sorted.length - 1];
+                setLastBookId(last ? last.id : null);
+
+                // تحديد إذا ما زال هناك كتب إضافية
+                setHasMore(sorted.length === PAGE_SIZE);
+            } else {
+                if (!loadMore) setBooks([]);
+                setHasMore(false);
+            }
+        } catch (err) {
+            console.error("❌ خطأ أثناء جلب الكتب:", err);
+            setError("حدث خطأ أثناء تحميل البيانات.");
+        } finally {
+            setLoading(false);
+            setLoadingMore(false);
+        }
     };
 
-    // 🔹 فلترة الكتب حسب التصنيف
-    const filterBooks = (books, categoryName) => {
-        if (!categoryName) return books;
-
-        const n = categoryName.toLowerCase();
-        return books.filter((book) => {
+    // 🔍 فلترة الكتب حسب التصنيف
+    const filteredBooks = name
+        ? books.filter((book) => {
             const cat = book.category?.toLowerCase() || "";
             const type = book.type?.toLowerCase() || "";
+            const n = name.toLowerCase();
 
             if (n === "مترجم") return ["أجنبي", "عالمي", "مترجم"].includes(type);
             if (n === "عربي") return type.includes("عربي");
             if (n === "غير روائي") return !cat.includes("رواية");
             return cat.includes(n);
-        });
-    };
+        })
+        : books;
 
-    const sortedBooks = sortBooks(books);
-    const filteredBooks = filterBooks(sortedBooks, name);
+    // ✅ إعادة ترتيب النتائج بعد الفلترة أيضًا
+    const displayedBooks = [...filteredBooks].sort((a, b) => {
+        if (a.status === "available" && b.status === "sold") return -1;
+        if (a.status === "sold" && b.status === "available") return 1;
+        return b.id - a.id;
+    });
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-10 text-right font-sans space-y-10">
@@ -95,41 +148,61 @@ export default function Category() {
             </motion.h2>
 
             {/* ⏳ حالة التحميل / عرض الكتب */}
-            {isLoading ? (
+            {loading ? (
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {[...Array(9)].map((_, i) => (
+                    {[...Array(PAGE_SIZE)].map((_, i) => (
                         <div
                             key={i}
                             className="h-80 bg-gray-200 animate-pulse rounded-lg shadow-sm"
                         ></div>
                     ))}
                 </div>
-            ) : filteredBooks.length === 0 ? (
+            ) : error ? (
+                <p className="text-center text-red-600 py-10">{error}</p>
+            ) : displayedBooks.length === 0 ? (
                 <p className="text-gray-600 text-lg text-center py-10">
                     📭 لا توجد كتب ضمن هذا التصنيف حاليًا.
                 </p>
             ) : (
-                <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                        hidden: { opacity: 0 },
-                        visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-                    }}
-                    className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-                >
-                    {filteredBooks.map((book) => (
-                        <motion.div
-                            key={book.id}
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                visible: { opacity: 1, y: 0 },
-                            }}
-                        >
-                            <BookCard book={book} />
-                        </motion.div>
-                    ))}
-                </motion.div>
+                <>
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: { opacity: 0 },
+                            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+                        }}
+                        className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                    >
+                        {displayedBooks.map((book) => (
+                            <motion.div
+                                key={book.id}
+                                variants={{
+                                    hidden: { opacity: 0, y: 30 },
+                                    visible: { opacity: 1, y: 0 },
+                                }}
+                            >
+                                <BookCard book={book} />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    {/* 🔽 زر تحميل المزيد */}
+                    {hasMore && (
+                        <div className="text-center mt-8">
+                            <button
+                                onClick={() => fetchBooks(true)}
+                                disabled={loadingMore}
+                                className={`px-6 py-2 rounded-lg text-white transition ${loadingMore
+                                        ? "bg-gray-400 cursor-not-allowed"
+                                        : "bg-blue-600 hover:bg-blue-700"
+                                    }`}
+                            >
+                                {loadingMore ? "جار التحميل..." : "تحميل المزيد ⬇️"}
+                            </button>
+                        </div>
+                    )}
+                </>
             )}
 
             {/* 🔝 زر الرجوع للأعلى */}

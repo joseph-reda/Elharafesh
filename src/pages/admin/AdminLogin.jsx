@@ -1,4 +1,4 @@
-// src/pages/Admin/AdminLogin.jsx
+// ✅ src/pages/admin/AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,13 +11,16 @@ export default function AdminLogin() {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        // 🔐 بيانات الدخول (يمكنك تعديلها كما تشاء)
         const ADMIN_EMAIL = "elhara@gmail.com";
         const ADMIN_PASSWORD = "008800";
 
         if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+            // ✅ حفظ الجلسة في localStorage و sessionStorage معًا
             localStorage.setItem("isAdmin", "true");
-            navigate("/admin/dashboard");
+            sessionStorage.setItem("isAdmin", "true");
+
+            // ✅ الانتقال إلى صفحة الخيارات
+            navigate("/admin/home", { replace: true });
         } else {
             setError("بيانات الدخول غير صحيحة");
         }
@@ -33,9 +36,7 @@ export default function AdminLogin() {
                     تسجيل دخول الإدارة
                 </h2>
 
-                {error && (
-                    <p className="text-red-600 text-sm text-center">{error}</p>
-                )}
+                {error && <p className="text-red-600 text-sm text-center">{error}</p>}
 
                 <div>
                     <label className="block mb-1 text-gray-600">البريد الإلكتروني</label>

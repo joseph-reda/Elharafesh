@@ -1,4 +1,4 @@
-// src/App.jsx
+// ✅ src/App.jsx
 import { Routes, Route } from "react-router-dom";
 
 // Components
@@ -18,7 +18,9 @@ import SearchResults from "./pages/SearchResults.jsx";
 // Pages (Admin)
 import AdminLogin from "./pages/admin/AdminLogin.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import ManageBooks from "./pages/admin/ManageBooks.jsx";
 import ProtectedRoute from "./pages/admin/ProtectedRoute.jsx";
+import AdminHome from "./pages/admin/AdminHome.jsx"; // ✅ الاستيراد الجديد
 
 export default function App() {
     return (
@@ -26,10 +28,18 @@ export default function App() {
             className="font-sans bg-gray-50 min-h-screen flex flex-col"
             dir="rtl"
         >
-            {/* ✅ عرض Navbar و SearchBar فقط في الصفحات العامة */}
             <Routes>
                 {/* 🧩 صفحات الإدارة */}
                 <Route path="/admin/login" element={<AdminLogin />} />
+                <Route
+                    path="/admin/home"
+                    element={
+                        <ProtectedRoute>
+                            <AdminHome />
+                        </ProtectedRoute>
+                    }
+                />
+
                 <Route
                     path="/admin/dashboard"
                     element={
@@ -39,6 +49,14 @@ export default function App() {
                     }
                 />
 
+                <Route
+                    path="/admin/manage-books"
+                    element={
+                        <ProtectedRoute>
+                            <ManageBooks />
+                        </ProtectedRoute>
+                    }
+                />
                 {/* 🏠 الصفحات العامة */}
                 <Route
                     path="*"

@@ -1,16 +1,29 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiShoppingCart, FiTrash2 } from "react-icons/fi";
-import BookImage from "./BookImage";
 import { useCart } from "../context/CartContext";
+import { useState } from "react";
 
 export default function BookCard({ book }) {
     const { addToCart, removeFromCart, isInCart } = useCart();
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     if (!book) return null;
 
     const isSold = book.status === "sold";
     const inCart = isInCart(book.id);
+
+    const images = Array.isArray(book.images) ? book.images : book.images ? [book.images] : [];
+
+    const nextImage = () => {
+        if (images.length > 1)
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+
+    const prevImage = () => {
+        if (images.length > 1)
+            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
 
     return (
         <motion.div
@@ -22,13 +35,48 @@ export default function BookCard({ book }) {
         >
             {/* 🖼️ صورة الكتاب */}
             <div className="relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
-                <BookImage
-                    images={book.images || []}
-                    alt={book.title}
-                    ratio="h-72"
-                    fit="cover"
-                    className="w-full h-[420px] object-contain transition-transform duration-500 group-hover:scale-105"
-                />
+                {images.length > 0 ? (
+                    <img
+                        src={images[currentIndex]}
+                        alt={book.title}
+                        className="w-full h-[420px] object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                ) : (
+                    <div className="flex items-center justify-center h-[420px] text-gray-400">
+                        لا توجد صورة
+                    </div>
+                )}
+
+                {/* 🔘 أزرار التنقل بين الصور */}
+                {images.length > 1 && (
+                    <>
+                        <button
+                            onClick={prevImage}
+                            className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-2 shadow hover:bg-white"
+                        >
+                            ◀
+                        </button>
+                        <button
+                            onClick={nextImage}
+                            className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-2 shadow hover:bg-white"
+                        >
+                            ▶
+                        </button>
+
+                        {/* مؤشر الصور الصغيرة */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                            {images.map((_, idx) => (
+                                <span
+                                    key={idx}
+                                    className={`w-2 h-2 rounded-full ${idx === currentIndex
+                                        ? "bg-blue-600"
+                                        : "bg-white/70"
+                                        }`}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
 
                 {/* 🔘 حالة الكتاب */}
                 <span

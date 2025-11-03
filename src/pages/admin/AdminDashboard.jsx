@@ -1,8 +1,8 @@
-// src/pages/AdminDashboard.jsx
 import { useState } from "react";
 import { ref, push } from "firebase/database";
 import { db } from "../../firebase";
 import toast, { Toaster } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 export default function AdminDashboard() {
     const [title, setTitle] = useState("");
@@ -13,23 +13,25 @@ export default function AdminDashboard() {
     const [price, setPrice] = useState("");
     const [HPaper, setHPaper] = useState("");
     const [description, setDescription] = useState("");
-    const [folder, setFolder] = useState(""); // اسم مجلد اليوم داخل public/images
-    const [images, setImages] = useState([]); // روابط الصور النهائية
+    const [folder, setFolder] = useState(""); // مجلد الصور داخل public/images
+    const [images, setImages] = useState([]); // روابط الصور
     const [loading, setLoading] = useState(false);
 
-    // عند اختيار الصور من الجهاز
+    // ✅ عند اختيار الصور
     const handleImageSelect = (files) => {
         if (!folder.trim()) {
             toast.error("⚠️ يرجى كتابة اسم المجلد داخل public/images أولاً (مثل 10-30)");
             return;
         }
 
-        const urls = Array.from(files).map((file) => `/images/${folder}/${file.name}`);
+        const urls = Array.from(files).map(
+            (file) => `/images/${folder}/${file.name}`
+        );
         setImages(urls);
         toast.success(`✅ تم اختيار ${urls.length} صورة`);
     };
 
-    // عند الإرسال
+    // ✅ عند الإرسال
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -42,24 +44,25 @@ export default function AdminDashboard() {
 
         const newBook = {
             id: Date.now(),
-            isNew: true,
             title,
             author,
             transl,
             type,
             category,
-            images, // /images/10-30/name.jpg
             price: price || "غير محدد",
             HPaper: HPaper || "",
             description: description || "",
+            images,
+            isNew: true,
             status: "available",
             createdAt: Date.now(),
         };
 
         try {
             await push(ref(db, "books"), newBook);
-            toast.success("📚 تم إضافة الكتاب بنجاح إلى قاعدة البيانات!");
-            // إعادة التهيئة
+            toast.success("📚 تم إضافة الكتاب بنجاح!");
+
+            // إعادة تعيين الحقول
             setTitle("");
             setAuthor("");
             setTransl("");
@@ -78,41 +81,38 @@ export default function AdminDashboard() {
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+        <div className="max-w-3xl mx-auto p-8 bg-white shadow-xl rounded-2xl mt-10">
             <Toaster />
-            <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">📘 لوحة إدارة الكتب</h2>
+            <motion.h2
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl font-extrabold text-center text-blue-700 mb-6"
+            >
+                📘 لوحة إدارة الكتب
+            </motion.h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-                {/* اسم مجلد الصور */}
-                <div>
-                    <label className="block text-sm font-medium mb-1">📁 اسم مجلد الصور (داخل public/images)</label>
+            <form onSubmit={handleSubmit} className="space-y-5">
+                {/* 📚 بيانات الكتاب */}
+                <div className="grid sm:grid-cols-2 gap-4">
                     <input
                         type="text"
-                        placeholder="مثال: 10-30"
-                        value={folder}
-                        onChange={(e) => setFolder(e.target.value)}
-                        className="w-full p-3 border rounded-md"
+                        placeholder="عنوان الكتاب"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="p-3 border rounded-md"
+                        required
                     />
-                    <p className="text-xs text-gray-500 mt-1">
-                        أدخل اسم المجلد الذي يحتوي على الصور مثل <code>10-30</code>
-                    </p>
+                    <input
+                        type="text"
+                        placeholder="اسم المؤلف"
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)}
+                        className="p-3 border rounded-md"
+                        required
+                    />
                 </div>
 
-                {/* بيانات الكتاب */}
-                <input
-                    type="text"
-                    placeholder="عنوان الكتاب"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                />
-                <input
-                    type="text"
-                    placeholder="اسم المؤلف"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                />
                 <input
                     type="text"
                     placeholder="المترجم (اختياري)"
@@ -121,82 +121,119 @@ export default function AdminDashboard() {
                     className="w-full p-3 border rounded-md"
                 />
 
-                <select
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                >
-                    <option value="عربي">عربي</option>
-                    <option value="عالمي">عالمي</option>
-                </select>
+                <div className="grid sm:grid-cols-2 gap-4">
+                    <select
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        className="p-3 border rounded-md"
+                    >
+                        <option value="عربي">عربي</option>
+                        <option value="عالمي">عالمي</option>
+                    </select>
 
-                <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                >
-                    <option value="">اختر الفئة</option>
-                    <option value="رواية">رواية</option>
-                    <option value="مسرحية">مسرحية</option>
-                    <option value="شعر">شعر</option>
-                    <option value="سيرة ذاتية">سيرة ذاتية</option>
-                    <option value="تاريخ">تاريخ</option>
-                    <option value="علم نفس">علم نفس</option>
-                    <option value="فلسفة">فلسفة</option>
-                    <option value="سياسة">سياسة</option>
-                </select>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="p-3 border rounded-md"
+                        required
+                    >
+                        <option value="">اختر الفئة</option>
+                        <option value="رواية">رواية</option>
+                        <option value="مسرحية">مسرحية</option>
+                        <option value="شعر">شعر</option>
+                        <option value="سيرة ذاتية">سيرة ذاتية</option>
+                        <option value="تاريخ">تاريخ</option>
+                        <option value="علم نفس">علم نفس</option>
+                        <option value="فلسفة">فلسفة</option>
+                        <option value="سياسة">سياسة</option>
+                    </select>
+                </div>
 
-                <input
-                    type="text"
-                    placeholder="السعر (اختياري)"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                />
-                <input
-                    type="text"
-                    placeholder="عدد الصفحات (اختياري)"
-                    value={HPaper}
-                    onChange={(e) => setHPaper(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                />
+                <div className="grid sm:grid-cols-2 gap-4">
+                    <input
+                        type="text"
+                        placeholder="السعر (اختياري)"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        className="p-3 border rounded-md"
+                    />
+                    <input
+                        type="text"
+                        placeholder="عدد الصفحات (اختياري)"
+                        value={HPaper}
+                        onChange={(e) => setHPaper(e.target.value)}
+                        className="p-3 border rounded-md"
+                    />
+                </div>
+
                 <textarea
                     placeholder="الوصف (اختياري)"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full p-3 border rounded-md"
-                    rows="4"
-                ></textarea>
-
-                {/* اختيار الصور */}
-                <input
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={(e) => handleImageSelect(e.target.files)}
-                    className="w-full p-3 border rounded-md bg-gray-50"
+                    className="w-full p-3 border rounded-md h-28"
                 />
 
-                {/* عرض الصور المختارة */}
+                {/* 📁 اختيار المجلد */}
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-700">
+                        📁 اسم مجلد الصور (داخل public/images)
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="مثال: 10-30"
+                        value={folder}
+                        onChange={(e) => setFolder(e.target.value)}
+                        className="w-full p-3 border rounded-md"
+                    />
+                </div>
+
+                {/* 🖼️ رفع الصور */}
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-700">
+                        📷 اختر صور الكتاب (يمكنك اختيار أكثر من صورة)
+                    </label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={(e) => handleImageSelect(e.target.files)}
+                        className="w-full p-3 border rounded-md bg-gray-50"
+                    />
+                </div>
+
+                {/* 🖼️ عرض الصور المختارة */}
                 {images.length > 0 && (
-                    <div className="p-3 bg-gray-50 border rounded-md">
-                        <p className="font-semibold text-sm mb-2">الصور التي سيتم حفظها:</p>
-                        <ul className="text-sm text-gray-700 list-disc list-inside">
+                    <div className="border rounded-lg p-3 bg-gray-50">
+                        <p className="font-semibold text-gray-700 mb-2">
+                            الصور المختارة ({images.length})
+                        </p>
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
                             {images.map((url, idx) => (
-                                <li key={idx}>{url}</li>
+                                <div
+                                    key={idx}
+                                    className="relative group border rounded-lg overflow-hidden"
+                                >
+                                    <img
+                                        src={url}
+                                        alt={`img-${idx}`}
+                                        className="w-full h-24 object-cover"
+                                    />
+                                    <span className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center text-xs text-white font-medium">
+                                        {idx + 1}
+                                    </span>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 )}
 
-                {loading && <p className="text-blue-600 text-sm">⏳ جاري الإضافة...</p>}
-
+                {/* زر الإضافة */}
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+                    className="w-full py-3 bg-blue-700 text-white font-semibold rounded-md hover:bg-blue-800 transition"
                 >
-                    {loading ? "جاري الإضافة..." : "إضافة الكتاب"}
+                    {loading ? "⏳ جاري الإضافة..." : "➕ إضافة الكتاب"}
                 </button>
             </form>
         </div>

@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext";
 import BookImage from "../components/BookImage";
 import { useQuery } from "@tanstack/react-query";
 import { FiShoppingCart, FiTrash2, FiMessageSquare } from "react-icons/fi";
-import { fetchBooks } from "../services/booksService"; // ✅ تم التعديل هنا
+import { fetchBooks } from "../services/booksService";
 
 export default function BookDetails() {
     const { id } = useParams();
@@ -12,15 +12,17 @@ export default function BookDetails() {
 
     const { data: books = [], isLoading, error } = useQuery({
         queryKey: ["books"],
-        queryFn: fetchBooks, // ✅ بدلاً من fetch("/books.json")
+        queryFn: fetchBooks,
     });
 
     if (isLoading)
         return <p className="text-center text-gray-600 py-10">⏳ جاري تحميل التفاصيل...</p>;
+
     if (error)
         return <p className="text-center text-red-600 py-10">❌ حدث خطأ أثناء تحميل البيانات</p>;
 
     const book = books.find((b) => String(b.id) === id);
+
     if (!book) {
         return (
             <div className="max-w-4xl mx-auto p-6 text-center">
@@ -35,8 +37,14 @@ export default function BookDetails() {
         );
     }
 
+    // ✅ إصلاح عرض الصور: تحويل كائن الصور إلى مصفوفة إن لزم
+    const imageArray = Array.isArray(book.images)
+        ? book.images
+        : Object.values(book.images || {});
+
     const isSold = book.status === "sold";
     const inCart = isInCart(book.id);
+
     const whatsappUrl = `https://wa.me/201034345458?text=${encodeURIComponent(
         `مرحبًا، أود حجز الكتاب التالي:\n\n📖 العنوان: ${book.title}\n💵 السعر: ${book.price}\n🆔 الكود: ${book.id}`
     )}`;
@@ -58,7 +66,7 @@ export default function BookDetails() {
                 >
                     <div className="w-full max-w-sm mx-auto drop-shadow-lg rounded-xl overflow-hidden border border-gray-100">
                         <BookImage
-                            images={book.images || []}
+                            images={imageArray} // ✅ تمرير مصفوفة صور صحيحة
                             alt={book.title}
                             ratio="aspect-[3/4]"
                             fit="contain"
@@ -111,10 +119,11 @@ export default function BookDetails() {
                     {/* 🟢 شارة الحالة */}
                     <div>
                         <span
-                            className={`inline-block px-4 py-1 rounded-full text-sm font-medium shadow ${isSold
-                                ? "bg-gray-600 text-white"
-                                : "bg-green-600 text-white"
-                                }`}
+                            className={`inline-block px-4 py-1 rounded-full text-sm font-medium shadow ${
+                                isSold
+                                    ? "bg-gray-600 text-white"
+                                    : "bg-green-600 text-white"
+                            }`}
                         >
                             {isSold ? "❌ تم الحجز" : "✅ متوفر"}
                         </span>
@@ -127,10 +136,11 @@ export default function BookDetails() {
                                 onClick={() =>
                                     inCart ? removeFromCart(book.id) : addToCart(book)
                                 }
-                                className={`flex items-center justify-center gap-2 flex-1 text-base font-medium rounded-lg py-3 transition-all duration-300 ${inCart
-                                    ? "bg-red-100 text-red-600 hover:bg-red-200"
-                                    : "bg-blue-700 text-white hover:bg-blue-800"
-                                    }`}
+                                className={`flex items-center justify-center gap-2 flex-1 text-base font-medium rounded-lg py-3 transition-all duration-300 ${
+                                    inCart
+                                        ? "bg-red-100 text-red-600 hover:bg-red-200"
+                                        : "bg-blue-700 text-white hover:bg-blue-800"
+                                }`}
                             >
                                 {inCart ? (
                                     <>
@@ -144,7 +154,6 @@ export default function BookDetails() {
                             </button>
                         )}
 
-                        {/* زر الحجز عبر واتساب */}
                         <a
                             href={whatsappUrl}
                             target="_blank"

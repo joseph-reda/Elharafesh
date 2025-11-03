@@ -1,11 +1,10 @@
-// 📘 src/components/BookImage.jsx
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { motion, AnimatePresence } from "framer-motion";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 /**
- * مكوّن BookImage:
+ * 📘 مكون BookImage:
  * يعرض صور الكتاب مع إمكانية التنقل بينها وتأثيرات انتقال جميلة.
  */
 export default function BookImage({
@@ -18,8 +17,14 @@ export default function BookImage({
     const [index, setIndex] = useState(0);
     const [loaded, setLoaded] = useState(false);
 
-    // 🖼️ في حال عدم وجود صور للكتاب
-    if (!images || images.length === 0) {
+    // ✅ تحويل الصور إلى Array في حال كانت Object من Firebase
+    const imageArray = useMemo(() => {
+        if (!images) return [];
+        return Array.isArray(images) ? images : Object.values(images);
+    }, [images]);
+
+    // 🖼️ في حال لا توجد صور
+    if (imageArray.length === 0) {
         return (
             <div
                 className={`relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 ${ratio} flex items-center justify-center`}
@@ -35,18 +40,18 @@ export default function BookImage({
     }
 
     // 🧩 الصورة الحالية
-    const currentImage = images[index];
-    const webpSrc = currentImage.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+    const currentImage = imageArray[index];
+    const webpSrc = currentImage?.replace(/\.(jpg|jpeg|png)$/i, ".webp");
 
     // 🔁 التنقل بين الصور
     const nextImage = () => {
         setLoaded(false);
-        setIndex((prev) => (prev + 1) % images.length);
+        setIndex((prev) => (prev + 1) % imageArray.length);
     };
 
     const prevImage = () => {
         setLoaded(false);
-        setIndex((prev) => (prev - 1 + images.length) % images.length);
+        setIndex((prev) => (prev - 1 + imageArray.length) % imageArray.length);
     };
 
     return (
@@ -80,7 +85,7 @@ export default function BookImage({
             </AnimatePresence>
 
             {/* 🔄 أزرار التنقل بين الصور */}
-            {images.length > 1 && (
+            {imageArray.length > 1 && (
                 <>
                     <button
                         onClick={prevImage}
@@ -98,22 +103,23 @@ export default function BookImage({
                         ▶
                     </button>
 
-                    {/* 🌟 مؤشرات الصفحات أسفل الصورة */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                        {images.map((_, i) => (
+                    {/* 🌟 مؤشرات أسفل الصورة */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                        {imageArray.map((_, i) => (
                             <span
                                 key={i}
-                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === index
+                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                                    i === index
                                         ? "bg-blue-600 scale-125 shadow-md"
                                         : "bg-gray-400/50 hover:bg-blue-400/70"
-                                    }`}
+                                }`}
                             />
                         ))}
                     </div>
                 </>
             )}
 
-            {/* ✨ تدرج خفيف أسفل الصورة لإضافة عمق بصري */}
+            {/* ✨ تدرج خفيف أسفل الصورة */}
             <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
         </div>
     );

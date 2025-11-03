@@ -137,10 +137,13 @@ export default function AdminDashboard() {
                 >
                     <option value="">اختر الفئة</option>
                     <option value="رواية">رواية</option>
-                    <option value="تاريخ">تاريخ</option>
-                    <option value="شعر">شعر</option>
                     <option value="مسرحية">مسرحية</option>
+                    <option value="شعر">شعر</option>
                     <option value="سيرة ذاتية">سيرة ذاتية</option>
+                    <option value="تاريخ">تاريخ</option>
+                    <option value="علم نفس">علم نفس</option>
+                    <option value="فلسفة">فلسفة</option>
+                    <option value="سياسة">سياسة</option>
                 </select>
 
                 <input

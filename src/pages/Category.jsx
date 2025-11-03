@@ -8,7 +8,7 @@ import BookCard from "../components/BookCard";
 import CategoryCard from "../components/CategoryCard";
 import ScrollTopButton from "../components/ScrollTopButton";
 
-const categories = ["تاريخ", "رواية", "غير روائي", "مترجم", "عربي"];
+const categories = ["تاريخ", "رواية", "فلسفة", "مترجم", "عربي"];
 
 export default function Category() {
     const { name } = useParams();
@@ -180,8 +180,8 @@ export default function Category() {
                                 onClick={handleLoadMore}
                                 disabled={loadingMore}
                                 className={`px-6 py-2 rounded-lg text-white transition ${loadingMore
-                                        ? "bg-gray-400 cursor-not-allowed"
-                                        : "bg-blue-600 hover:bg-blue-700"
+                                    ? "bg-gray-400 cursor-not-allowed"
+                                    : "bg-blue-600 hover:bg-blue-700"
                                     }`}
                             >
                                 {loadingMore

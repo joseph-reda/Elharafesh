@@ -1,11 +1,31 @@
+# Dependencies
+node_modules/
+package-lock.json
+
 # Firebase
 firebase-service-key.json
 serviceAccountKey.json
+.firebase/
 
-# صور محلية
-/public/images/
-
-# بيئة
+# Environment
 .env
 .env.local
-node_modules/
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build
+/build
+/dist
+
+# Images (كل الصور في public/images ما تترفعش)
+public/images/
+
+# VS Code
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+

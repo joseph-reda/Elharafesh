@@ -2,7 +2,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { fetchBooks } from "../services/booksService.js"; // ✅ جلب الكتب من Firebase
+import { fetchBooks } from "../services/booksService.js";
+
+// دالة تنظيف النص العربي (تُحوّل كل أنواع الألف إلى "ا" عادي وتزيل الهمزات)
+const normalizeArabic = (str) => {
+    if (!str) return "";
+    return str
+        .toLowerCase()
+        .trim()
+        .replace(/[\u0622\u0623\u0625\u0627\u0671\u0672\u0673\u0674\u0675]/g, "ا") // كل أنواع الألف → ا
+        .replace(/ة/g, "ه")
+        .replace(/ي/g, "ى")
+        .replace(/[إأآ]/g, "ا")
+        .replace(/ء/g, "")
+        .replace(/\s+/g, " "); // مسافات متعددة → مسافة واحدة
+};
 
 export default function SearchBar() {
     const [keyword, setKeyword] = useState("");
@@ -10,14 +24,12 @@ export default function SearchBar() {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate();
 
-    // 📚 تحميل جميع الكتب مرة واحدة من Firebase
     useEffect(() => {
         fetchBooks()
             .then((data) => setBooks(data))
-            .catch((err) => console.error("خطأ في تحميل الكتب:", err));
+            .catch(() => toast.error("فشل تحميل الكتب للبحث"));
     }, []);
 
-    // 🔍 عند الكتابة في مربع البحث
     const handleChange = (e) => {
         const value = e.target.value;
         setKeyword(value);
@@ -27,46 +39,39 @@ export default function SearchBar() {
             return;
         }
 
-        const query = value.toLowerCase();
-        const filtered = books.filter(
-            (book) =>
-                book.title?.toLowerCase().includes(query) ||
-                book.author?.toLowerCase().includes(query)
-        );
+        const normalizedInput = normalizeArabic(value);
 
-        setSuggestions(filtered.slice(0, 5)); // عرض أول 5 اقتراحات فقط
+        const filtered = books
+            .filter((book) => {
+                const title = normalizeArabic(book.title || "");
+                const author = normalizeArabic(book.author || "");
+                return title.includes(normalizedInput) || author.includes(normalizedInput);
+            })
+            .slice(0, 6);
+
+        setSuggestions(filtered);
     };
 
-    // 🚀 عند الضغط على "بحث"
     const handleSubmit = (e) => {
         e.preventDefault();
         const trimmed = keyword.trim();
-
         if (!trimmed) {
-            toast.error("⚠️ من فضلك أدخل كلمة للبحث");
+            toast.error("أدخل كلمة للبحث");
             return;
         }
 
-        const query = trimmed.toLowerCase();
+        const normalized = normalizeArabic(trimmed);
         const results = books.filter((book) => {
-            const title = book.title?.toLowerCase() || "";
-            const author = book.author?.toLowerCase() || "";
-            return title.includes(query) || author.includes(query);
+            const t = normalizeArabic(book.title || "");
+            const a = normalizeArabic(book.author || "");
+            return t.includes(normalized) || a.includes(normalized);
         });
 
-        if (results.length === 0) {
-            toast("📭 لا توجد نتائج لهذا البحث");
-        }
-
-        navigate(`/search?q=${encodeURIComponent(trimmed)}`, {
-            state: { results, keyword: trimmed },
-        });
-
+        navigate("/search", { state: { results, keyword: trimmed } });
         setKeyword("");
         setSuggestions([]);
     };
 
-    // 📘 عند الضغط على اقتراح
     const handleSuggestionClick = (bookId) => {
         navigate(`/book/${bookId}`);
         setKeyword("");
@@ -74,48 +79,38 @@ export default function SearchBar() {
     };
 
     return (
-        <div className="relative w-full max-w-xl mx-auto">
-            <form
-                onSubmit={handleSubmit}
-                className="flex gap-2 w-full"
-                aria-label="شريط البحث"
-            >
+        <div className="relative max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="flex gap-2">
                 <input
                     type="text"
                     value={keyword}
                     onChange={handleChange}
-                    placeholder="🔍 ابحث باسم الكتاب أو اسم الكاتب..."
-                    aria-label="ابحث باسم الكتاب أو المؤلف"
-                    className="border border-gray-300 p-2 rounded w-full 
-                        focus:outline-none focus:ring-2 focus:ring-blue-500 
-                        transition-all duration-200 text-right placeholder-gray-400"
+                    placeholder="ابحث بالعنوان أو اسم المؤلف..."
+                    className="flex-1 px-5 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:outline-none shadow-sm text-lg"
                 />
                 <button
                     type="submit"
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 
-                        hover:from-blue-700 hover:to-blue-800 
-                        text-white px-6 py-2 rounded-lg shadow 
-                        transition-all duration-300 font-medium"
+                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-semibold shadow-md transition"
                 >
                     بحث
                 </button>
             </form>
 
             {suggestions.length > 0 && (
-                <ul
-                    className="absolute z-50 bg-white border border-gray-200 
-                        rounded-lg shadow-md mt-2 w-full max-h-60 overflow-y-auto"
-                >
+                <ul className="absolute z-50 mt-2 w-full bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden">
                     {suggestions.map((book) => (
                         <li
                             key={book.id}
                             onClick={() => handleSuggestionClick(book.id)}
-                            className="px-4 py-2 cursor-pointer 
-                                hover:bg-blue-50 flex justify-between items-center 
-                                transition-colors duration-200"
+                            className="px-5 py-3 hover:bg-blue-50 cursor-pointer flex justify-between items-center border-b border-gray-100 last:border-0"
                         >
-                            <span className="font-medium text-gray-700">{book.title}</span>
-                            <span className="text-sm text-gray-500">{book.author}</span>
+                            <div>
+                                <p className="font-semibold text-gray-800">{book.title}</p>
+                                <p className="text-sm text-gray-500">{book.author}</p>
+                            </div>
+                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                                {book.price} ج.م
+                            </span>
                         </li>
                     ))}
                 </ul>

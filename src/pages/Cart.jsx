@@ -1,197 +1,232 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+// src/pages/Cart.jsx
+import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiTrash2, FiPlus, FiMinus } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Cart() {
     const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
-    const [showButton, setShowButton] = useState(false);
 
-    const totalPrice = cart.reduce((sum, book) => {
-        const price = parseFloat(book.price) || 0;
-        return sum + price * book.quantity;
-    }, 0);
+    const totalPrice = cart.reduce(
+        (sum, book) => sum + (parseFloat(book.price) || 0) * (book.quantity || 1),
+        0
+    );
 
-    // 🟢 رسالة واتساب للمجموعة كلها
+    const BASE_URL = window.location.origin;
+
+    // رسالة واتساب احترافية (مفصولة عن الـ map عشان ما يحصلش خطأ)
+    const orderLines = cart.map((book, i) => {
+        const qty = book.quantity > 1 ? ` × ${book.quantity}` : "";
+        return `${i + 1}. ${book.title}
+   المؤلف: ${book.author}
+   السعر: ${book.price} ج.م${qty}
+   الرابط: ${BASE_URL}/book/${book.id}`;
+    });
+
     const whatsappMessage = [
-        "📚 *تفاصيل الكتب المطلوبة:*",
-        "──────────────────────────────",
-        ...cart.map((book) => {
-            let message = `#${book.id} - ${book.title}\n💵 ${book.price}`;
-            if (book.quantity > 1) message += ` × ${book.quantity}`;
-            return message + "\n──────────────────────────────";
-        }),
-        `💰 *الإجمالي:* ${totalPrice.toFixed(2)} ج.م`,
+        "مكتبة الحرافيش للكتب المستعملة",
+        "شكرًا لاختيارك كتبك من عندنا!",
+        "",
+        "طلب حجز كتب:",
+        "━━━━━━━━━━━━━━━━━━",
+        ...orderLines,
+        "━━━━━━━━━━━━━━━━━━",
+        `الإجمالي: *${totalPrice.toFixed(2)} جنيه مصري*`,
+        "",
+        "يرجى تأكيد الطلب لتجهيز الكتب فورًا",
+        "نشكرك على ثقتك فينا – مكتبة الحرافيش",
     ].join("\n");
 
-    const whatsappUrl = `https://wa.me/2001034345458?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/201034345458?text=${encodeURIComponent(
         whatsappMessage
     )}`;
 
     useEffect(() => {
-        setShowButton(cart.length > 0);
-    }, [cart]);
+        window.scrollTo(0, 0);
+    }, []);
+
+    // حالة السلة فارغة
+    if (cart.length === 0) {
+        return (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-20 flex items-center justify-center"
+            >
+                <div className="text-center">
+                    <div className="text-9xl mb-8">Empty Cart</div>
+                    <h2 className="text-4xl font-bold text-gray-700 mb-4">السلة فارغة</h2>
+                    <p className="text-xl text-gray-600 mb-8">
+                        ابدأ التسوق الآن واختر كتبك المفضلة
+                    </p>
+                    <Link
+                        to="/category"
+                        className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-4 rounded-2xl text-xl font-bold shadow-lg transition transform hover:scale-105"
+                    >
+                        تصفح الكتب
+                    </Link>
+                </div>
+            </motion.div>
+        );
+    }
 
     return (
-        <main className="max-w-7xl mx-auto px-4 py-12 font-sans text-right relative">
-            <motion.h1
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-3xl font-bold text-blue-800 mb-10 text-center"
-            >
-                🛒 سلة التسوق
-            </motion.h1>
+        <>
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
+                <div className="max-w-5xl mx-auto">
+                    <motion.h1
+                        initial={{ opacity: 0, y: -30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent"
+                    >
+                        سلة التسوق
+                    </motion.h1>
 
-            {cart.length === 0 ? (
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-gray-600 text-lg text-center py-16"
-                >
-                    📭 السلة فارغة حالياً.
-                </motion.p>
-            ) : (
-                <div className="space-y-12">
-                    {/* 🧾 بطاقات الكتب */}
-                    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-                        {cart.map((book) => {
-                            const singleMessage = [
-                                "📖 *الكتاب المطلوب:*",
-                                "──────────────────────────────",
-                                `#${book.id} - ${book.title}`,
-                                `💵 ${book.price}${book.quantity > 1 ? ` × ${book.quantity}` : ""}`,
-                                "──────────────────────────────",
-                            ].join("\n");
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        {/* قائمة الكتب */}
+                        <div className="lg:col-span-2 space-y-6">
+                            <AnimatePresence>
+                                {cart.map((book) => (
+                                    <motion.div
+                                        key={book.id}
+                                        layout
+                                        initial={{ opacity: 0, x: -50 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 100, scale: 0.9 }}
+                                        className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow"
+                                    >
+                                        <div className="flex items-center p-6 gap-6">
+                                            <Link to={`/book/${book.id}`} className="flex-shrink-0">
+                                                <img
+                                                    src={book.images?.[0] || "/placeholder.png"}
+                                                    alt={book.title}
+                                                    className="w-28 h-40 object-cover rounded-xl shadow-md hover:scale-105 transition-transform"
+                                                />
+                                            </Link>
 
-                            const singleBookUrl = `https://wa.me/2001034345458?text=${encodeURIComponent(
-                                singleMessage
-                            )}`;
+                                            <div className="flex-1">
+                                                <Link
+                                                    to={`/book/${book.id}`}
+                                                    className="block font-bold text-xl text-gray-800 hover:text-blue-600 transition mb-2"
+                                                >
+                                                    {book.title}
+                                                </Link>
+                                                <p className="text-gray-600 mb-3">المؤلف: {book.author}</p>
 
-                            return (
-                                <motion.div
-                                    key={book.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.4 }}
-                                    className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200 hover:border-blue-300 transition-all duration-300 flex flex-col"
-                                >
-                                    {/* صورة الكتاب */}
-                                    <div className="relative bg-gradient-to-br from-gray-100 to-gray-50">
-                                        <img
-                                            src={book.images?.[0] || "/placeholder.png"}
-                                            alt={book.title}
-                                            className="w-full h-[420px] object-contain transition-transform duration-500 hover:scale-105"
-                                        />
-                                        {book.isNew && (
-                                            <span className="absolute top-3 right-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full shadow-md">
-                                                جديد
-                                            </span>
-                                        )}
-                                    </div>
+                                                <div className="flex items-center gap-4 mb-4">
+                                                    <span className="text-lg font-medium text-gray-700">الكمية:</span>
+                                                    <div className="flex items-center bg-gray-100 rounded-full">
+                                                        <button
+                                                            onClick={() =>
+                                                                updateQuantity(book.id, (book.quantity || 1) - 1)
+                                                            }
+                                                            disabled={(book.quantity || 1) <= 1}
+                                                            className="p-2 hover:bg-gray-200 rounded-full transition disabled:opacity-50"
+                                                        >
+                                                            <FiMinus />
+                                                        </button>
+                                                        <span className="w-12 text-center font-bold text-lg">
+                                                            {book.quantity || 1}
+                                                        </span>
+                                                        <button
+                                                            onClick={() =>
+                                                                updateQuantity(book.id, (book.quantity || 1) + 1)
+                                                            }
+                                                            className="p-2 hover:bg-gray-200 rounded-full transition"
+                                                        >
+                                                            <FiPlus />
+                                                        </button>
+                                                    </div>
+                                                </div>
 
-                                    {/* تفاصيل الكتاب */}
-                                    <div className="flex-1 p-5 flex flex-col justify-between">
-                                        <div className="space-y-2">
-                                            <h2 className="text-xl font-semibold text-blue-900 line-clamp-2">
-                                                {book.title}
-                                            </h2>
-                                            <p className="text-green-700 font-semibold text-lg">
-                                                💵 {book.price}
-                                            </p>
-                                            <p className="text-xs text-gray-500">
-                                                🆔 رقم الكتاب: {book.id}
-                                            </p>
-                                        </div>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-2xl font-bold text-indigo-600">
+                                                        {book.price} ج.م
+                                                    </span>
+                                                    {book.quantity > 1 && (
+                                                        <span className="text-lg text-gray-600">
+                                                            = {(book.price * book.quantity).toFixed(2)} ج.م
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
 
-                                        {/* التحكم بالكمية */}
-                                        <div className="flex items-center gap-2 mt-3">
-                                            <label className="text-gray-700 text-sm">
-                                                الكمية:
-                                            </label>
-                                            <input
-                                                type="number"
-                                                min="1"
-                                                value={book.quantity}
-                                                onChange={(e) =>
-                                                    updateQuantity(
-                                                        book.id,
-                                                        parseInt(e.target.value)
-                                                    )
-                                                }
-                                                className="w-16 border border-gray-300 rounded-md p-1 text-center shadow-sm focus:ring-2 focus:ring-blue-500 transition"
-                                            />
-                                        </div>
-
-                                        {/* الأزرار */}
-                                        <div className="flex justify-between items-center gap-3 pt-4">
-                                            <a
-                                                href={singleBookUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded-lg shadow transition text-center"
-                                            >
-                                                📲 حجز الكتاب
-                                            </a>
                                             <button
-                                                onClick={() =>
-                                                    removeFromCart(book.id)
-                                                }
-                                                className="text-sm bg-red-100 hover:bg-red-200 text-red-600 px-3 py-2 rounded-lg shadow transition"
+                                                onClick={() => {
+                                                    removeFromCart(book.id);
+                                                    toast.success("تم إزالة الكتاب من السلة", {
+                                                        icon: "Trash",
+                                                        style: { background: "#fef2f2", color: "#991b1b" },
+                                                    });
+                                                }}
+                                                className="text-red-500 hover:text-red-700 p-3 rounded-full hover:bg-red-50 transition"
                                             >
-                                                🗑️ إزالة
+                                                <FiTrash2 size={24} />
                                             </button>
                                         </div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-
-                    {/* 💰 ملخص السلة */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="bg-gradient-to-l from-blue-50 to-white border-t-4 border-blue-600 rounded-2xl shadow-md p-6 flex flex-col md:flex-row justify-between items-center gap-4"
-                    >
-                        <p className="text-2xl font-bold text-blue-800">
-                            💰 الإجمالي: {totalPrice.toFixed(2)} ج.م
-                        </p>
-                        <div className="flex flex-wrap gap-4">
-                            <button
-                                onClick={clearCart}
-                                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow transition"
-                            >
-                                🧹 إفراغ السلة
-                            </button>
-                            <a
-                                href={whatsappUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow transition"
-                            >
-                                📦 حجز المجموعة كاملة
-                            </a>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
                         </div>
-                    </motion.div>
-                </div>
-            )}
 
-            {/* 🔘 زر واتساب عائم */}
-            {showButton && (
-                <motion.a
+                        {/* ملخص الطلب */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="lg:sticky lg:top-24 h-fit"
+                        >
+                            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-2xl p-8 shadow-2xl">
+                                <h3 className="text-2xl font-bold mb-6 text-center">ملخص الطلب</h3>
+                                <div className="space-y-4 mb-8">
+                                    <div className="flex justify-between text-lg">
+                                        <span>عدد الكتب:</span>
+                                        <span className="font-bold">{cart.length}</span>
+                                    </div>
+                                    <div className="flex justify-between text-xl">
+                                        <span>الإجمالي:</span>
+                                        <span className="font-extrabold text-3xl">
+                                            {totalPrice.toFixed(2)} ج.م
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <a
+                                        href={whatsappUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-5 rounded-2xl font-bold text-xl shadow-lg transition transform hover:scale-105 flex items-center justify-center gap-3"
+                                    >
+                                        <FaWhatsapp size={28} />
+                                        إرسال الطلب عبر واتساب
+                                    </a>
+
+                                    <button
+                                        onClick={clearCart}
+                                        className="w-full bg-red-500 hover:bg-red-600 text-white py-4 rounded-2xl font-bold transition"
+                                    >
+                                        إفراغ السلة
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* زر واتساب عائم */}
+                <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center text-3xl transition-all"
-                    title="حجز عبر واتساب"
+                    className="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-5 rounded-full shadow-2xl flex items-center gap-3 text-lg font-bold transition transform hover:scale-110"
                 >
-                    <FaWhatsapp />
-                </motion.a>
-            )}
-        </main>
+                    <FaWhatsapp size={32} />
+                    <span className="hidden sm:inline">إرسال الطلب</span>
+                </a>
+            </div>
+        </>
     );
 }

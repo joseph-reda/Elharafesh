@@ -1,70 +1,68 @@
-// ✅ src/pages/admin/AdminLogin.jsx
+// src/pages/admin/AdminLogin.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function AdminLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
+        setLoading(true);
 
-        const ADMIN_EMAIL = "elhara@gmail.com";
-        const ADMIN_PASSWORD = "008800";
+        // يمكنك لاحقًا استبدال هذا بـ Firebase Authentication الحقيقي
+        const ADMIN_EMAIL = "elhara@gmail.com";     // غيّرها لاحقًا
+        const ADMIN_PASS = "008800";              // غيّرها لاحقًا
 
-        if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-            // ✅ حفظ الجلسة في localStorage و sessionStorage معًا
+        if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
             localStorage.setItem("isAdmin", "true");
             sessionStorage.setItem("isAdmin", "true");
-
-            // ✅ الانتقال إلى صفحة الخيارات
-            navigate("/admin/home", { replace: true });
+            toast.success("مرحباً بك في لوحة التحكم");
+            navigate("/admin/manage-books");
         } else {
-            setError("بيانات الدخول غير صحيحة");
+            toast.error("بيانات الدخول غير صحيحة");
+            setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
             <form
                 onSubmit={handleLogin}
-                className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm space-y-5"
+                className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md"
             >
-                <h2 className="text-2xl font-bold text-center text-blue-700">
+                <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">
                     تسجيل دخول الإدارة
                 </h2>
 
-                {error && <p className="text-red-600 text-sm text-center">{error}</p>}
-
-                <div>
-                    <label className="block mb-1 text-gray-600">البريد الإلكتروني</label>
+                <div className="space-y-5">
                     <input
                         type="email"
+                        placeholder="البريد الإلكتروني"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         required
                     />
-                </div>
-
-                <div>
-                    <label className="block mb-1 text-gray-600">كلمة المرور</label>
                     <input
                         type="password"
+                        placeholder="كلمة المرور"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         required
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                    disabled={loading}
+                    className="w-full mt-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition disabled:opacity-70"
                 >
-                    دخول
+                    {loading ? "جاري تسجيل الدخول..." : "دخول"}
                 </button>
             </form>
         </div>

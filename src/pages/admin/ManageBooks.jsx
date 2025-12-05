@@ -1,52 +1,68 @@
-// ✅ src/pages/admin/ManageBooks.jsx
-import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { ref, get, update, remove } from "firebase/database";
+// src/pages/admin/ManageBooks.jsx
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ref, get, update, remove, push } from "firebase/database";
 import {
     getStorage,
-    ref as sRef,
+    ref as storageRef,
     uploadBytes,
     getDownloadURL,
     deleteObject,
 } from "firebase/storage";
+import { db } from "../../firebase";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import imageCompression from "browser-image-compression";
+import { ClipLoader } from "react-spinners";
+
+const storage = getStorage();
 
 export default function ManageBooks() {
-    const [books, setBooks] = useState([]);
-    const [filteredBooks, setFilteredBooks] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [savingAll, setSavingAll] = useState(false);
     const navigate = useNavigate();
-    const storage = getStorage();
+    const [books, setBooks] = useState([]);
+    const [filtered, setFiltered] = useState([]);
+    const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [showAddForm, setShowAddForm] = useState(false);
 
-    // ✅ تحقق من تسجيل الدخول
+    // نموذج إضافة كتاب جديد
+    const [newBook, setNewBook] = useState({
+        title: "",
+        author: "",
+        transl: "",
+        type: "عربي",
+        category: "",
+        price: "",
+        HPaper: "",
+        description: "",
+        status: "available",
+    });
+    const [imageFiles, setImageFiles] = useState([]);
+    const [uploading, setUploading] = useState(false);
+
+    // تحقق من تسجيل الدخول
     useEffect(() => {
-        const adminLoggedIn = localStorage.getItem("isAdmin");
-        if (!adminLoggedIn) navigate("/admin/login");
+        const isAdmin = localStorage.getItem("isAdmin") || sessionStorage.getItem("isAdmin");
+        if (!isAdmin) navigate("/admin/login");
     }, [navigate]);
 
-    // ✅ جلب الكتب
+    // جلب الكتب
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const snapshot = await get(ref(db, "books"));
-                if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    const booksArray = Object.entries(data).map(([key, value]) => ({
+                const snap = await get(ref(db, "books"));
+                if (snap.exists()) {
+                    const data = snap.val();
+                    const list = Object.entries(data).map(([key, value]) => ({
                         key,
                         ...value,
                     }));
-                    setBooks(booksArray.sort((a, b) => b.id - a.id));
-                    setFilteredBooks(booksArray);
-                } else {
-                    toast.error("📭 لا توجد كتب بعد");
+                    const sorted = list.sort((a, b) => (b.id || 0) - (a.id || 0));
+                    setBooks(sorted);
+                    setFiltered(sorted);
                 }
             } catch (err) {
-                toast.error("❌ خطأ أثناء تحميل الكتب");
-                console.error(err);
+                toast.error("فشل تحميل الكتب");
             } finally {
                 setLoading(false);
             }
@@ -54,297 +70,345 @@ export default function ManageBooks() {
         fetchBooks();
     }, []);
 
-    // ✅ البحث الفوري
+    // بحث
     useEffect(() => {
-        const term = searchTerm.toLowerCase();
-        setFilteredBooks(
+        const term = search.toLowerCase();
+        setFiltered(
             books.filter(
                 (b) =>
                     b.title?.toLowerCase().includes(term) ||
                     b.author?.toLowerCase().includes(term)
             )
         );
-    }, [searchTerm, books]);
+    }, [search, books]);
 
-    // ✅ تعديل محلي
-    const handleChange = (key, field, value) => {
-        setBooks((prev) =>
-            prev.map((book) => (book.key === key ? { ...book, [field]: value } : book))
-        );
-    };
+    // إضافة كتاب جديد
+    const handleAddBook = async (e) => {
+        e.preventDefault();
+        if (!newBook.title || !newBook.author || !newBook.category || imageFiles.length === 0) {
+            toast.error("املأ الحقول الأساسية واختر صور");
+            return;
+        }
 
-    // ✅ رفع عدة صور
-    const handleImagesUpload = async (key, files) => {
-        if (!files || files.length === 0) return;
-
-        const selectedFiles = Array.from(files);
-        const uploadedUrls = [];
-
+        setUploading(true);
         try {
-            for (const file of selectedFiles) {
-                const imageRef = sRef(storage, `book_images/${Date.now()}_${file.name}`);
-                await uploadBytes(imageRef, file);
-                const url = await getDownloadURL(imageRef);
-                uploadedUrls.push(url);
+            // ضغط + رفع الصور
+            const compressed = await Promise.all(
+                Array.from(imageFiles).map((file) =>
+                    imageCompression(file, { maxSizeMB: 0.8, maxWidthOrHeight: 1200 })
+                )
+            );
+
+            const urls = [];
+            for (const file of compressed) {
+                const fileRef = storageRef(storage, `books/${Date.now()}_${file.name}`);
+                await uploadBytes(fileRef, file);
+                const url = await getDownloadURL(fileRef);
+                urls.push(url);
             }
 
-            setBooks((prev) =>
-                prev.map((book) =>
-                    book.key === key
-                        ? {
-                            ...book,
-                            images: [...(book.images || []), ...uploadedUrls],
-                        }
-                        : book
-                )
-            );
+            // إضافة الكتاب
+            await push(ref(db, "books"), {
+                ...newBook,
+                images: urls,
+                createdAt: Date.now(),
+            });
 
-            toast.success("📷 تم رفع الصور بنجاح");
+            toast.success("تم إضافة الكتاب بنجاح");
+            setNewBook({
+                title: "",
+                author: "",
+                transl: "",
+                type: "عربي",
+                category: "",
+                price: "",
+                HPaper: "",
+                description: "",
+                status: "available",
+            });
+            setImageFiles([]);
+            setShowAddForm(false);
+            // إعادة تحميل الكتب
+            window.location.reload();
         } catch (err) {
-            toast.error("❌ فشل رفع الصور");
             console.error(err);
+            toast.error("فشل في إضافة الكتاب");
+        } finally {
+            setUploading(false);
         }
     };
 
-    // ✅ حذف صورة معينة
-    const handleDeleteImage = async (key, imageUrl) => {
-        try {
-            // حذف من التخزين
-            const imagePath = decodeURIComponent(imageUrl.split("/o/")[1].split("?")[0]);
-            const imageRef = sRef(storage, imagePath);
-            await deleteObject(imageRef).catch(() => { });
-
-            // تحديث قاعدة البيانات محليًا
-            setBooks((prev) =>
-                prev.map((book) =>
-                    book.key === key
-                        ? {
-                            ...book,
-                            images: (book.images || []).filter((img) => img !== imageUrl),
-                        }
-                        : book
-                )
-            );
-
-            toast.success("🗑️ تم حذف الصورة");
-        } catch (err) {
-            toast.error("❌ فشل حذف الصورة");
-            console.error(err);
-        }
+    // تعديل حقل
+    const handleChange = (key, field, value) => {
+        setBooks((prev) =>
+            prev.map((b) => (b.key === key ? { ...b, [field]: value } : b))
+        );
     };
 
-    // ✅ حفظ كتاب واحد
+    // حفظ التعديلات
     const handleSave = async (book) => {
         try {
-            await update(ref(db, `books/${book.key}`), book);
-            toast.success(`✅ تم حفظ "${book.title}"`);
+            await update(ref(db, `books/${book.key}`), {
+                title: book.title,
+                author: book.author,
+                transl: book.transl,
+                type: book.type,
+                category: book.category,
+                price: book.price,
+                HPaper: book.HPaper,
+                description: book.description,
+                status: book.status,
+            });
+            toast.success("تم الحفظ");
         } catch {
-            toast.error("❌ فشل الحفظ");
+            toast.error("فشل الحفظ");
         }
     };
 
-    // ✅ حذف كتاب
-    const handleDeleteBook = async (key, title) => {
-        if (!window.confirm(`هل أنت متأكد من حذف "${title}"؟`)) return;
+    // حذف كتاب
+    const handleDelete = async (book) => {
+        if (!window.confirm(`هل أنت متأكد من حذف "${book.title}"؟`)) return;
         try {
-            await remove(ref(db, `books/${key}`));
-            setBooks((prev) => prev.filter((b) => b.key !== key));
-            toast.success("🗑️ تم حذف الكتاب");
+            // حذف الصور من Storage
+            if (book.images && Array.isArray(book.images)) {
+                await Promise.all(
+                    book.images.map((url) => {
+                        const fileRef = storageRef(storage, url);
+                        return deleteObject(fileRef).catch(() => { });
+                    })
+                );
+            }
+            await remove(ref(db, `books/${book.key}`));
+            toast.success("تم الحذف");
+            setBooks((prev) => prev.filter((b) => b.key !== book.key));
         } catch {
-            toast.error("❌ فشل حذف الكتاب");
+            toast.error("فشل الحذف");
         }
     };
 
-    // ✅ حفظ الكل
-    const handleSaveAll = async () => {
-        try {
-            setSavingAll(true);
-            const updates = {};
-            books.forEach((book) => (updates[`books/${book.key}`] = book));
-            await update(ref(db), updates);
-            toast.success("💾 تم حفظ جميع التعديلات");
-        } catch {
-            toast.error("❌ فشل الحفظ الكلي");
-        } finally {
-            setSavingAll(false);
-        }
+    // تسجيل الخروج
+    const handleLogout = () => {
+        localStorage.removeItem("isAdmin");
+        sessionStorage.removeItem("isAdmin");
+        navigate("/admin/login");
     };
-
-    if (loading)
-        return (
-            <div className="text-center py-20 text-gray-600 text-lg">
-                ⏳ جاري تحميل البيانات...
-            </div>
-        );
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-10 font-sans">
-            <Toaster />
-
-            {/* شريط البحث وحفظ الكل */}
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
-                <h2 className="text-3xl font-extrabold text-blue-700">🛠️ إدارة الكتب</h2>
-
-                <input
-                    type="text"
-                    placeholder="🔍 ابحث باسم الكتاب أو المؤلف..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-80 focus:ring-2 focus:ring-blue-400"
-                />
-
-                <button
-                    onClick={handleSaveAll}
-                    disabled={savingAll}
-                    className={`${savingAll
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-green-600 hover:bg-green-700"
-                        } text-white px-6 py-2 rounded-lg font-semibold shadow transition`}
-                >
-                    {savingAll ? "💾 جاري الحفظ..." : "💾 حفظ الكل"}
-                </button>
-            </div>
-
-            {/* بطاقات الكتب */}
-            <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
-                }}
-                className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            >
-                {filteredBooks.map((book) => (
-                    <motion.div
-                        key={book.key}
-                        variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            visible: { opacity: 1, y: 0 },
-                        }}
-                        className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition flex flex-col"
+        <div className="min-h-screen bg-gray-100 p-4">
+            <Toaster position="top-center" />
+            <div className="max-w-7xl mx-auto">
+                <div className="flex justify-between items-center mb-8">
+                    <h1 className="text-3xl font-bold text-blue-800">لوحة تحكم المكتبة</h1>
+                    <button
+                        onClick={handleLogout}
+                        className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg"
                     >
-                        {/* 🖼️ الصور */}
-                        <div className="relative bg-gray-50 p-3 grid grid-cols-3 gap-2">
-                            {(book.images || []).length > 0 ? (
-                                book.images.map((img, idx) => (
-                                    <div key={idx} className="relative group">
-                                        <img
-                                            src={img}
-                                            alt={`img-${idx}`}
-                                            className="w-full h-24 object-cover rounded-lg border"
-                                        />
-                                        <button
-                                            onClick={() => handleDeleteImage(book.key, img)}
-                                            className="absolute top-1 left-1 bg-red-600 text-white text-xs px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition"
-                                        >
-                                            🗑️
-                                        </button>
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="col-span-3 text-center text-gray-400">
-                                    لا توجد صور
-                                </p>
-                            )}
+                        تسجيل الخروج
+                    </button>
+                </div>
 
-                            <input
-                                type="file"
-                                multiple
-                                accept="image/*"
-                                onChange={(e) => handleImagesUpload(book.key, e.target.files)}
-                                className="col-span-3 text-sm border rounded-lg px-2 py-1 cursor-pointer mt-2"
-                            />
-                        </div>
+                {/* زر إضافة كتاب */}
+                <button
+                    onClick={() => setShowAddForm(!showAddForm)}
+                    className="mb-6 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold"
+                >
+                    {showAddForm ? "إلغاء" : "إضافة كتاب جديد"}
+                </button>
 
-                        {/* 📝 التفاصيل */}
-                        <div className="p-4 flex flex-col flex-1 space-y-3">
+                {/* نموذج الإضافة */}
+                {showAddForm && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-white p-6 rounded-xl shadow-lg mb-8"
+                    >
+                        <h2 className="text-2xl font-bold mb-4">إضافة كتاب جديد</h2>
+                        <form onSubmit={handleAddBook} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <input
                                 type="text"
-                                value={book.title || ""}
-                                onChange={(e) =>
-                                    handleChange(book.key, "title", e.target.value)
-                                }
-                                className="font-bold text-lg border rounded-lg px-2 py-1"
+                                placeholder="عنوان الكتاب *"
+                                value={newBook.title}
+                                onChange={(e) => setNewBook({ ...newBook, title: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                                required
                             />
-
                             <input
                                 type="text"
-                                value={book.author || ""}
-                                onChange={(e) =>
-                                    handleChange(book.key, "author", e.target.value)
-                                }
-                                className="text-gray-700 border rounded-lg px-2 py-1"
+                                placeholder="اسم المؤلف *"
+                                value={newBook.author}
+                                onChange={(e) => setNewBook({ ...newBook, author: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                                required
                             />
-
+                            <input
+                                type="text"
+                                placeholder="المترجم (اختياري)"
+                                value={newBook.transl}
+                                onChange={(e) => setNewBook({ ...newBook, transl: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                            />
+                            <select
+                                value={newBook.type}
+                                onChange={(e) => setNewBook({ ...newBook, type: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                            >
+                                <option value="عربي">عربي</option>
+                                <option value="مترجم">مترجم</option>
+                            </select>
+                            <input
+                                type="text"
+                                placeholder="التصنيف * (مثل: رواية، تاريخ...)"
+                                value={newBook.category}
+                                onChange={(e) => setNewBook({ ...newBook, category: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                                required
+                            />
                             <input
                                 type="number"
-                                value={book.price || ""}
-                                onChange={(e) =>
-                                    handleChange(book.key, "price", e.target.value)
-                                }
-                                placeholder="السعر"
-                                className="text-gray-700 border rounded-lg px-2 py-1"
+                                placeholder="السعر *"
+                                value={newBook.price}
+                                onChange={(e) => setNewBook({ ...newBook, price: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                                required
                             />
-
+                            <input
+                                type="text"
+                                placeholder="حالة الورق (اختياري)"
+                                value={newBook.HPaper}
+                                onChange={(e) => setNewBook({ ...newBook, HPaper: e.target.value })}
+                                className="border rounded-lg px-4 py-2"
+                            />
                             <textarea
-                                value={book.description || ""}
-                                onChange={(e) =>
-                                    handleChange(book.key, "description", e.target.value)
-                                }
-                                placeholder="الوصف..."
-                                className="border rounded-lg px-2 py-1 h-20 text-sm resize-none"
+                                placeholder="وصف الكتاب (اختياري)"
+                                rows="3"
+                                value={newBook.description}
+                                onChange={(e) => setNewBook({ ...newBook, description: e.target.value })}
+                                className="border rounded-lg px-4 py-2 md:col-span-2"
                             />
 
-                            <select
-                                value={book.category}
-                                onChange={(e) =>
-                                    handleChange(book.key, "category", e.target.value)
-                                }
-                                className="border rounded-lg px-2 py-1"
-                            >
-                                <option value="رواية">رواية</option>
-                                <option value="تاريخ">تاريخ</option>
-                                <option value="فلسفة">فلسفة</option>
-                                <option value="علم نفس">علم نفس</option>
-                                <option value="شعر">شعر</option>
-                                <option value="سيرة ذاتية">سيرة ذاتية</option>
-                                <option value="سياسة">سياسة</option>
-                            </select>
+                            <div className="md:col-span-2">
+                                <label className="block mb-2 font-medium">صور الكتاب (متعدد) *</label>
+                                <input
+                                    type="file"
+                                    multiple
+                                    accept="image/*"
+                                    onChange={(e) => setImageFiles(e.target.files)}
+                                    className="block w-full text-sm"
+                                />
+                                {imageFiles.length > 0 && (
+                                    <p className="text-sm text-gray-600 mt-1">
+                                        تم اختيار {imageFiles.length} صورة
+                                    </p>
+                                )}
+                            </div>
 
-                            <select
-                                value={book.status}
-                                onChange={(e) =>
-                                    handleChange(book.key, "status", e.target.value)
-                                }
-                                className={`border rounded-lg px-2 py-1 ${book.status === "sold"
-                                        ? "bg-red-100 text-red-700"
-                                        : "bg-green-100 text-green-700"
-                                    }`}
-                            >
-                                <option value="available">📗 متاح</option>
-                                <option value="sold">📕 تم البيع</option>
-                            </select>
-                        </div>
-
-                        {/* ⚙️ أزرار التحكم */}
-                        <div className="flex justify-between p-4 border-t">
-                            <button
-                                onClick={() => handleSave(book)}
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-lg transition"
-                            >
-                                💾 حفظ
-                            </button>
-                            <button
-                                onClick={() => handleDeleteBook(book.key, book.title)}
-                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg transition"
-                            >
-                                🗑️ حذف
-                            </button>
-                        </div>
+                            <div className="md:col-span-2 flex gap-4">
+                                <button
+                                    type="submit"
+                                    disabled={uploading}
+                                    className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-lg disabled:opacity-70"
+                                >
+                                    {uploading ? (
+                                        <>
+                                            <ClipLoader className="inline ml-2" size={20} color="#fff" /> جاري الرفع...
+                                        </>
+                                    ) : (
+                                        "إضافة الكتاب"
+                                    )}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowAddForm(false)}
+                                    className="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg"
+                                >
+                                    إلغاء
+                                </button>
+                            </div>
+                        </form>
                     </motion.div>
-                ))}
-            </motion.div>
+                )}
+
+                {/* قائمة الكتب */}
+                <input
+                    type="text"
+                    placeholder="ابحث بالعنوان أو المؤلف..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="w-full md:w-96 mb-6 px-4 py-2 border rounded-lg"
+                />
+
+                {loading ? (
+                    <div className="text-center py-10">
+                        <ClipLoader size={50} color="#3B82F6" />
+                    </div>
+                ) : filtered.length === 0 ? (
+                    <p className="text-center text-gray-600 text-xl">لا توجد كتب</p>
+                ) : (
+                    <div className="grid gap-6">
+                        {filtered.map((book) => (
+                            <motion.div
+                                key={book.key}
+                                layout
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="bg-white p-6 rounded-xl shadow-md"
+                            >
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <input
+                                        type="text"
+                                        value={book.title || ""}
+                                        onChange={(e) => handleChange(book.key, "title", e.target.value)}
+                                        className="font-bold text-lg border rounded px-3 py-1"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={book.author || ""}
+                                        onChange={(e) => handleChange(book.key, "author", e.target.value)}
+                                        className="border rounded px-3 py-1"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={book.category || ""}
+                                        onChange={(e) => handleChange(book.key, "category", e.target.value)}
+                                        className="border rounded px-3 py-1"
+                                    />
+                                    <input
+                                        type="number"
+                                        value={book.price || ""}
+                                        onChange={(e) => handleChange(book.key, "price", e.target.value)}
+                                        className="border rounded px-3 py-1"
+                                    />
+                                    <select
+                                        value={book.status || "available"}
+                                        onChange={(e) => handleChange(book.key, "status", e.target.value)}
+                                        className={`border rounded px-3 py-1 ${book.status === "sold" ? "bg-red-100" : "bg-green-100"
+                                            }`}
+                                    >
+                                        <option value="available">متاح</option>
+                                        <option value="sold">تم البيع</option>
+                                    </select>
+                                </div>
+
+                                <div className="flex gap-3 mt-4">
+                                    <button
+                                        onClick={() => handleSave(book)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded"
+                                    >
+                                        حفظ
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(book)}
+                                        className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded"
+                                    >
+                                        حذف
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

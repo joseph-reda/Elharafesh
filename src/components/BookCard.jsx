@@ -1,151 +1,65 @@
+// src/components/BookCard.jsx
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { FiShoppingCart, FiTrash2 } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
-import { useState } from "react";
 
 export default function BookCard({ book }) {
     const { addToCart, removeFromCart, isInCart } = useCart();
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const inCart = isInCart(book.id);
 
     if (!book) return null;
 
-    const isSold = book.status === "sold";
-    const inCart = isInCart(book.id);
-
-    const images = Array.isArray(book.images) ? book.images : book.images ? [book.images] : [];
-
-    const nextImage = () => {
-        if (images.length > 1)
-            setCurrentIndex((prev) => (prev + 1) % images.length);
-    };
-
-    const prevImage = () => {
-        if (images.length > 1)
-            setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    };
-
     return (
         <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            whileHover={{ y: -6, scale: 1.02 }}
-            className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden text-right border border-gray-100 relative"
+            whileHover={{ y: -10, scale: 1.04 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
         >
-            {/* 🖼️ صورة الكتاب */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
-                {images.length > 0 ? (
-                    <img
-                        src={images[currentIndex]}
+            <Link to={`/book/${book.id}`}>
+                <div className="relative overflow-hidden bg-gray-100 aspect-[3/4]">
+                    <LazyLoadImage
+                        src={book.images?.[0] || "/placeholder-low.jpg"}
                         alt={book.title}
-                        className="w-full h-[420px] object-contain transition-transform duration-500 group-hover:scale-105"
+                        effect="blur"
+                        className="w-full h-full object-cover"
+                        wrapperClassName="w-full h-full"
                     />
-                ) : (
-                    <div className="flex items-center justify-center h-[420px] text-gray-400">
-                        لا توجد صورة
-                    </div>
-                )}
-
-                {/* 🔘 أزرار التنقل بين الصور */}
-                {images.length > 1 && (
-                    <>
-                        <button
-                            onClick={prevImage}
-                            className="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-2 shadow hover:bg-white"
-                        >
-                            ◀
-                        </button>
-                        <button
-                            onClick={nextImage}
-                            className="absolute top-1/2 right-2 -translate-y-1/2 bg-white/80 text-gray-800 rounded-full p-2 shadow hover:bg-white"
-                        >
-                            ▶
-                        </button>
-
-                        {/* مؤشر الصور الصغيرة */}
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                            {images.map((_, idx) => (
-                                <span
-                                    key={idx}
-                                    className={`w-2 h-2 rounded-full ${idx === currentIndex
-                                        ? "bg-blue-600"
-                                        : "bg-white/70"
-                                        }`}
-                                />
-                            ))}
+                    {book.status === "sold" && (
+                        <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                            <span className="text-white text-3xl font-bold drop-shadow-2xl">
+                                تم البيع
+                            </span>
                         </div>
-                    </>
-                )}
+                    )}
+                </div>
+            </Link>
 
-                {/* 🔘 حالة الكتاب */}
-                <span
-                    className={`absolute top-3 left-3 text-xs font-medium px-3 py-1 rounded-full shadow-md ${isSold ? "bg-gray-600" : "bg-green-600"
-                        } text-white`}
-                >
-                    {isSold ? "❌ تم الحجز" : "✅ متوفر"}
-                </span>
-
-                {/* طبقة ظل أنيقة عند المرور */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
-
-            {/* 📘 تفاصيل الكتاب */}
-            <div className="p-5 space-y-3">
-                {/* 🏷️ العنوان */}
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 leading-snug line-clamp-2 group-hover:text-blue-700 transition-colors duration-300">
-                    {book.title}
-                </h3>
-
-                {/* ✍️ المؤلف */}
-                {book.author && (
-                    <p className="text-gray-500 text-sm line-clamp-1">
-                        ✍️ {book.author}
-                    </p>
-                )}
-
-                {/* 💵 السعر */}
-                {book.price && (
-                    <p className="text-green-700 text-base font-semibold">
-                        💵 {book.price} ج.م
-                    </p>
-                )}
-
-                {/* 📄 زر التفاصيل */}
-                <Link
-                    to={`/book/${book.id}`}
-                    className={`block w-full text-center text-sm md:text-base px-4 py-2.5 rounded-lg font-medium transition-all duration-300 ${isSold
-                            ? "bg-gray-400 text-white cursor-not-allowed opacity-80"
-                            : "bg-blue-700 hover:bg-blue-800 text-white shadow-sm hover:shadow-md"
-                        }`}
-                >
-                    {isSold ? "غير متاح الآن" : "عرض التفاصيل"}
+            <div className="p-5">
+                <Link to={`/book/${book.id}`} className="block">
+                    <h3 className="font-bold text-lg text-gray-800 hover:text-blue-600 transition line-clamp-2 min-h-14">
+                        {book.title}
+                    </h3>
                 </Link>
+                <p className="text-gray-600 text-sm mt-1">{book.author}</p>
 
-                {/* 🛒 زر السلة */}
-                {!isSold && (
+                <div className="flex items-center justify-between mt-5">
+                    <span className="text-2xl font-bold text-indigo-600">
+                        {book.price} ج.م
+                    </span>
+
                     <button
-                        onClick={() =>
-                            inCart ? removeFromCart(book.id) : addToCart(book)
-                        }
-                        className={`mt-2 w-full flex items-center justify-center gap-2 text-sm md:text-base px-4 py-2.5 rounded-lg font-medium transition-all duration-300 ${inCart
+                        onClick={() => (inCart ? removeFromCart(book.id) : addToCart(book))}
+                        className={`p-3.5 rounded-full transition-all duration-200 ${inCart
                                 ? "bg-red-100 text-red-600 hover:bg-red-200"
                                 : "bg-green-100 text-green-700 hover:bg-green-200"
                             }`}
                     >
-                        {inCart ? (
-                            <>
-                                <FiTrash2 className="text-lg" />
-                                إزالة من السلة
-                            </>
-                        ) : (
-                            <>
-                                <FiShoppingCart className="text-lg" />
-                                أضف إلى السلة
-                            </>
-                        )}
+                        {inCart ? <FiTrash2 size={23} /> : <FiShoppingCart size={23} />}
                     </button>
-                )}
+                </div>
             </div>
         </motion.div>
     );

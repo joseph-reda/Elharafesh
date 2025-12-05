@@ -21,7 +21,7 @@ export default function Navbar() {
                 {/* الشعار دائماً على اليسار */}
                 <NavLink to="/" className="flex items-center">
                     <img
-                        src="/images/logo.png"
+                        src="/logo.jpeg"
                         alt="شعار الموقع"
                         className="w-12 h-12 rounded-full border border-gray-200 shadow-sm"
                     />

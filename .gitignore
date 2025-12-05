@@ -1,14 +1,11 @@
-# Firebase Service Account Key (ممنوع رفعه أبداً)
+# Firebase
 firebase-service-key.json
 serviceAccountKey.json
 
-# مجلدات الصور المحلية
-/public/images/compressed/
-/public/images/*.jpg
-/public/images/*.jpeg
-/public/images/*.png
-/public/images/*.webp
+# صور محلية
+/public/images/
 
-# بيئة التطوير
+# بيئة
 .env
 .env.local
+node_modules/
